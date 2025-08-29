@@ -15,8 +15,8 @@ CObject::~CObject()
 
 void CObject::UpdateRect()
 {
-	m_tRect.left	= m_vPivot.x - ( m_vSize.x * 0.5f );
-	m_tRect.top		= m_vPivot.y - ( m_vSize.y * 0.5f );
-	m_tRect.right	= m_vPivot.x + ( m_vSize.x * 0.5f );
-	m_tRect.bottom	= m_vPivot.y + ( m_vSize.y * 0.5f );
+	m_tRect.left	= (LONG)(m_vPivot.x - ( m_vSize.x * 0.5f ));
+	m_tRect.top		= (LONG)(m_vPivot.y - ( m_vSize.y * 0.5f ));
+	m_tRect.right	= (LONG)(m_vPivot.x + ( m_vSize.x * 0.5f ));
+	m_tRect.bottom	= (LONG)(m_vPivot.y + ( m_vSize.y * 0.5f ));
 }

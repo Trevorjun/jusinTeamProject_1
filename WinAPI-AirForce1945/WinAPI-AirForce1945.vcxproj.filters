@@ -31,6 +31,15 @@
     <Filter Include="01. Object\02. Bullet">
       <UniqueIdentifier>{338b6e33-750e-4551-81b3-fc6857d39ac2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Object\03. Item">
+      <UniqueIdentifier>{5ab27b08-c6f6-40c5-aee1-9c12c86bfa05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. AbstractFactory">
+      <UniqueIdentifier>{51738779-623d-40ff-adbc-1f8890b1e7e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="98. CollisionManager">
+      <UniqueIdentifier>{1ae54855-be50-4775-9432-0987b3740145}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -60,6 +69,12 @@
     <ClInclude Include="CObject.h">
       <Filter>01. Object</Filter>
     </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>01. Object\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CCollisionManager.h">
+      <Filter>98. CollisionManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -76,6 +91,12 @@
     </ClCompile>
     <ClCompile Include="CObject.cpp">
       <Filter>01. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>01. Object\03. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CCollisionManager.cpp">
+      <Filter>98. CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

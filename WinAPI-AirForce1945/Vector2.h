@@ -4,7 +4,7 @@
 typedef struct Vector2
 {
 public:
-	Vector2() : x(0.f), y(0.f) {};
+	Vector2() : x(0.f), y(0.f) { };
 	Vector2(const int& _x, const int& _y) : x((float)_x), y((float)_y) { };
 	Vector2(const float& _x, const float& _y) : x(_x), y(_y) { };
 	Vector2(const Vector2& _rhs)

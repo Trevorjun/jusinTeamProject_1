@@ -1,6 +1,7 @@
 #pragma once
 #include "Define.h"
 
+class CObject;
 class CMainGame
 {
 public:
@@ -13,7 +14,7 @@ public:
 	void		Render();
 	void		Release();
 private:
-	HDC			m_hDC;
-
+	HDC				m_hDC;
+	list<CObject*>	m_ObjectList[OBJ_END];
 };
 

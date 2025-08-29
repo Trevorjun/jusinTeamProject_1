@@ -16,10 +16,20 @@ enum OBJECT
 	PLAYER,
 	MONSTER,
 	BULLET,
+	ITEM,
 
 	OBJ_END
 };
 
+enum COLLIISION_FLAG
+{
+	RECT_TO_RECT,
+	CIRCLE_TO_CIRCLE,
+	RECT_TO_CIRCLE,
+	CIRCLE_TO_RECT,
+
+	COL_FLAG_END
+};
 
 template <typename T>
 static void SafeDelete(T& _p)

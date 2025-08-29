@@ -1,7 +1,7 @@
 #pragma once
 #include "Define.h"
 
-class CObject abstract
+class CObject
 {
 public:
 	CObject();
