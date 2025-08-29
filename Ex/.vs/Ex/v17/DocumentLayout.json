@@ -1,9 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Work\\Ex\\",
+  "WorkspaceRootPath": "D:\\cpp_ksh\\Jusin158\\jusinTeamProject_1\\Ex\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D1FAFCF7-307E-4DC4-823F-4A6E46FAA191}|Ex\\Ex.vcxproj|C:\\Work\\Ex\\Ex\\Ex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{D1FAFCF7-307E-4DC4-823F-4A6E46FAA191}|Ex\\Ex.vcxproj|D:\\cpp_ksh\\Jusin158\\jusinTeamProject_1\\Ex\\Ex\\Ex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{D1FAFCF7-307E-4DC4-823F-4A6E46FAA191}|Ex\\Ex.vcxproj|solutionrelative:Ex\\Ex.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -20,9 +20,9 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Ex.cpp",
-              "DocumentMoniker": "C:\\Work\\Ex\\Ex\\Ex.cpp",
+              "DocumentMoniker": "D:\\cpp_ksh\\Jusin158\\jusinTeamProject_1\\Ex\\Ex\\Ex.cpp",
               "RelativeDocumentMoniker": "Ex\\Ex.cpp",
-              "ToolTip": "C:\\Work\\Ex\\Ex\\Ex.cpp",
+              "ToolTip": "D:\\cpp_ksh\\Jusin158\\jusinTeamProject_1\\Ex\\Ex\\Ex.cpp",
               "RelativeToolTip": "Ex\\Ex.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
