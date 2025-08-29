@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <cmath>
 
 typedef struct Vector2
@@ -12,55 +12,55 @@ public:
 		x = _rhs.x;
 		y = _rhs.y;
 	}
-	Vector2& operator=(const Vector2& _rhs)				// this = º¤ÅÍÀÎ¼ö | ¹İÈ¯°ª : this
+	Vector2& operator=(const Vector2& _rhs)				// this = ë²¡í„°ì¸ìˆ˜ | ë°˜í™˜ê°’ : this
 	{
 		x = _rhs.x;
 		y = _rhs.y;
 		return *this;
 	}
-	Vector2 operator+(const Vector2& _vVec)				// this + º¤ÅÍ | ¹İÈ¯°ª : °ª º¤ÅÍ
+	Vector2 operator+(const Vector2& _vVec)				// this + ë²¡í„° | ë°˜í™˜ê°’ : ê°’ ë²¡í„°
 	{
 		return Vector2(x + _vVec.x, x + _vVec.x);
 	}
-	Vector2 operator*(const int& _scalar)				// this * Á¤¼ö | ¹İÈ¯°ª : °ª º¤ÅÍ
+	Vector2 operator*(const int& _scalar)				// this * ì •ìˆ˜ | ë°˜í™˜ê°’ : ê°’ ë²¡í„°
 	{
 		return Vector2( x * _scalar, y* _scalar );
 	}
-	Vector2 operator*(const float& _scalar)				// this * ½Ç¼ö | ¹İÈ¯°ª : °ª º¤ÅÍ
+	Vector2 operator*(const float& _scalar)				// this * ì‹¤ìˆ˜ | ë°˜í™˜ê°’ : ê°’ ë²¡í„°
 	{
 		return Vector2( x * _scalar, y * _scalar );
 	}
-	Vector2& operator*=(const int& _scalar)				// this *= Á¤¼ö | ¹İÈ¯°ª : this
+	Vector2& operator*=(const int& _scalar)				// this *= ì •ìˆ˜ | ë°˜í™˜ê°’ : this
 	{
 		x *= _scalar;
 		y *= _scalar;
 		return *this;
 	}
-	Vector2& operator*=(const float& _scalar)			// this *= ½Ç¼ö | ¹İÈ¯°ª : this
+	Vector2& operator*=(const float& _scalar)			// this *= ì‹¤ìˆ˜ | ë°˜í™˜ê°’ : this
 	{
 		x *= _scalar;
 		y *= _scalar;
 		return *this;
 	}
-	Vector2& operator-=(const Vector2& _vVec)			// this -= º¤ÅÍ | ¹İÈ¯°ª : this
+	Vector2& operator-=(const Vector2& _vVec)			// this -= ë²¡í„° | ë°˜í™˜ê°’ : this
 	{
 		x -= _vVec.x;
 		y -= _vVec.y;
 		return *this;
 	}
-	Vector2& operator+=(const Vector2& _vVec)			// this += º¤ÅÍ | ¹İÈ¯°ª : this
+	Vector2& operator+=(const Vector2& _vVec)			// this += ë²¡í„° | ë°˜í™˜ê°’ : this
 	{
 		x += _vVec.x;
 		y += _vVec.y;
 		return *this;
 	}
 	
-	const float GetSquared() const						// this Vec2 xÁ¦°ö, yÁ¦°ö | ¹İÈ¯ 
+	const float GetSquared() const						// this Vec2 xì œê³±, yì œê³± | ë°˜í™˜ 
 	{
 		return x * x + y * y;
 	}
-	Vector2 GetNomalized() const						// thisÀÇ x, y¿¡ ´ëÇÔ ÇÇÅ¸°í¶ó½º ½ÄÀ» ¼öÇà
-	{													// x, yÀÇ ´ë°¢¼±(ºøº¯)À» ±¸ÇØÁÜ
+	Vector2 GetNomalized() const						// thisì˜ x, yì— ëŒ€í•¨ í”¼íƒ€ê³ ë¼ìŠ¤ ì‹ì„ ìˆ˜í–‰
+	{													// x, yì˜ ëŒ€ê°ì„ (ë¹—ë³€)ì„ êµ¬í•´ì¤Œ
 		return Nomalize(*this);
 	}
 	Vector2& Rotate(const float& _fDegree)
@@ -75,7 +75,7 @@ public:
 		return *this;
 	}
 
-	static Vector2 Nomalize(const Vector2& _vVec);		// _vVec¿¡ ´ëÇÑ ´ë°¢¼± ¹İÈ¯(Á¤Àû ÇÔ¼ö)
+	static Vector2 Nomalize(const Vector2& _vVec);		// _vVecì— ëŒ€í•œ ëŒ€ê°ì„  ë°˜í™˜(ì •ì  í•¨ìˆ˜)
 
 public:
 	float x;
