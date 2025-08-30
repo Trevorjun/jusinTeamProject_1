@@ -133,8 +133,10 @@
   <ItemGroup>
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CLifeItem.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPowerItem.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
@@ -146,8 +148,10 @@
   <ItemGroup>
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CItem.cpp" />
+    <ClCompile Include="CLifeItem.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CPowerItem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
