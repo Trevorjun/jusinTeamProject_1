@@ -3,16 +3,17 @@
 
 CItem::CItem()
 {
+
 }
 
 CItem::~CItem()
 {
+
 }
 
 void CItem::Initialize()
 {
-	m_vPivot = { 400, 300 };
-	m_vSize = { 100, 100 };
+
 }
 
 int CItem::Update()
@@ -26,13 +27,22 @@ int CItem::Update()
 
 void CItem::LateUpdate()
 {
+	
+}
+
+bool CItem::OnCollision(CObject* _pColObj)
+{
+
+	return false;
 }
 
 void CItem::Render(HDC _hDC)
 {
-	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+	
 }
 
 void CItem::Release()
 {
 }
+
+

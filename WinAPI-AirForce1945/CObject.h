@@ -12,19 +12,21 @@ public:
 	const Vector2&		GetSize()		{ return m_vSize; }
 	const Vector2&		GetDir()		{ return m_vDir; }
 	const float&		GetSpeed()		{ return m_fSpeed; }
-	
+	const bool&			GetCollision()	{ return m_bCollision; }
+
 	void	SetPivot(const Vector2& _vPivot)	{ m_vPivot = _vPivot; }
 	void	SetSize(const Vector2& _vSize)		{ m_vSize = _vSize; }
 	void	SetDir(const Vector2& _vDir)		{ m_vDir = _vDir; }
 	void	SetSpeed(const float& _fSpeed)		{ m_fSpeed = _fSpeed; }
 	void	SetDestroy()						{ m_bDestroy = true; }
-
+	void	SetCollision(const bool& _isCol)	{ m_bCollision = _isCol; }
 public:
-	virtual void		Initialize()		PURE;
-	virtual int			Update()			PURE;
-	virtual void		LateUpdate()		PURE;
-	virtual void		Render(HDC _hDC)	PURE;
-	virtual void		Release()			PURE;
+	virtual void		Initialize()						PURE;
+	virtual int			Update()							PURE;
+	virtual void		LateUpdate()						PURE;
+	virtual bool		OnCollision(CObject* _pColObj)		PURE;
+	virtual void		Render(HDC _hDC)					PURE;
+	virtual void		Release()							PURE;
 
 protected:
 	virtual void		UpdateRect();
@@ -37,5 +39,7 @@ protected:
 
 	float			m_fSpeed;
 	bool			m_bDestroy;
+private:
+	bool			m_bCollision;
 };
 
