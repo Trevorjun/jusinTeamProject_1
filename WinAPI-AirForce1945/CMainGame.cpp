@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CMainGame.h"
 #include "CObject.h"
 #include "CItem.h"
@@ -24,7 +24,7 @@ void CMainGame::Update()
 	bool bIsDestroy(false);
 	for (int i = 0; i < OBJ_END; ++i)
 	{
-		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end(); )
+		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
 			bIsDestroy = (*iter)->Update();
 
