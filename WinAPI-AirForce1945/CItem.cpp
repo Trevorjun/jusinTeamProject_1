@@ -26,6 +26,11 @@ void CItem::LateUpdate()
 	m_bDestroy = Check_InBound() ? false : true;
 }
 
+bool CItem::OnCollision(CObject* _pObjCol)
+{
+	return false;
+}
+
 void CItem::Render(HDC _hDC)
 {
 	int a = 0;

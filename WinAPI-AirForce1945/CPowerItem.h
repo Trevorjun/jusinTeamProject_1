@@ -12,6 +12,7 @@ public:
     void Initialize() override;
     int Update() override;
     void LateUpdate() override;
+    bool OnCollision(CObject* _pObjCol) override;
     void Render(HDC _hDC) override;
     void Release() override;
 

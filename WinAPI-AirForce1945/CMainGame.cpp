@@ -70,7 +70,7 @@ void CMainGame::Render()
 		for (auto& obj : list)
 			obj->Render(m_hDC);
 
-	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
+	//CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
 }
 
 void CMainGame::Release()

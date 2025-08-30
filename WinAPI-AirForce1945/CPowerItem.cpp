@@ -25,6 +25,11 @@ void CPowerItem::LateUpdate()
 {
 }
 
+bool CPowerItem::OnCollision(CObject* _pObjCol)
+{
+	return false;
+}
+
 void CPowerItem::Render(HDC _hDC)
 {
 	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
