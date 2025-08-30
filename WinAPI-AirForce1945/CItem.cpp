@@ -1,24 +1,20 @@
 #include "pch.h"
 #include "CItem.h"
 
-CItem::CItem()
-{
-
-}
+CItem::CItem() { }
 
 CItem::~CItem()
 {
-
+	Release();
 }
 
-void CItem::Initialize()
-{
-
-}
+void CItem::Initialize() {}
 
 int CItem::Update()
 {
 	if (m_bDestroy) return OBJ_DESTROY;
+
+	Move();
 
 	__super::UpdateRect();
 
@@ -27,22 +23,33 @@ int CItem::Update()
 
 void CItem::LateUpdate()
 {
-	
+	m_bDestroy = Check_InBound() ? false : true;
 }
 
-bool CItem::OnCollision(CObject* _pColObj)
+bool CItem::OnCollision(CObject* _pObjCol)
 {
-
 	return false;
 }
 
 void CItem::Render(HDC _hDC)
 {
-	
+	int a = 0;
+	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
-void CItem::Release()
+void CItem::Release() { }
+
+void CItem::Move()
 {
+	m_vPivot += m_vDir * m_fSpeed;
 }
 
-
+bool CItem::Check_InBound()
+{
+	if (m_tRect.right <= 0 || m_tRect.left >= WINCX
+		|| m_tRect.bottom <= 0 || m_tRect.top >= WINCY)
+	{
+		return false;
+	}
+	return true;
+}
