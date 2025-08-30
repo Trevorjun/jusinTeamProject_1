@@ -39,13 +39,6 @@ void CMainGame::Initialize()
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
 #pragma endregion
 
-
-
-#pragma region 테스트 코드(monster)
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
-#pragma endregion
 }
 
 void CMainGame::Update()

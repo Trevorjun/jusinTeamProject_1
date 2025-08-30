@@ -49,6 +49,9 @@
     <Filter Include="01. Object\01. Monster\Monster_Curve">
       <UniqueIdentifier>{e63e9e34-b553-4259-8444-361444be9ecd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="97. Stage">
+      <UniqueIdentifier>{25d8aa79-30d9-48b4-a1f0-e9fe9ac35017}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -108,6 +111,12 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>99. AbstractFactory</Filter>
     </ClInclude>
+    <ClInclude Include="CStage.h">
+      <Filter>97. Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="CStageManager.h">
+      <Filter>97. Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -151,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="CMonster_Curve.cpp">
       <Filter>01. Object\01. Monster\Monster_Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="CStageManager.cpp">
+      <Filter>97. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CStage.cpp">
+      <Filter>97. Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

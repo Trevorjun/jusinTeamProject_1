@@ -1,8 +1,14 @@
 #include "pch.h"
 #include "CStageManager.h"
+#include "CAbstractFactory.h"
+
 #include "CObject.h"
 #include "CLifeItem.h"
 #include "CPowerItem.h"
+
+#include "CMonster_Curve.h"
+#include "CMonster_Straight.h"
+#include "CMonster_Suicide.h"
 
 CStageManager* CStageManager::m_instance = nullptr;
 
@@ -72,9 +78,28 @@ CObject* CStageManager::Create_Monster()
 		int iX = rand() % (WINCX - 100);
 		int iY = 0;
 
-		// TODO : add create monster logic
-		// TODO : delete create item logic
-		Create_Item({iX, iY});
+		int iRand = rand() % 3;
+
+		CObject* pMonster;
+
+		switch (iRand)
+		{
+		case 0: 
+			pMonster = CAbstractFactory<CMonster_Curve>::Create();
+			break;
+		case 1 :
+			pMonster = CAbstractFactory<CMonster_Straight>::Create();
+			break;
+		case 2 :
+		default:
+			pMonster = CAbstractFactory<CMonster_Suicide>::Create();
+			break;
+		}
+
+		pMonster->SetPivot({iX, iY});
+		(*m_pObjectList)[MONSTER].push_back(pMonster);
+
+		// Create_Item({iX, iY});
 		m_fLastMonsterSpawned = GetTickCount64();
 	}
 	return nullptr;
