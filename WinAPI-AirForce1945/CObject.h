@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Define.h"
 
 class CObject
@@ -29,7 +29,25 @@ public:
 	virtual void		Release()							PURE;
 
 protected:
-	virtual void		UpdateRect();
+	void	UpdateRect();
+
+	/**
+	* \brief 오브젝트가 있어야 할 범위를 벗어났는지 여부를 확인하는 함수
+	*
+	* 주로 LateUpdate()에서 호출하며, 필요할 경우에만 사용할 것
+	*
+	* \param	_iMargin	경계선 판정 시 적용할 여유값
+	*
+	* \return
+	* - INSIDE:		범위 안에 있음
+	* - OUT_LEFT:		화면 기준 왼쪽으로 범위 이탈
+	* - OUT_RIGHT:		화면 기준 오른쪽으로 범위 이탈
+	* - OUT_TOP:		화면 기준 위쪽으로 범위 이탈
+	* - OUT_BOTTOM:		화면 기준 아래쪽으로 범위 이탈
+	*
+	* \note _iMargin 값에 따라 자식 클래스에서 HandleOutOfRange()를 조정할 것
+	*/
+	OUTOFRANGE_DIR		IsOutOfRange(const int _iMargin = 0);
 
 protected:
 	RECT			m_tRect;

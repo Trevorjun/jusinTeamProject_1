@@ -4,6 +4,7 @@
 #include "CItem.h"
 
 #include "CCollisionManager.h"
+#include "CPlayer.h"
 
 #include "CPowerItem.h"
 #include "CLifeItem.h"
@@ -19,6 +20,14 @@ CMainGame::~CMainGame()
 void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
+
+#pragma region player 테스트 코드
+	CObject* pObject = new CPlayer;
+
+	m_ObjectList[OBJECT::PLAYER].push_back(pObject);
+
+	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
+#pragma endregion
 
 #pragma region 테스트 코드
 	CObject* pObj = new CPowerItem();
@@ -60,17 +69,17 @@ void CMainGame::LateUpdate()
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)	
 			obj->LateUpdate();
+
+	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
 }
 
 void CMainGame::Render()
 {
-	Rectangle(m_hDC, 0, 0, WINCX, WINCY);
+	Rectangle(m_hDC, -10, -10, WINCX + 10, WINCY + 10);
 
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)
 			obj->Render(m_hDC);
-
-	//CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
 }
 
 void CMainGame::Release()

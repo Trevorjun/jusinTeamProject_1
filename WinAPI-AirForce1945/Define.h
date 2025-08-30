@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 // world variable
 extern		HWND		g_hWnd;
@@ -30,6 +30,17 @@ enum COLLISION_FLAG
 	CIRCLE_TO_RECT,
 
 	COL_FLAG_END
+};
+
+enum OUTOFRANGE_DIR
+{
+	INSIDE,
+	OUT_LEFT,
+	OUT_RIGHT,
+	OUT_TOP,
+	OUT_BOTTOM,
+
+	OUT_DIR_END
 };
 
 template <typename T>
