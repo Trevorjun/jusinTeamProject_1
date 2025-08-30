@@ -1,12 +1,2 @@
-﻿  pch.cpp
-C:\Users\a9018\Desktop\jusinTeamProject_1\WinAPI-AirForce1945\Vector2.h(4,16): warning C4091: 'typedef ': 변수를 선언하지 않으면 'Vector2' 왼쪽은 무시됩니다.
-  (소스 파일 'pch.cpp'을(를) 컴파일하는 중)
-  
-  CCollisionManager.cpp
-  CItem.cpp
-  CMainGame.cpp
-  CObject.cpp
-  Vector2.cpp
-  WinAPI-AirForce1945.cpp
-  코드를 생성하고 있습니다...
-  WinAPI-AirForce1945.vcxproj -> C:\Users\a9018\Desktop\jusinTeamProject_1\WinAPI-AirForce1945\x64\Debug\WinAPI-AirForce1945.exe
+﻿  CPlayer.cpp
+  WinAPI-AirForce1945.vcxproj -> D:\cpp_ksh\Jusin158\jusinTeamProject_1\WinAPI-AirForce1945\x64\Debug\WinAPI-AirForce1945.exe

@@ -75,6 +75,9 @@
     <ClInclude Include="CCollisionManager.h">
       <Filter>98. CollisionManager</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>01. Object\00. Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -97,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
       <Filter>98. CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>01. Object\00. Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
