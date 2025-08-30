@@ -33,7 +33,7 @@ void CItem::LateUpdate()
 bool CItem::OnCollision(CObject* _pColObj)
 {
 
-	return m_bCollision;
+	return false;
 }
 
 void CItem::Render(HDC _hDC)

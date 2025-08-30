@@ -38,7 +38,8 @@ protected:
 	Vector2			m_vDir;
 
 	float			m_fSpeed;
-	bool			m_bCollision;
 	bool			m_bDestroy;
+private:
+	bool			m_bCollision;
 };
 

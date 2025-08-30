@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CCollisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\Define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:Define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CCollisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CItem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CItem.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CObject.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\Define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:Define.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CCollisionManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|solutionrelative:CCollisionManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C2E40E14-D579-40BE-A07B-44596938B6AD}|WinAPI-AirForce1945.vcxproj|C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CItem.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -79,19 +79,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CCollisionManager.h",
-              "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h",
-              "RelativeDocumentMoniker": "CCollisionManager.h",
-              "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h",
-              "RelativeToolTip": "CCollisionManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-29T12:10:47.005Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "CMainGame.h",
               "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CMainGame.h",
@@ -104,28 +91,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Define.h",
               "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\Define.h",
               "RelativeDocumentMoniker": "Define.h",
               "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\Define.h",
               "RelativeToolTip": "Define.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAPAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAUwCgAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-08-29T07:22:56.123Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "CObject.h",
               "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CObject.h",
               "RelativeDocumentMoniker": "CObject.h",
               "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CObject.h",
               "RelativeToolTip": "CObject.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABoAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-08-30T05:57:58.679Z"
+              "WhenOpened": "2025-08-30T05:57:58.679Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CCollisionManager.h",
+              "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h",
+              "RelativeDocumentMoniker": "CCollisionManager.h",
+              "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.h",
+              "RelativeToolTip": "CCollisionManager.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-08-29T12:10:47.005Z"
             },
             {
               "$type": "Document",
@@ -155,7 +155,7 @@
         },
         {
           "DockedWidth": 384,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
@@ -171,25 +171,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "CItem.cpp",
               "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CItem.cpp",
               "RelativeDocumentMoniker": "CItem.cpp",
               "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CItem.cpp",
               "RelativeToolTip": "CItem.cpp",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAlwCMAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-08-29T10:00:05.4Z"
+              "WhenOpened": "2025-08-29T10:00:05.4Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "CCollisionManager.cpp",
               "DocumentMoniker": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.cpp",
               "RelativeDocumentMoniker": "CCollisionManager.cpp",
               "ToolTip": "C:\\Users\\a9018\\Desktop\\jusinTeamProject_1\\WinAPI-AirForce1945\\CCollisionManager.cpp",
               "RelativeToolTip": "CCollisionManager.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAsAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-08-30T06:31:03.397Z",
               "EditorCaption": ""
