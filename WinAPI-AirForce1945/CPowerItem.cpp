@@ -8,7 +8,6 @@ CPowerItem::~CPowerItem() { }
 void CPowerItem::Initialize()
 {
 	m_tRect = { 0, };
-	m_vPivot = { 400, 300 };
 	m_vSize = { 25, 25 };
 	m_vDir = { 0, 1 };
 
@@ -23,6 +22,7 @@ int CPowerItem::Update()
 
 void CPowerItem::LateUpdate()
 {
+	__super::LateUpdate();
 }
 
 bool CPowerItem::OnCollision(CObject* _pObjCol)
