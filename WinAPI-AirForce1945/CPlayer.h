@@ -15,12 +15,12 @@ public:
 	void Release() override;
 
 public:
-	int   GetLife() const { return m_iLife; }
-	int   GetPower() const { return m_iPower; }
-	bool  GetIsAlive() const { return m_bIsAlive; }
-	bool  GetIsInvincible() const { return m_bIsInvincible; }
-	DWORD GetAttackCooldown() const { return m_dwAttackCooldown; }
-	DWORD GetLastAttackTime() const { return m_dwLastAttackTime; }
+	int       GetLife() const { return m_iLife; }
+	int       GetPower() const { return m_iPower; }
+	bool      GetIsAlive() const { return m_bIsAlive; }
+	bool      GetIsInvincible() const { return m_bIsInvincible; }
+	ULONGLONG GetAttackCooldown() const { return m_dwAttackCooldown; }
+	ULONGLONG GetLastAttackTime() const { return m_dwLastAttackTime; }
 
 	// SetLife는 플레이어 생성, 부활 등에 사용할 것. Life 추가는 AddLife 함수 사용 바람
 	void SetLife(const int _iLife) { m_iLife = _iLife; }
@@ -28,8 +28,8 @@ public:
 	void SetPower(const int _iPower) { m_iLife = _iPower; }
 	void SetIsAlive(const bool _bIsAlive) { m_bIsAlive = _bIsAlive; }
 	void SetIsInvincible(const bool _bIsInvincible) { m_bIsInvincible = _bIsInvincible; }
-	void SetAttackCooldown(const DWORD _dwAttackCooldown) { m_dwAttackCooldown = _dwAttackCooldown; }
-	void SetLastAttackTime(const DWORD _dwLastAttackTime) { m_dwLastAttackTime = _dwLastAttackTime; }
+	void SetAttackCooldown(const ULONGLONG _dwAttackCooldown) { m_dwAttackCooldown = _dwAttackCooldown; }
+	void SetLastAttackTime(const ULONGLONG _dwLastAttackTime) { m_dwLastAttackTime = _dwLastAttackTime; }
 
 public:
 	bool OnCollision(CObject* _pColObj) override;
@@ -41,8 +41,8 @@ public:
 private:
 	void Key_Input();
 	// 화면 밖으로 나가지 않게 만드는 기능의 함수
-	void HandleOutOfRange(const OUTOFRANGE_DIR eOutDir);
-	
+	void HandleOutOfBound(const tagObjBound tOutDir);
+
 private:
 	list<CObject*>* m_pBullet;
 	list<CObject*>* m_pShield;
@@ -55,6 +55,6 @@ private:
 	bool m_bIsAlive;
 	bool m_bIsInvincible;		// 피격, 부활 시 true -> 무적
 
-	DWORD m_dwAttackCooldown;	// 공격간 딜레이 설정
-	DWORD m_dwLastAttackTime;	// 마지막 공격 시간 저장
+	ULONGLONG m_dwAttackCooldown;	// 공격간 딜레이 설정
+	ULONGLONG m_dwLastAttackTime;	// 마지막 공격 시간 저장
 };

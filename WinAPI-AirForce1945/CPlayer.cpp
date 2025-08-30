@@ -37,7 +37,7 @@ int CPlayer::Update()
 
 void CPlayer::LateUpdate()
 {
-	HandleOutOfRange(IsOutOfRange());
+	HandleOutOfBound(IsOutOfBound());
 }
 
 void CPlayer::Render(HDC _hDC)
@@ -138,20 +138,17 @@ void CPlayer::Key_Input()
 	}
 }
 
-void CPlayer::HandleOutOfRange(const OUTOFRANGE_DIR eOutDir)
+void CPlayer::HandleOutOfBound(const tagObjBound tOutDir)
 {
-	if (eOutDir == OUTOFRANGE_DIR::INSIDE)
-		return;
-
-	if (eOutDir == OUTOFRANGE_DIR::OUT_LEFT)
+	if (tOutDir.bIsOutLeft)
 		m_vPivot.x += static_cast<float>(0 - m_tRect.left);
 
-	if (eOutDir == OUTOFRANGE_DIR::OUT_RIGHT)
+	if (tOutDir.bIsOutRight)
 		m_vPivot.x -= static_cast<float>(m_tRect.right - WINCX);
 
-	if (eOutDir == OUTOFRANGE_DIR::OUT_TOP)
+	if (tOutDir.bIsOutTop)
 		m_vPivot.y += static_cast<float>(0 - m_tRect.top);
 
-	if (eOutDir == OUTOFRANGE_DIR::OUT_BOTTOM)
+	if (tOutDir.bIsOutBottom)
 		m_vPivot.y -= static_cast<float>(m_tRect.bottom - WINCY);
 }
