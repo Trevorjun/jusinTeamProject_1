@@ -9,6 +9,11 @@
 #include "CPowerItem.h"
 #include "CLifeItem.h"
 
+#include "CAbstractFactory.h"
+#include "CMonster_Curve.h"
+#include "CMonster_Straight.h"
+#include "CMonster_Suicide.h"
+
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
 }
@@ -42,6 +47,11 @@ void CMainGame::Initialize()
 
 #pragma endregion
 
+#pragma region 테스트 코드(monster)
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
+#pragma endregion
 }
 
 void CMainGame::Update()
@@ -52,6 +62,13 @@ void CMainGame::Update()
 		for (auto iter = m_ObjectList[i].begin(); iter != m_ObjectList[i].end();)
 		{
 			bIsDestroy = (*iter)->Update();
+
+#pragma region 테스트 코드(monster에 player 주소 가지고 오기)
+			if (i == MONSTER)
+			{
+				dynamic_cast<CMonster*>(*iter)->setPlayerVXY(m_ObjectList[PLAYER].front());
+			}
+#pragma endregion
 
 			if (bIsDestroy)
 			{

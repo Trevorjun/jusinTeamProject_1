@@ -9,7 +9,7 @@ extern		HWND		g_hWnd;
 #define		WINCY				720
 #define		OBJ_DESTROY			1
 #define		OBJ_NOEVENT			0
-#define		PI					3.14159
+#define		PI					3.14159f
 #define		RAD(_fAngle)		((_fAngle * PI) / 180.f)					
 // enum 
 enum OBJECT
