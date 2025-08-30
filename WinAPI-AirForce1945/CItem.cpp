@@ -28,6 +28,7 @@ void CItem::LateUpdate()
 
 void CItem::Render(HDC _hDC)
 {
+	int a = 0;
 	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
