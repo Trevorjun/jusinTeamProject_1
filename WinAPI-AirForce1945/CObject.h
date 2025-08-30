@@ -34,20 +34,15 @@ protected:
 	/**
 	* \brief 오브젝트가 있어야 할 범위를 벗어났는지 여부를 확인하는 함수
 	*
-	* 주로 LateUpdate()에서 호출하며, 필요할 경우에만 사용할 것
+	* 주로 LateUpdate()에서 호출하며, 범위 밖으로 나갈 시 오브젝트 제거 등 다양하게 사용 가능
 	*
-	* \param	_iMargin	경계선 판정 시 적용할 여유값
+	* \param	_iMargin
+	* 경계선 판정 시 경계를 늘리거나 줄이는 데 사용. 디폴트로 사용 시 정해진 화면과 동일한 범위
 	*
-	* \return
-	* - INSIDE:		범위 안에 있음
-	* - OUT_LEFT:		화면 기준 왼쪽으로 범위 이탈
-	* - OUT_RIGHT:		화면 기준 오른쪽으로 범위 이탈
-	* - OUT_TOP:		화면 기준 위쪽으로 범위 이탈
-	* - OUT_BOTTOM:		화면 기준 아래쪽으로 범위 이탈
-	*
-	* \note _iMargin 값에 따라 자식 클래스에서 HandleOutOfRange()를 조정할 것
+	* \return	tagObjBound:
+	* 범위 밖으로 나갈 시 각 방향의 bool값이 true가 되는 구조체
 	*/
-	OUTOFRANGE_DIR		IsOutOfRange(const int _iMargin = 0);
+	tagObjBound	IsOutOfBound(const int _iMargin = 0);
 
 protected:
 	RECT			m_tRect;
