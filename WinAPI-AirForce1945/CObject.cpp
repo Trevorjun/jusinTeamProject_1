@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "CObject.h"
 
-CObject::CObject() : m_fSpeed(0.f), m_bDestroy(false)
+CObject::CObject() : m_fSpeed(0.f), m_bDestroy(false), m_bCollision(false)
 {
 	ZeroMemory(&m_tRect, sizeof(RECT));
 	ZeroMemory(&m_vPivot, sizeof(Vector2));

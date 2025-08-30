@@ -6,6 +6,9 @@
 #include "CCollisionManager.h"
 #include "CPlayer.h"
 
+#include "CPowerItem.h"
+#include "CLifeItem.h"
+
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
 }
@@ -18,11 +21,27 @@ void CMainGame::Initialize()
 {
 	m_hDC = GetDC(g_hWnd);
 
+#pragma region player 테스트 코드
 	CObject* pObject = new CPlayer;
 
 	m_ObjectList[OBJECT::PLAYER].push_back(pObject);
 
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
+#pragma endregion
+
+#pragma region 테스트 코드
+	CObject* pObj = new CPowerItem();
+	pObj->Initialize();
+
+	m_ObjectList[ITEM].push_back(pObj);
+
+	pObj = new CLifeItem();
+	pObj->Initialize();
+
+	m_ObjectList[ITEM].push_back(pObj);
+
+#pragma endregion
+
 }
 
 void CMainGame::Update()

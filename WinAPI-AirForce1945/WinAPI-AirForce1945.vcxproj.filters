@@ -75,8 +75,11 @@
     <ClInclude Include="CCollisionManager.h">
       <Filter>98. CollisionManager</Filter>
     </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>01. Object\00. Player</Filter>
+    <ClInclude Include="CPowerItem.h">
+      <Filter>01. Object\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CLifeItem.h">
+      <Filter>01. Object\03. Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -101,8 +104,11 @@
     <ClCompile Include="CCollisionManager.cpp">
       <Filter>98. CollisionManager</Filter>
     </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>01. Object\00. Player</Filter>
+    <ClCompile Include="CPowerItem.cpp">
+      <Filter>01. Object\03. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CLifeItem.cpp">
+      <Filter>01. Object\03. Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
