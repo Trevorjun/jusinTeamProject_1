@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CObject.h"
 
 CObject::CObject() : m_fSpeed(0.f), m_bDestroy(0)
@@ -10,13 +10,12 @@ CObject::CObject() : m_fSpeed(0.f), m_bDestroy(0)
 }
 
 CObject::~CObject()
-{
-}
+{}
 
 void CObject::UpdateRect()
 {
-	m_tRect.left	= (LONG)(m_vPivot.x - ( m_vSize.x * 0.5f ));
-	m_tRect.top		= (LONG)(m_vPivot.y - ( m_vSize.y * 0.5f ));
-	m_tRect.right	= (LONG)(m_vPivot.x + ( m_vSize.x * 0.5f ));
-	m_tRect.bottom	= (LONG)(m_vPivot.y + ( m_vSize.y * 0.5f ));
+	m_tRect.left   = static_cast<LONG>(m_vPivot.x - (m_vSize.x * 0.5f));
+	m_tRect.top    = static_cast<LONG>(m_vPivot.y - (m_vSize.y * 0.5f));
+	m_tRect.right  = static_cast<LONG>(m_vPivot.x + (m_vSize.x * 0.5f));
+	m_tRect.bottom = static_cast<LONG>(m_vPivot.y + (m_vSize.y * 0.5f));
 }
