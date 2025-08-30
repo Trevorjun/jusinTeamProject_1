@@ -9,10 +9,10 @@ void CCollisionManager::RTRCollision(list<CObject*>& _Src1, list<CObject*>& _Src
 		{
 			if (IntersectRect(&tDst, &(Src1->GetRect()), &(Src2->GetRect())))
 			{
-				Src1->OnCollision(Src2);
-				Src2->OnCollision(Src1);
 				Src1->SetCollision(true);
 				Src2->SetCollision(true);
+				Src1->OnCollision(Src2);
+				Src2->OnCollision(Src1);
 			}
 			else
 			{
@@ -35,10 +35,10 @@ void CTCCollision(list<CObject*>& _Src1, list<CObject*>& _Src2)
 
 			if (fSumRadius >= fDiagonal)
 			{
-				Src1->OnCollision(Src2);
-				Src2->OnCollision(Src1);
 				Src1->SetCollision(true);
 				Src2->SetCollision(true);
+				Src1->OnCollision(Src2);
+				Src2->OnCollision(Src1);
 			}
 			else
 			{
