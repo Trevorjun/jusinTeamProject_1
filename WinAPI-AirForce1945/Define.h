@@ -9,7 +9,7 @@ extern		HWND		g_hWnd;
 #define		WINCY				720
 #define		OBJ_DESTROY			1
 #define		OBJ_NOEVENT			0
-#define		PI					3.14159
+#define		PI					3.14159f
 #define		RAD(_fAngle)		((_fAngle * PI) / 180.f)					
 // enum 
 enum OBJECT
@@ -32,15 +32,21 @@ enum COLLISION_FLAG
 	COL_FLAG_END
 };
 
-enum OUTOFRANGE_DIR
+/**
+ * \brief 각 사방의 범위 밖으로 나갈 경우를 체크하기 위한 구조체
+ *
+ * \details
+ * - bIsOutLeft:	왼쪽으로 벗어난 경우 true
+ * - bIsOutRight:	오른쪽으로 벗어난 경우 true
+ * - bIsOutTop:	위쪽으로 벗어난 경우 true
+ * - bIsOutBottom:	아래쪽으로 벗어난 경우 true
+ */
+struct tagObjBound
 {
-	INSIDE,
-	OUT_LEFT,
-	OUT_RIGHT,
-	OUT_TOP,
-	OUT_BOTTOM,
-
-	OUT_DIR_END
+	bool bIsOutLeft = false;
+	bool bIsOutRight = false;
+	bool bIsOutTop = false;
+	bool bIsOutBottom = false;
 };
 
 template <typename T>

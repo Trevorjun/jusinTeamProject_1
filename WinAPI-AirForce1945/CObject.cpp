@@ -20,20 +20,21 @@ void CObject::UpdateRect()
 	m_tRect.bottom = static_cast<LONG>(m_vPivot.y + (m_vSize.y * 0.5f));
 }
 
-OUTOFRANGE_DIR CObject::IsOutOfRange(const int _iMargin)
+tagObjBound CObject::IsOutOfBound(const int _iMargin)
 {
+	tagObjBound tObjBound = {};
 
 	if (m_tRect.left < 0 - _iMargin)
-		return OUTOFRANGE_DIR::OUT_LEFT;
+		tObjBound.bIsOutLeft = true;
 
 	if (m_tRect.right > WINCX + _iMargin)
-		return OUTOFRANGE_DIR::OUT_RIGHT;
+		tObjBound.bIsOutRight = true;
 
 	if (m_tRect.top < 0 - _iMargin)
-		return OUTOFRANGE_DIR::OUT_TOP;
+		tObjBound.bIsOutTop = true;
 
 	if (m_tRect.bottom > WINCY + _iMargin)
-		return OUTOFRANGE_DIR::OUT_BOTTOM;
+		tObjBound.bIsOutBottom = true;
 
-	return OUTOFRANGE_DIR::INSIDE;
+	return tObjBound;
 }

@@ -40,11 +40,14 @@
     <Filter Include="98. CollisionManager">
       <UniqueIdentifier>{1ae54855-be50-4775-9432-0987b3740145}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97. StageManager">
-      <UniqueIdentifier>{79088868-d657-452d-9e9a-2cf36add03f1}</UniqueIdentifier>
+    <Filter Include="01. Object\01. Monster\Monster_Suicide">
+      <UniqueIdentifier>{e76af495-4d08-4c03-827b-d13033061f54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="97. StageManager\00. Stage">
-      <UniqueIdentifier>{9f0be3c0-2288-482b-89fe-e06a86cd77c4}</UniqueIdentifier>
+    <Filter Include="01. Object\01. Monster\Monster_Straight">
+      <UniqueIdentifier>{5e9406ba-e70c-4d42-b60d-95ea6f7989c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01. Object\01. Monster\Monster_Curve">
+      <UniqueIdentifier>{e63e9e34-b553-4259-8444-361444be9ecd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -90,11 +93,20 @@
     <ClInclude Include="CPlayer.h">
       <Filter>01. Object\00. Player</Filter>
     </ClInclude>
-    <ClInclude Include="CStage.h">
-      <Filter>97. StageManager\00. Stage</Filter>
+    <ClInclude Include="CMonster.h">
+      <Filter>01. Object\01. Monster</Filter>
     </ClInclude>
-    <ClInclude Include="CStageManager.h">
-      <Filter>97. StageManager</Filter>
+    <ClInclude Include="CMonster_Suicide.h">
+      <Filter>01. Object\01. Monster\Monster_Suicide</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster_Straight.h">
+      <Filter>01. Object\01. Monster\Monster_Straight</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonster_Curve.h">
+      <Filter>01. Object\01. Monster\Monster_Curve</Filter>
+    </ClInclude>
+    <ClInclude Include="CAbstractFactory.h">
+      <Filter>99. AbstractFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -128,11 +140,17 @@
     <ClCompile Include="CPlayer.cpp">
       <Filter>01. Object\00. Player</Filter>
     </ClCompile>
-    <ClCompile Include="CStage.cpp">
-      <Filter>97. StageManager\00. Stage</Filter>
+    <ClCompile Include="CMonster.cpp">
+      <Filter>01. Object\01. Monster</Filter>
     </ClCompile>
-    <ClCompile Include="CStageManager.cpp">
-      <Filter>97. StageManager</Filter>
+    <ClCompile Include="CMonster_Suicide.cpp">
+      <Filter>01. Object\01. Monster\Monster_Suicide</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster_Straight.cpp">
+      <Filter>01. Object\01. Monster\Monster_Straight</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster_Curve.cpp">
+      <Filter>01. Object\01. Monster\Monster_Curve</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
