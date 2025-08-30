@@ -32,6 +32,7 @@ public:
 	void SetLastAttackTime(const DWORD _dwLastAttackTime) { m_dwLastAttackTime = _dwLastAttackTime; }
 
 public:
+	bool OnCollision(CObject* _pColObj) override;
 	// AddLife는 플레이어 Life 추가시 사용할 것. 플레이어 생성, 부활 등은 SetLife 함수 사용 바람
 	void AddLife(const int _iLifeChange);
 	// AddPower는 플레이어 Power 추가시 사용할 것. 플레이어 생성, 부활 등은 SetPower 함수 사용 바람
@@ -41,7 +42,7 @@ private:
 	void Key_Input();
 	// 화면 밖으로 나가지 않게 만드는 기능의 함수
 	void HandleOutOfRange(const OUTOFRANGE_DIR eOutDir);
-
+	
 private:
 	list<CObject*>* m_pBullet;
 	list<CObject*>* m_pShield;

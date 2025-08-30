@@ -49,6 +49,11 @@ void CPlayer::Release()
 {
 }
 
+bool CPlayer::OnCollision(CObject* _pColObj)
+{
+	return false;
+}
+
 void CPlayer::AddLife(const int _iLifeChange)
 {
 	m_iLife += _iLifeChange;

@@ -137,6 +137,7 @@
     <ClInclude Include="CLifeItem.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CObject.h" />
+    <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CPowerItem.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="framework.h" />
@@ -152,6 +153,7 @@
     <ClCompile Include="CLifeItem.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CObject.cpp" />
+    <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPowerItem.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

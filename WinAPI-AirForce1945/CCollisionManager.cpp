@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CCollisionManager.h"
 
 void CCollisionManager::RTRCollision(list<CObject*>& _Src1, list<CObject*>& _Src2)
@@ -22,7 +22,8 @@ void CCollisionManager::RTRCollision(list<CObject*>& _Src1, list<CObject*>& _Src
 		}
 }
 
-void CTCCollision(list<CObject*>& _Src1, list<CObject*>& _Src2)
+void CCollisionManager::CTCCollision(list<CObject*>& _Src1, list<CObject*>& _Src2)
+
 {
 	for (auto& Src1 : _Src1)
 		for (auto& Src2 : _Src2)
