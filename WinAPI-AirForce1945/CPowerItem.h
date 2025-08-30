@@ -1,10 +1,12 @@
 #pragma once
-#include "CObject.h"
-class CItem : public CObject
+
+#include "CItem.h"
+
+class CPowerItem : public CItem
 {
 public:
-    CItem();
-    virtual ~CItem();
+    CPowerItem();
+    ~CPowerItem() override;
 
 public:
     void Initialize() override;
@@ -14,8 +16,6 @@ public:
     void Release() override;
 
 public:
-    virtual void Move();
-    virtual bool Check_InBound();
-    virtual void Apply_Effect(CObject* pObj) PURE;
+    void Apply_Effect(CObject* pObj) override;
 };
 
