@@ -57,10 +57,12 @@ private :
 	list<CObject*> (*m_pObjectList)[OBJ_END];
 
 private : // ui elements
-	RECT rInfoBound;
+	RECT rStageInfo;
+	RECT rPlayerInfo;
 	RECT rGameOver;
 	RECT rGameClear;
-	TCHAR tInfos[128];
+	TCHAR tStageInfos[128];
+	TCHAR tPlayerInfos[128];
 	long long lDisplayElapsedTime;
 
 #pragma region TEST

@@ -25,7 +25,9 @@ CStageManager* CStageManager::Get_Instance()
 
 CStageManager::CStageManager()
 {
-	rInfoBound ={ WINCX - 170, 0, WINCX, 100 };
+	rStageInfo ={ WINCX - 170, 0, WINCX, 70 };
+	rPlayerInfo = { 0, 0, 170, 70 };
+
 	rGameOver = {( WINCX >> 1) - 100, ( WINCY >> 1) - 100,  (WINCX >> 1) + 100, (WINCY >> 1) + 100 };
 	rGameClear = { (WINCX >> 1) - 100, (WINCY >> 1) - 100,  (WINCX >> 1) + 100, (WINCY >> 1) + 100 };
 
@@ -37,6 +39,9 @@ CStageManager::CStageManager()
 
 	bGameOver = false;
 	bGameClear = false;
+
+	ZeroMemory(tStageInfos, sizeof(tStageInfos));
+	ZeroMemory(tPlayerInfos, sizeof(tPlayerInfos));
 
 #pragma region TEST
 	Test_Call_OnPlayerDead = GetTickCount64();
@@ -87,16 +92,26 @@ void CStageManager::LateUpdate()
 void CStageManager::Render(HDC _hDC)
 {
 	// TODO : 
-	Rectangle(_hDC, rInfoBound.left, rInfoBound.top, rInfoBound.right, rInfoBound.bottom);
+	Rectangle(_hDC, rStageInfo.left, rStageInfo.top, rStageInfo.right, rStageInfo.bottom);
+	Rectangle(_hDC, rPlayerInfo.left, rPlayerInfo.top, rPlayerInfo.right, rPlayerInfo.bottom);
 
 	// Set current stage text info
-	wsprintf(tInfos, TEXT("\nSTAGE : %d\nREQUIRED KILL : %d\nCURRENT KILL : %d"), 
+	wsprintf(tStageInfos, TEXT("\nSTAGE : %d\nREQUIRED KILL : %d\nCURRENT KILL : %d"), 
 		m_stages[m_iCurrentStage]->Get_CurrentStage(),
 		m_stages[m_iCurrentStage]->Get_RequiredKillCount(),
 		m_stages[m_iCurrentStage]->Get_CurrentKillCount());
 
-	DrawText(_hDC, tInfos, -1, &rInfoBound, DT_VCENTER | DT_CENTER);
+	DrawText(_hDC, tStageInfos, -1, &rStageInfo, DT_VCENTER | DT_CENTER);
+
+	// Set current player text info
+	wsprintf(tPlayerInfos, TEXT("\nLIFE : %d\nPOWER : %d"),
+		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->GetLife(),
+		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->GetPower());
+
+	DrawText(_hDC, tPlayerInfos, -1, &rPlayerInfo, DT_VCENTER | DT_CENTER);
+
 }
+
 void CStageManager::Release()
 {
 	// TODO : stages created need to call Safe_Delete!! 
@@ -136,8 +151,6 @@ CObject* CStageManager::Create_Monster()
 
 		pMonster->SetPivot({iX, iY});
 		
-
-
 		// TODO : inject player's pointer to monster object
 		// (*m_pObjectList)[PLAYER].front()
 
@@ -186,7 +199,6 @@ void CStageManager::Transition_Stage()
 	m_iCurrentStage++;
 	if (m_iCurrentStage >= cTotalStage)
 	{
-		// TODO : add game clear logic
 		// Prevent index out of bounds
 		m_iCurrentStage = cTotalStage - 1;
 		bGameClear = true;
@@ -252,8 +264,6 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 	Release();
 	Initialize();
 	lDisplayElapsedTime = GetTickCount64();
-	// TODO : add player's revive logic
-
 }
 
 void CStageManager::Test_StageManager()
