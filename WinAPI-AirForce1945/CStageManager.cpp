@@ -25,12 +25,22 @@ CStageManager* CStageManager::Get_Instance()
 CStageManager::CStageManager()
 {
 	rInfoBound ={ WINCX - 170, 0, WINCX, 100 };
+	rGameOver = {( WINCX >> 1) - 100, ( WINCY >> 1) - 100,  (WINCX >> 1) + 100, (WINCY >> 1) + 100 };
+	rGameClear = { (WINCX >> 1) - 100, (WINCY >> 1) - 100,  (WINCX >> 1) + 100, (WINCY >> 1) + 100 };
 
 	ZeroMemory(m_stages, sizeof(m_stages));
 	m_iCurrentStage = 0;
 	m_fLastMonsterSpawned = 0;
 	m_fStageSpawnTime = 0.f;
 	m_pObjectList = nullptr;
+
+	bGameOver = false;
+	bGameClear = false;
+
+#pragma region TEST
+	Test_Call_OnPlayerDead = GetTickCount64();
+	Test_Call_OnMonsterDead = GetTickCount64();
+#pragma endregion
 }
 
 CStageManager::~CStageManager()
@@ -40,27 +50,39 @@ CStageManager::~CStageManager()
 
 void CStageManager::Initialize()
 {
-	m_stages[0] = new CStage(1, 7, 3.f, 0.3f);
-	m_stages[1] = new CStage(2, 10, 2.5f, 0.5f);
-	m_stages[2] = new CStage(3, 12, 2.1f, 0.65f);
+	m_stages[0] = new CStage(1, 4, 1.f, 0.3f);
+	m_stages[1] = new CStage(2, 4, 1.f, 0.5f);
+	m_stages[2] = new CStage(3, 4, 1.f, 0.65f);
 
 	m_iCurrentStage = 0;
 
 	m_fStageSpawnTime = m_stages[m_iCurrentStage]->Get_SpawnTime();
 	m_fLastMonsterSpawned = GetTickCount64();
 }
+
 void CStageManager::Update()
 {
+#pragma region TEST
+	Test_StageManager();
+#pragma endregion
+
+	if (bGameOver)
+	{
+		Handle_GameOver();
+	}
+
 	if (m_stages[m_iCurrentStage]->Get_Clear())
 	{
 		Transition_Stage();
 	}
 	Create_Monster();
 }
+
 void CStageManager::LateUpdate()
 {
 	Check_Clear();
 }
+
 void CStageManager::Render(HDC _hDC)
 {
 	// TODO : 
@@ -112,13 +134,14 @@ CObject* CStageManager::Create_Monster()
 		}
 
 		pMonster->SetPivot({iX, iY});
+		
+
 
 		// TODO : inject player's pointer to monster object
 		// (*m_pObjectList)[PLAYER].front()
 
 		(*m_pObjectList)[MONSTER].push_back(pMonster);
 
-		// Create_Item({iX, iY});
 		m_fLastMonsterSpawned = GetTickCount64();
 	}
 	return nullptr;
@@ -163,7 +186,33 @@ void CStageManager::Transition_Stage()
 	if (m_iCurrentStage >= cTotalStage)
 	{
 		// TODO : add game clear logic
+		// Prevent index out of bounds
+		m_iCurrentStage = cTotalStage - 1;
+		bGameClear = true;
 	}
+}
+
+void CStageManager::Handle_GameOver()
+{
+	while (bGameOver && lDisplayElapsedTime + 2000 < GetTickCount64())
+	{
+		bGameOver = false;
+	}
+}
+
+void CStageManager::Display_GameOver(HDC _hDC)
+{
+	if (bGameOver)
+	{
+		DrawText(_hDC, L"=====GAME OVER=====", -1, &rGameOver, DT_VCENTER | DT_CENTER);
+	}
+}
+
+void CStageManager::Display_GameClear(HDC _hDC)
+{
+	DrawText(_hDC, L"=====GAME CELAR=====", -1, &rGameOver, DT_VCENTER | DT_CENTER);
+
+
 }
 
 void CStageManager::On_MonsterKilled(CObject* pKilledObj)
@@ -177,5 +226,49 @@ void CStageManager::On_MonsterKilled(CObject* pKilledObj)
 	{
 		Create_Item(pKilledObj->GetPivot());
 	}
+}
 
+void CStageManager::On_PlayerDead(CObject* _pPlayer)
+{
+	tested = true;
+ 	bGameOver = true;
+
+	
+	//  Release only Bullet, Monster, Item 
+	for (int i = 0; i < OBJ_END; ++i)
+	{
+		if (i == MONSTER || i == BULLET || i == ITEM)
+		{
+			for (auto iter = (*m_pObjectList)[i].begin(); iter != (*m_pObjectList)[i].end(); )
+			{
+				SafeDelete<CObject*>((*iter));
+				iter = (*m_pObjectList)[i].erase(iter);
+			}
+		}
+
+	}
+
+	Release();
+	Initialize();
+	lDisplayElapsedTime = GetTickCount64();
+	// TODO : add player's revive logic
+
+}
+
+void CStageManager::Test_StageManager()
+{
+	if (Test_Call_OnPlayerDead + 20000 < GetTickCount64() && !tested)
+	{
+		CObject* pObj = (*m_pObjectList)[PLAYER].front();
+		On_PlayerDead(pObj);
+	}
+	if (Test_Call_OnMonsterDead + 2000 < GetTickCount64())
+	{
+		if ((*m_pObjectList)[MONSTER].size() > 0)
+		{
+			CObject* pObj = (*m_pObjectList)[MONSTER].front();
+			On_MonsterKilled(pObj);
+		}
+		Test_Call_OnMonsterDead = GetTickCount64();
+	}
 }

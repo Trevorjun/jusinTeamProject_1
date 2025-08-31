@@ -37,6 +37,8 @@ int CPlayer::Update()
 
 	Key_Input(IsOutOfBound(-10));
 
+	
+
 	return OBJ_NOEVENT;
 }
 
