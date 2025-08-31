@@ -30,21 +30,19 @@ public:
 
 	/**
 	 * \brief 총알 발사에 사용하는 투사체 속도, 발사각 제공하는 Create
-	 * \param _fX		오브젝트의 m_vPivot.x
-	 * \param _fY		오브젝트의 m_vPivot.y
-	 * \param _fSpeed	발사 속도
-	 * \param _fAngle	발사각 (WinAPI 좌표 기준 0 ~ 360도)
+	 * \param _fX			오브젝트의 m_vPivot.x
+	 * \param _fY			오브젝트의 m_vPivot.y
+	 * \param _fSpeed		발사 속도
+	 * \param _fShootDeg	발사각 (90도 : 위, 270도 : 아래)
 	 */
-	static CObject* Create(float _fX, float _fY, float _fSpeed, float _fAngle)
+	static CObject* Create(float _fX, float _fY, float _fSpeed, float _fShootDeg)
 	{
 		CObject* pObject = new T;
 		pObject->Initialize();
 		pObject->SetPivot({ _fX, _fY });
-		pObject->SetAngle(_fAngle);
+		pObject->SetAngle(_fShootDeg);
 		pObject->SetSpeed(_fSpeed);
 
 		return pObject;
 	}
-
-
 };

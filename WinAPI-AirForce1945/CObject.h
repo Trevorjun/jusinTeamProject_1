@@ -29,7 +29,7 @@ public:
 	const Vector2&		GetPivot()		{ return m_vPivot; }
 	const Vector2&		GetSize()		{ return m_vSize; }
 	const Vector2&		GetDir()		{ return m_vDir; }
-	const float&		GetAngle()		{ return m_fAngle; }
+	const float&		GetAngle()		{ return m_fShootDeg; }
 	const float&		GetSpeed()		{ return m_fSpeed; }
 	const bool&			GetCollision()	{ return m_bCollision; }
 
@@ -38,7 +38,7 @@ public:
 	void	SetSize(const Vector2& _vSize)				{ m_vSize = _vSize; }
 	void	SetDir(const Vector2& _vDir)				{ m_vDir = _vDir; }
 	void	SetSpeed(const float& _fSpeed)				{ m_fSpeed = _fSpeed; }
-	void	SetAngle(const float& _fAngle)				{ m_fAngle = _fAngle; }
+	void	SetAngle(const float& _fAngle)				{ m_fShootDeg = _fAngle; }
 	void	SetDestroy()								{ m_bDestroy = true; }
 	void	SetCollision(const bool& _isCol)			{ m_bCollision = _isCol; }
 public:
@@ -71,7 +71,7 @@ protected:
 	Vector2			m_vDir;
 
 	float			m_fSpeed;
-	float			m_fAngle;		//  Degree 각 (총알 발사각에 사용)
+	float			m_fShootDeg;		//  Degree 각 (총알 발사각에 사용)
 	bool			m_bDestroy;
 
 private:

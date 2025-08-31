@@ -16,4 +16,8 @@ public:
 
 public:
 	bool OnCollision(CObject* _pColObj) override;
+
+private:
+	Vector2 m_vCenter;			// 가상 중심점
+	float   m_fRotateAngle;		// 회전 각도
 };

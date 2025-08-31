@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CAccelBullet.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CAbstractFactory.h" />
     <ClInclude Include="CCollisionManager.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="WinAPI-AirForce1945.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CAccelBullet.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CItem.cpp" />
