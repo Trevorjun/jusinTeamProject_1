@@ -19,8 +19,8 @@ public:
 	int       GetPower() const { return m_iPower; }
 	bool      GetIsAlive() const { return m_bIsAlive; }
 	bool      GetIsInvincible() const { return m_bIsInvincible; }
-	ULONGLONG GetAttackCooldown() const { return m_dwAttackCooldown; }
-	ULONGLONG GetLastAttackTime() const { return m_dwLastAttackTime; }
+	ULONGLONG GetAttackCooldown() const { return m_qwAttackCooldown; }
+	ULONGLONG GetLastAttackTime() const { return m_qwLastAttackTime; }
 
 	// SetLife는 플레이어 생성, 부활 등에 사용할 것. Life 추가는 AddLife 함수 사용 바람
 	void SetLife(const int _iLife) { m_iLife = _iLife; }
@@ -28,11 +28,14 @@ public:
 	void SetPower(const int _iPower) { m_iLife = _iPower; }
 	void SetIsAlive(const bool _bIsAlive) { m_bIsAlive = _bIsAlive; }
 	void SetIsInvincible(const bool _bIsInvincible) { m_bIsInvincible = _bIsInvincible; }
-	void SetAttackCooldown(const ULONGLONG _dwAttackCooldown) { m_dwAttackCooldown = _dwAttackCooldown; }
-	void SetLastAttackTime(const ULONGLONG _dwLastAttackTime) { m_dwLastAttackTime = _dwLastAttackTime; }
+	void SetAttackCooldown(const ULONGLONG _dwAttackCooldown) { m_qwAttackCooldown = _dwAttackCooldown; }
+	void SetLastAttackTime(const ULONGLONG _dwLastAttackTime) { m_qwLastAttackTime = _dwLastAttackTime; }
 
 public:
 	void Set_Bullet(list<CObject*>* pBullet) { m_pBullet = pBullet; }
+
+	// 플레이어 죽을 시 외부에서 호출하면 플레이어 상태 초기화 및 일정시간 무적
+	void Revive();
 
 public:
 	bool OnCollision(CObject* _pColObj) override;
@@ -52,8 +55,11 @@ private:
 	int m_iPower;
 	int m_iMaxPower;
 
-	ULONGLONG m_dwAttackCooldown;		// 공격간 딜레이 설정
-	ULONGLONG m_dwLastAttackTime;		// 마지막 공격 시간 저장
+	ULONGLONG m_qwAttackCooldown;		// 공격간 딜레이 설정
+	ULONGLONG m_qwLastAttackTime;		// 마지막 공격 시간 저장
+
+	ULONGLONG m_dwInvincibleDuration;	// 무적 지속 시간 설정
+	ULONGLONG m_qwInvincibleEndTime;	// 무적 끝나는 시간 저장
 
 	bool m_bIsAlive;
 	bool m_bIsInvincible;				// 피격, 부활 시 true -> 무적
