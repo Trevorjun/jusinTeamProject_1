@@ -34,11 +34,11 @@ public:
 public:
 	void Set_Bullet(list<CObject*>* pBullet) { m_pBullet = pBullet; }
 
-	// 플레이어 죽을 시 외부에서 호출하면 플레이어 상태 초기화 및 일정시간 무적
+	//! 플레이어 죽을 시 외부에서 호출하면 플레이어 상태 초기화 및 일정시간 무적
 	void Revive();
 
 public:
-	bool OnCollision(CObject* _pColObj) override;
+	bool OnCollision(CObject* _pObjCol) override;
 	// AddLife는 플레이어 Life 추가시 사용할 것. 플레이어 생성, 부활 등은 SetLife 함수 사용 바람
 	void AddLife(const int _iLifeChange);
 	// AddPower는 플레이어 Power 추가시 사용할 것. 플레이어 생성, 부활 등은 SetPower 함수 사용 바람

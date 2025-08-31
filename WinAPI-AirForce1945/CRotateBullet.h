@@ -15,7 +15,7 @@ public:
 	void Release() override;
 
 public:
-	bool OnCollision(CObject* _pColObj) override;
+	bool OnCollision(CObject* _pObjCol) override;
 
 private:
 	Vector2 m_vCenter;			// 가상 중심점

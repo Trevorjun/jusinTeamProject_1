@@ -10,8 +10,9 @@ extern HWND g_hWnd;
 #define		WINCX				600
 #define		WINCY				720
 
-#define		OBJ_DESTROY			1		//! 현재 사용 안함
-#define		OBJ_NOEVENT			0		//! 현재 사용 안함
+#define		OBJ_NOEVENT			0
+#define		OBJ_DESTROY			1
+#define		OBJ_PLAYERDEAD		2
 
 #define		PI					3.14159f
 #define		RAD(_fAngle)		(((_fAngle) * PI) / 180.f)
@@ -42,7 +43,8 @@ extern HWND g_hWnd;
 
 // 열거체				//////////////
 
-enum OBJECT
+// 오브젝트 리스트에서 생성할 때 사용
+enum OBJECT				
 {
 	PLAYER,
 	MONSTER,
@@ -60,6 +62,20 @@ enum COLLISION_FLAG
 	CIRCLE_TO_RECT,
 
 	COL_FLAG_END
+};
+
+// 오브젝트의 타입을 저장해서 충돌 판정에서 사용
+enum class OBJECT_TYPE	
+{
+	PLAYER,
+	MONSTER,
+	BOSS,
+	PLAYER_BULLET,
+	MONSTER_BULLET,
+	ITEM_LIFE,
+	ITEM_POWER,
+
+	END
 };
 
 // 함수 템플릿			//////////////

@@ -24,7 +24,7 @@ public:
 	CObject();
 	virtual ~CObject();
 public:
-	const OBJECT&		GetObjectType()	{ return m_eObjectType; }
+	const OBJECT_TYPE&	GetObjectType()	{ return m_eObjectType; }
 	const RECT&			GetRect()		{ return m_tRect; }
 	const Vector2&		GetPivot()		{ return m_vPivot; }
 	const Vector2&		GetSize()		{ return m_vSize; }
@@ -33,19 +33,19 @@ public:
 	const float&		GetSpeed()		{ return m_fSpeed; }
 	const bool&			GetCollision()	{ return m_bCollision; }
 
-	void	SetObjectType(const OBJECT& _eObjectType)	{ m_eObjectType = _eObjectType; }
-	void	SetPivot(const Vector2& _vPivot)			{ m_vPivot = _vPivot; }
-	void	SetSize(const Vector2& _vSize)				{ m_vSize = _vSize; }
-	void	SetDir(const Vector2& _vDir)				{ m_vDir = _vDir; }
-	void	SetSpeed(const float& _fSpeed)				{ m_fSpeed = _fSpeed; }
-	void	SetAngle(const float& _fAngle)				{ m_fShootDeg = _fAngle; }
-	void	SetDestroy()								{ m_bDestroy = true; }
-	void	SetCollision(const bool& _isCol)			{ m_bCollision = _isCol; }
+	void	SetObjectType(const OBJECT_TYPE& _eObjectType)	{ m_eObjectType = _eObjectType; }
+	void	SetPivot(const Vector2& _vPivot)				{ m_vPivot = _vPivot; }
+	void	SetSize(const Vector2& _vSize)					{ m_vSize = _vSize; }
+	void	SetDir(const Vector2& _vDir)					{ m_vDir = _vDir; }
+	void	SetSpeed(const float& _fSpeed)					{ m_fSpeed = _fSpeed; }
+	void	SetAngle(const float& _fAngle)					{ m_fShootDeg = _fAngle; }
+	void	SetDestroy()									{ m_bDestroy = true; }
+	void	SetCollision(const bool& _isCol)				{ m_bCollision = _isCol; }
 public:
 	virtual void		Initialize()						PURE;
 	virtual int			Update()							PURE;
 	virtual void		LateUpdate()						PURE;
-	virtual bool		OnCollision(CObject* _pColObj)		PURE;
+	virtual bool		OnCollision(CObject* _pObjCol)		PURE;
 	virtual void		Render(HDC _hDC)					PURE;
 	virtual void		Release()							PURE;
 
@@ -64,7 +64,7 @@ protected:
 	tagObjBound	IsOutOfBound(const int _iMargin = 0);
 
 protected:
-	OBJECT			m_eObjectType;
+	OBJECT_TYPE		m_eObjectType;
 	RECT			m_tRect;
 	Vector2			m_vPivot;
 	Vector2			m_vSize;

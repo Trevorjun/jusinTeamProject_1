@@ -17,7 +17,7 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_eObjectType = OBJECT::PLAYER;
+	m_eObjectType = OBJECT_TYPE::PLAYER;
 
 	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
 	m_vSize  = { 60.f, 60.f };
@@ -31,6 +31,13 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_bDestroy)
+		return OBJ_DESTROY;
+
+	if (!m_bIsAlive)
+		//return OBJ_PLAYERDEAD;
+		Revive();
+
 	if (m_bIsInvincible)
 	{
 		//todo 몬스터 및 총알과 충돌에서 무적
@@ -38,12 +45,6 @@ int CPlayer::Update()
 		if (GetTickCount64() >= m_qwInvincibleEndTime)
 			m_bIsInvincible = false;
 	}
-
-	if (m_bDestroy)
-		return OBJ_DESTROY;
-
-	if (m_iLife <= 0)
-		m_bIsAlive = false;
 
 	KeyInput(IsOutOfBound(-10));
 
@@ -83,9 +84,36 @@ void CPlayer::Revive()
 	m_qwInvincibleEndTime = GetTickCount64() + m_dwInvincibleDuration;
 }
 
-bool CPlayer::OnCollision(CObject* _pColObj)
+bool CPlayer::OnCollision(CObject* _pObjCol)
 {
-	//! Collision을 메인 게임의 LateUpdate에서 했을 때 그 안에서 호출되는, 충돌 시 할 작업들
+	switch (_pObjCol->GetObjectType())
+	{
+	case OBJECT_TYPE::MONSTER:
+	{
+		this->AddLife(-1);
+	}
+	break;
+	case OBJECT_TYPE::MONSTER_BULLET:
+	{
+		//todo 몬스터 총알만 판정하도록
+	}
+	break;
+	case OBJECT_TYPE::ITEM_LIFE:
+	{
+		this->AddLife(1);
+	}
+	break;
+	case OBJECT_TYPE::ITEM_POWER:
+	{
+		this->AddPower(1);
+	}
+	break;
+	default:
+		break;
+	}
+
+	if (m_iLife <= 0)
+		m_bIsAlive = false;
 
 	return false;
 }

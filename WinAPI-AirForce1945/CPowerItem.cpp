@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CPowerItem.h"
 
 CPowerItem::CPowerItem() { }
@@ -27,6 +27,17 @@ void CPowerItem::LateUpdate()
 
 bool CPowerItem::OnCollision(CObject* _pObjCol)
 {
+	switch (_pObjCol->GetObjectType())
+	{
+	case OBJECT_TYPE::PLAYER:
+	{
+		m_bDestroy = true;
+	}
+	break;
+	default:
+		break;
+	}
+
 	return false;
 }
 
@@ -41,7 +52,7 @@ void CPowerItem::Release()
 
 void CPowerItem::Apply_Effect(CObject* pObj)
 {
-	// TODO : ÇÃ·¹ÀÌ¾î Å¬·¡½º ¼³°è ¿Ï·á ÈÄ ±¸Çö
+	// TODO : í”Œë ˆì´ì–´ í´ë˜ìŠ¤ ì„¤ê³„ ì™„ë£Œ í›„ êµ¬í˜„
 
 	// static_cast<CPlayer*>(pObj)->Create_Posin();
 

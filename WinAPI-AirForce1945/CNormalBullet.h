@@ -16,5 +16,5 @@ public:
 	void Release() override;
 
 public:
-	bool OnCollision(CObject* _pColObj) override;
+	bool OnCollision(CObject* _pObjCol) override;
 };
