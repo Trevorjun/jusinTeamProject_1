@@ -27,6 +27,8 @@ public:
 	void Check_Clear();
 	void Transition_Stage();
 
+	list<CObject*>* GetMonsterList() { return m_pObjectList[MONSTER]; }
+
 public :
 	static CStageManager* Get_Instance();
 	void Set_ObjectList(list<CObject*> (*_pObjectList)[OBJ_END]) { m_pObjectList = _pObjectList; }
