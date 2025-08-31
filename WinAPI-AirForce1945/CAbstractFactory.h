@@ -1,25 +1,48 @@
-#pragma once
-
+﻿#pragma once
 #include "CObject.h"
 
-template<typename T>
+template <typename T>
 class CAbstractFactory
 {
 public:
-	static CObject* Create(CObject* pTarget = nullptr)
+	// 생성 및 Initialize만 수행하는 기본 Create
+	static CObject* Create()
 	{
-		CObject* pObj = new T;
-		pObj->Initialize();
+		CObject* pObject = new T;
+		pObject->Initialize();
 
-		return pObj;
+		return pObject;
 	}
 
-	static CObject* Create(float fX, float fY)
+	/**
+	 * \brief 초기 Pivot을 지정하는 Create
+	 * \param _fX		오브젝트의 m_vPivot.x
+	 * \param _fY		오브젝트의 m_vPivot.y
+	 */
+	static CObject* Create(float _fX, float _fY)
 	{
-		CObject* pObj = new T;
-		pObj->Initialize();
-		pObj->SetPivot({ fX,fY });
+		CObject* pObject = new T;
+		pObject->Initialize();
+		pObject->SetPivot({ _fX, _fY });
 
-		return pObj;
+		return pObject;
 	}
+
+	/**
+	 * \brief 총알 발사에 사용하는 발사각 제공 Create
+	 * \param _fX		오브젝트의 m_vPivot.x
+	 * \param _fY		오브젝트의 m_vPivot.y
+	 * \param _fAngle	초기 발사각
+	 */
+	static CObject* Create(float _fX, float _fY, float _fAngle)
+	{
+		CObject* pObject = new T;
+		pObject->Initialize();
+		pObject->SetPivot({ _fX, _fY });
+		pObject->SetAngle(_fAngle);
+
+		return pObject;
+	}
+
+
 };

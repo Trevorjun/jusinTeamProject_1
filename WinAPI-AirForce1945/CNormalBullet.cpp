@@ -11,7 +11,7 @@ CNormalBullet::~CNormalBullet()
 
 void CNormalBullet::Initialize()
 {
-	m_vPivot = { WINCX / 2.f, 600.f };
+	//m_vPivot = { WINCX / 2.f, 600.f };
 	m_vSize  = { 15.f, 15.f };
 	m_fSpeed = 6.f;
 }

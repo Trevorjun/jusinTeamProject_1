@@ -6,7 +6,7 @@
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr),
 	  m_iLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_dwAttackCooldown(10), m_dwLastAttackTime(0),
+	  m_qwAttackCooldown(10), m_qwLastAttackTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
 {
 }
@@ -18,20 +18,27 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
-	m_vPivot = { 100.f, 100.f };
+	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
 	m_vSize  = { 60.f, 60.f };
 	m_fSpeed = 8.f;
 
-	m_iLife     = 3;
-	m_iMaxPower = 5;
+	m_iLife     = IPLATER_LIFE;
+	m_iMaxPower = IMAX_POWER;
 
 	m_bIsAlive = true;
 }
 
 int CPlayer::Update()
 {
+	GetTickCount64();
+
 	if (m_bDestroy)
 		return OBJ_DESTROY;
+
+	if (m_iLife <= 0)
+	{
+		m_bIsAlive = false;
+	}
 
 	__super::UpdateRect();
 
@@ -59,6 +66,15 @@ void CPlayer::Render(HDC _hDC)
 
 void CPlayer::Release()
 {
+}
+
+void CPlayer::Revive()
+{
+	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
+	m_iLife = IPLATER_LIFE;
+	m_iPower = 0;
+
+	m_bIsAlive = true;
 }
 
 bool CPlayer::OnCollision(CObject* _pColObj)
