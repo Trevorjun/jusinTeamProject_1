@@ -6,6 +6,7 @@
 #include "CLifeItem.h"
 #include "CPowerItem.h"
 
+#include "CPlayer.h"
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
@@ -197,6 +198,7 @@ void CStageManager::Handle_GameOver()
 	while (bGameOver && lDisplayElapsedTime + 2000 < GetTickCount64())
 	{
 		bGameOver = false;
+		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->Revive();
 	}
 }
 
@@ -245,7 +247,6 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 				iter = (*m_pObjectList)[i].erase(iter);
 			}
 		}
-
 	}
 
 	Release();
