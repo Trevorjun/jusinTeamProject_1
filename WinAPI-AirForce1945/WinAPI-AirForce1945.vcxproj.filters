@@ -58,6 +58,9 @@
     <Filter Include="01. Object\01. Monster\Monster_Boss">
       <UniqueIdentifier>{48757ea4-e175-46b7-8e93-a6b368705bfb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Object\02. Bullet\ChaserBullet">
+      <UniqueIdentifier>{34ffef6a-1960-42ef-bf5d-66ffa354c844}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -120,9 +123,6 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>99. Factories</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPolicy.h">
-      <Filter>99. Factories\00. BulletFactory</Filter>
-    </ClInclude>
     <ClInclude Include="CNormalBullet.h">
       <Filter>01. Object\02. Bullet</Filter>
     </ClInclude>
@@ -135,8 +135,8 @@
     <ClInclude Include="CMonster_Boss.h">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClInclude>
-    <ClInclude Include="CBulletFactory.h">
-      <Filter>99. Factories\00. BulletFactory</Filter>
+    <ClInclude Include="CChaserBullet.h">
+      <Filter>01. Object\02. Bullet\ChaserBullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +185,6 @@
     <ClCompile Include="CMonster_Curve.cpp">
       <Filter>01. Object\01. Monster\Monster_Curve</Filter>
     </ClCompile>
-    <ClCompile Include="BulletPolicy.cpp">
-      <Filter>99. Factories\00. BulletFactory</Filter>
-    </ClCompile>
     <ClCompile Include="CNormalBullet.cpp">
       <Filter>01. Object\02. Bullet</Filter>
     </ClCompile>
@@ -200,8 +197,8 @@
     <ClCompile Include="CMonster_Boss.cpp">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClCompile>
-    <ClCompile Include="CBulletFactory.cpp">
-      <Filter>99. Factories\00. BulletFactory</Filter>
+    <ClCompile Include="CChaserBullet.cpp">
+      <Filter>01. Object\02. Bullet\ChaserBullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

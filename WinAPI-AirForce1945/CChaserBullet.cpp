@@ -21,7 +21,7 @@ void CChaserBullet::Initialize()
 
     m_hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 0));
     m_pMonsterList = CStageManager::Get_Instance()->GetMonsterList();
-    SetTarget();
+    //SetTarget();
 }
 
 int CChaserBullet::Update()

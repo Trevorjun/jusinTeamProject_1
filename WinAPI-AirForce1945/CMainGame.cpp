@@ -30,8 +30,7 @@ void CMainGame::Initialize()
 	srand((unsigned int)time(NULL));
 	m_hDC = GetDC(g_hWnd);
 
-	CStageManager::Get_Instance()->Initialize();
-	CStageManager::Get_Instance()->Set_ObjectList(&m_ObjectList);
+	CStageManager::Get_Instance()->Initialize();	
 
 #pragma region player 테스트 코드
 	CObject* pPlayer = new CPlayer;
@@ -73,6 +72,11 @@ void CMainGame::Initialize()
 #pragma endregion
 
 	m_ObjectList[BULLET].push_back(CAbstractFactory<CChaserBullet>::Create());
+
+	CStageManager::Get_Instance()->Set_Player(m_ObjectList[PLAYER]);
+	CStageManager::Get_Instance()->Set_BulletList(m_ObjectList[BULLET]);
+	CStageManager::Get_Instance()->Set_MonsterList(m_ObjectList[MONSTER]);
+	CStageManager::Get_Instance()->Set_ItemList(m_ObjectList[ITEM]);
 }
 
 void CMainGame::Update()

@@ -27,11 +27,14 @@ public:
 	void Check_Clear();
 	void Transition_Stage();
 
-	list<CObject*>* GetMonsterList() { return m_pObjectList[MONSTER]; }
+	list<CObject*>* GetMonsterList() { return m_pMonsterList; }
 
 public :
 	static CStageManager* Get_Instance();
-	void Set_ObjectList(list<CObject*> (*_pObjectList)[OBJ_END]) { m_pObjectList = _pObjectList; }
+	void Set_Player(list<CObject*>& _pObjectList) { m_pPlayer = _pObjectList.front(); }
+	void Set_BulletList(list<CObject*>& _pObjectList) { m_pBulletList = &_pObjectList; }
+	void Set_MonsterList(list<CObject*>& _pObjectList) { m_pMonsterList = &_pObjectList; }
+	void Set_ItemList(list<CObject*>& _pObjectList) { m_pItemList = &_pObjectList; }
 
 private:
 	static const int cTotalStage = 3;
@@ -43,5 +46,8 @@ private:
 
 private :
 	static CStageManager* m_instance;
-	list<CObject*> (*m_pObjectList)[OBJ_END];
+	CObject*		m_pPlayer;
+	list<CObject*>* m_pBulletList;
+	list<CObject*>* m_pMonsterList;
+	list<CObject*>* m_pItemList;
 };

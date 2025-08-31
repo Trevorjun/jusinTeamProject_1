@@ -28,7 +28,11 @@ CStageManager::CStageManager()
 	m_iCurrentStage = 0;
 	m_fLastMonsterSpawned = 0;
 	m_fStageSpawnTime = 0.f;
-	m_pObjectList = nullptr;
+
+	m_pPlayer			= nullptr;
+	m_pBulletList		= nullptr;
+	m_pMonsterList		= nullptr;
+	m_pItemList			= nullptr;
 }
 
 CStageManager::~CStageManager()
@@ -101,7 +105,7 @@ CObject* CStageManager::Create_Monster()
 		}
 
 		pMonster->SetPivot({iX, iY});
-		(*m_pObjectList)[MONSTER].push_back(pMonster);
+		m_pMonsterList->push_back(pMonster);
 
 		// Create_Item({iX, iY});
 		m_fLastMonsterSpawned = GetTickCount64();
@@ -129,7 +133,7 @@ CObject* CStageManager::Create_Item(Vector2 _vPos)
 	pItem->Initialize();
 	pItem->SetPivot(_vPos);
 
-	(*m_pObjectList)[ITEM].push_back(pItem);
+	m_pItemList->push_back(pItem);
 
 	return pItem;
 }
