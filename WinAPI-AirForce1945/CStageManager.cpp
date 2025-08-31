@@ -112,6 +112,10 @@ CObject* CStageManager::Create_Monster()
 		}
 
 		pMonster->SetPivot({iX, iY});
+
+		// TODO : inject player's pointer to monster object
+		// (*m_pObjectList)[PLAYER].front()
+
 		(*m_pObjectList)[MONSTER].push_back(pMonster);
 
 		// Create_Item({iX, iY});
