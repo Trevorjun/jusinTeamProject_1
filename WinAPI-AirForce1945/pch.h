@@ -4,6 +4,7 @@
 #include "framework.h"
 #include <list>
 #include <algorithm>
+#include <functional>
 // custom header
 #include "Vector2.h"
 

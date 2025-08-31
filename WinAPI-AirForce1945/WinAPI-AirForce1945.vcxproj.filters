@@ -75,6 +75,12 @@
     <ClInclude Include="CCollisionManager.h">
       <Filter>98. CollisionManager</Filter>
     </ClInclude>
+    <ClInclude Include="CPowerItem.h">
+      <Filter>01. Object\03. Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CLifeItem.h">
+      <Filter>01. Object\03. Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -97,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="CCollisionManager.cpp">
       <Filter>98. CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CPowerItem.cpp">
+      <Filter>01. Object\03. Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CLifeItem.cpp">
+      <Filter>01. Object\03. Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
