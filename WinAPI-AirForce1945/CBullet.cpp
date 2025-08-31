@@ -22,11 +22,19 @@ void CBullet::Initialize()
 
 int CBullet::Update()
 {
-	return 0;
+	if (m_bDestroy)
+		return OBJ_DESTROY;
+
+	__super::UpdateRect();
+
+	return OBJ_NOEVENT;
 }
 
 void CBullet::LateUpdate()
 {
+	
+
+	HandleOutOfBound(IsOutOfBound());
 }
 
 void CBullet::Render(HDC _hDC)
@@ -35,4 +43,9 @@ void CBullet::Render(HDC _hDC)
 
 void CBullet::Release()
 {
+}
+
+void CBullet::HandleOutOfBound(const tagObjBound tOutDir)
+{
+
 }

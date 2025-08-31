@@ -34,9 +34,6 @@
     <Filter Include="01. Object\03. Item">
       <UniqueIdentifier>{5ab27b08-c6f6-40c5-aee1-9c12c86bfa05}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99. AbstractFactory">
-      <UniqueIdentifier>{51738779-623d-40ff-adbc-1f8890b1e7e8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="98. CollisionManager">
       <UniqueIdentifier>{1ae54855-be50-4775-9432-0987b3740145}</UniqueIdentifier>
     </Filter>
@@ -48,6 +45,12 @@
     </Filter>
     <Filter Include="01. Object\01. Monster\Monster_Curve">
       <UniqueIdentifier>{e63e9e34-b553-4259-8444-361444be9ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Factories">
+      <UniqueIdentifier>{51738779-623d-40ff-adbc-1f8890b1e7e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99. Factories\00. BulletFactory">
+      <UniqueIdentifier>{a8a2231c-0e19-4995-9cdf-0ae25fcddc59}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,6 +98,7 @@
     </ClInclude>
     <ClInclude Include="CBullet.h">
       <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
     <ClInclude Include="CMonster.h">
       <Filter>01. Object\01. Monster</Filter>
     </ClInclude>
@@ -108,7 +112,10 @@
       <Filter>01. Object\01. Monster\Monster_Curve</Filter>
     </ClInclude>
     <ClInclude Include="CAbstractFactory.h">
-      <Filter>99. AbstractFactory</Filter>
+      <Filter>99. Factories</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletPolicy.h">
+      <Filter>99. Factories\00. BulletFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +151,7 @@
     </ClCompile>
     <ClCompile Include="CBullet.cpp">
       <Filter>01. Object\02. Bullet</Filter>
+    </ClCompile>
     <ClCompile Include="CMonster.cpp">
       <Filter>01. Object\01. Monster</Filter>
     </ClCompile>
@@ -155,6 +163,9 @@
     </ClCompile>
     <ClCompile Include="CMonster_Curve.cpp">
       <Filter>01. Object\01. Monster\Monster_Curve</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletPolicy.cpp">
+      <Filter>99. Factories\00. BulletFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

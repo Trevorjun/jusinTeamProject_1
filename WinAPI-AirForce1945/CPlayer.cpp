@@ -28,11 +28,14 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
+	if (m_bDestroy)
+		return OBJ_DESTROY;
+
 	__super::UpdateRect();
 
 	Key_Input();
 
-	return 0;
+	return OBJ_NOEVENT;
 }
 
 void CPlayer::LateUpdate()
@@ -42,7 +45,15 @@ void CPlayer::LateUpdate()
 
 void CPlayer::Render(HDC _hDC)
 {
+	int saved = SaveDC(_hDC);
+
+	HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	HPEN hOldPen = static_cast<HPEN>(SelectObject(_hDC, hNewPen));
+
 	Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+
+	DeleteObject(SelectObject(_hDC, hOldPen));
+	RestoreDC(_hDC, saved);
 }
 
 void CPlayer::Release()

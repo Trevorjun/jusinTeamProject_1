@@ -15,4 +15,6 @@ public:
 	void Release() override;
 
 private:
+	// 화면 밖으로 나가지 않게 만드는 기능의 함수
+	void HandleOutOfBound(const tagObjBound tOutDir);
 };

@@ -69,6 +69,7 @@ protected:
 
 	float			m_fSpeed;
 	bool			m_bDestroy;
+
 private:
 	bool			m_bCollision;
 };
