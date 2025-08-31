@@ -117,6 +117,9 @@
     <ClInclude Include="BulletPolicy.h">
       <Filter>99. Factories\00. BulletFactory</Filter>
     </ClInclude>
+    <ClInclude Include="CNormalBullet.h">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -166,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="BulletPolicy.cpp">
       <Filter>99. Factories\00. BulletFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="CNormalBullet.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

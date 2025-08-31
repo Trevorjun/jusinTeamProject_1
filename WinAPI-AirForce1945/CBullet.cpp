@@ -1,12 +1,6 @@
 ﻿#include "pch.h"
 #include "CBullet.h"
 
-//todo 불릿 팩토리 구성 시 필요한 것들
-/*
- * 1. 생성 위치를 플레이어 앞쪽에서 나오도록 지정
- * 2. 속도를 Set으로 지정
- */
-
 CBullet::CBullet()
 {
 }
@@ -16,36 +10,19 @@ CBullet::~CBullet()
 	CBullet::Release();
 }
 
-void CBullet::Initialize()
-{
-}
-
-int CBullet::Update()
-{
-	if (m_bDestroy)
-		return OBJ_DESTROY;
-
-	__super::UpdateRect();
-
-	return OBJ_NOEVENT;
-}
-
 void CBullet::LateUpdate()
 {
-	
-
-	HandleOutOfBound(IsOutOfBound());
+	HandleOutOfBound(IsOutOfBound(50));
 }
 
-void CBullet::Render(HDC _hDC)
+bool CBullet::OnCollision(CObject* _pColObj)
 {
+	return false;
 }
 
-void CBullet::Release()
+void CBullet::HandleOutOfBound(const tagObjBound _tOutDir)
 {
-}
-
-void CBullet::HandleOutOfBound(const tagObjBound tOutDir)
-{
-
+	if (_tOutDir.bIsOutLeft || _tOutDir.bIsOutRight
+		|| _tOutDir.bIsOutTop || _tOutDir.bIsOutBottom)
+		m_bDestroy = true;
 }

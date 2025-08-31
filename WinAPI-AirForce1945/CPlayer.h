@@ -39,9 +39,7 @@ public:
 	void AddPower(const int _iPowerChange);
 
 private:
-	void Key_Input();
-	// 화면 밖으로 나가지 않게 만드는 기능의 함수
-	void HandleOutOfBound(const tagObjBound tOutDir);
+	void Key_Input(const tagObjBound _tOutDir);
 
 private:
 	list<CObject*>* m_pBullet;
@@ -50,11 +48,10 @@ private:
 	int m_iLife;
 	int m_iPower;
 	int m_iMaxPower;
-	// int m_iScore;			// 사용 미정
+
+	ULONGLONG m_dwAttackCooldown;		// 공격간 딜레이 설정
+	ULONGLONG m_dwLastAttackTime;		// 마지막 공격 시간 저장
 
 	bool m_bIsAlive;
-	bool m_bIsInvincible;		// 피격, 부활 시 true -> 무적
-
-	ULONGLONG m_dwAttackCooldown;	// 공격간 딜레이 설정
-	ULONGLONG m_dwLastAttackTime;	// 마지막 공격 시간 저장
+	bool m_bIsInvincible;				// 피격, 부활 시 true -> 무적
 };
