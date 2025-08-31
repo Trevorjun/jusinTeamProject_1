@@ -11,9 +11,10 @@ CNormalBullet::~CNormalBullet()
 
 void CNormalBullet::Initialize()
 {
-	m_vPivot = { WINCX / 2.f, 600.f };
 	m_vSize  = { 15.f, 15.f };
 	m_fSpeed = 6.f;
+
+	m_fAngle = 270.f;
 }
 
 int CNormalBullet::Update()
@@ -23,7 +24,8 @@ int CNormalBullet::Update()
 
 	CObject::UpdateRect();
 
-	m_vPivot.y -= m_fSpeed;
+	m_vPivot.x += m_fSpeed * cosf(RAD(m_fAngle));
+	m_vPivot.y += m_fSpeed * sinf(RAD(m_fAngle));
 
 	return OBJ_NOEVENT;
 }

@@ -135,6 +135,7 @@
     <ClInclude Include="BulletPolicy.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CAbstractFactory.h" />
+    <ClInclude Include="CBulletFactory.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CLifeItem.h" />
@@ -161,6 +162,7 @@
   <ItemGroup>
     <ClCompile Include="BulletPolicy.cpp" />
     <ClCompile Include="CBullet.cpp" />
+    <ClCompile Include="CBulletFactory.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLifeItem.cpp" />

@@ -51,7 +51,7 @@
     </Filter>
     <Filter Include="99. Factories\00. BulletFactory">
       <UniqueIdentifier>{a8a2231c-0e19-4995-9cdf-0ae25fcddc59}</UniqueIdentifier>
-	</Filter>
+    </Filter>
     <Filter Include="97. Stage">
       <UniqueIdentifier>{25d8aa79-30d9-48b4-a1f0-e9fe9ac35017}</UniqueIdentifier>
     </Filter>
@@ -135,6 +135,9 @@
     <ClInclude Include="CMonster_Boss.h">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClInclude>
+    <ClInclude Include="CBulletFactory.h">
+      <Filter>99. Factories\00. BulletFactory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -196,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="CMonster_Boss.cpp">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CBulletFactory.cpp">
+      <Filter>99. Factories\00. BulletFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
