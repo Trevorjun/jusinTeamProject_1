@@ -14,6 +14,7 @@
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
 #include "CNormalBullet.h"
+#include "CMonster_Boss.h"
 
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
@@ -25,7 +26,11 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
+	srand((unsigned int)time(NULL));
 	m_hDC = GetDC(g_hWnd);
+
+	CStageManager::Get_Instance()->Initialize();
+	CStageManager::Get_Instance()->Set_ObjectList(&m_ObjectList);
 
 #pragma region player 테스트 코드
 	CObject* pPlayer = new CPlayer;
@@ -69,6 +74,8 @@ void CMainGame::Initialize()
 
 void CMainGame::Update()
 {
+	CStageManager::Get_Instance()->Update();
+
 	bool bIsDestroy(false);
 	for (int i = 0; i < OBJ_END; ++i)
 	{
@@ -101,6 +108,8 @@ void CMainGame::LateUpdate()
 			obj->LateUpdate();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
+
+	CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()
@@ -123,4 +132,10 @@ void CMainGame::Release()
 					_p = nullptr;
 				}
 			});
+
+	CStageManager::Get_Instance()->Release(); 
+	if (CStageManager::Get_Instance())
+	{
+		delete CStageManager::Get_Instance();
+	}
 }

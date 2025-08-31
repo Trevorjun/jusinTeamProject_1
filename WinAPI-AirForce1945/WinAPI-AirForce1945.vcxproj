@@ -140,6 +140,7 @@
     <ClInclude Include="CLifeItem.h" />
     <ClInclude Include="CMainGame.h" />
     <ClInclude Include="CMonster.h" />
+    <ClInclude Include="CMonster_Boss.h" />
     <ClInclude Include="CMonster_Curve.h" />
     <ClInclude Include="CMonster_Straight.h" />
     <ClInclude Include="CMonster_Suicide.h" />
@@ -151,6 +152,8 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="CStage.h" />
+    <ClInclude Include="CStageManager.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="WinAPI-AirForce1945.h" />
@@ -163,6 +166,7 @@
     <ClCompile Include="CLifeItem.cpp" />
     <ClCompile Include="CMainGame.cpp" />
     <ClCompile Include="CMonster.cpp" />
+    <ClCompile Include="CMonster_Boss.cpp" />
     <ClCompile Include="CMonster_Curve.cpp" />
     <ClCompile Include="CMonster_Straight.cpp" />
     <ClCompile Include="CMonster_Suicide.cpp" />
@@ -176,6 +180,8 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CStage.cpp" />
+    <ClCompile Include="CStageManager.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="WinAPI-AirForce1945.cpp" />
   </ItemGroup>
