@@ -15,6 +15,10 @@ void CBullet::LateUpdate()
 	HandleOutOfBound(IsOutOfBound(50));
 }
 
+void CBullet::Release()
+{
+}
+
 bool CBullet::OnCollision(CObject* _pColObj)
 {
 	return false;

@@ -1,5 +1,7 @@
 ﻿#include "pch.h"
 #include "CPlayer.h"
+#include "CAbstractFactory.h"
+#include "CNormalBullet.h"
 
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr),
@@ -88,6 +90,8 @@ void CPlayer::Key_Input(const tagObjBound _tOutDir)
 
 	if (GetAsyncKeyState(VK_SPACE))
 	{
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
+
 		//todo 파워에 따른 총알 생성 바리에이션 추가
 	}
 

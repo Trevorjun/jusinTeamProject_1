@@ -10,9 +10,9 @@ public:
 public:
 	void Initialize() override PURE;
 	int  Update() override PURE;
-	void LateUpdate() override;				// 이것만 순수가상이 아니므로 자식의 LateUpdate()에서 호출할것
+	void LateUpdate() override;
 	void Render(HDC _hDC) override PURE;
-	void Release() override PURE;
+	void Release() override;
 
 public:
 	bool OnCollision(CObject* _pColObj) override;

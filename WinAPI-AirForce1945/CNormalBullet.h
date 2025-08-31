@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "CBullet.h"
 
+// 직선으로 날아가는 기본 총알
 class CNormalBullet final : public CBullet
 {
 public:

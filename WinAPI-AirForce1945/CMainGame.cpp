@@ -13,6 +13,7 @@
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
+#include "CNormalBullet.h"
 
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
@@ -27,12 +28,24 @@ void CMainGame::Initialize()
 	m_hDC = GetDC(g_hWnd);
 
 #pragma region player 테스트 코드
-	CObject* pObject = new CPlayer;
+	CObject* pPlayer = new CPlayer;
 
-	m_ObjectList[OBJECT::PLAYER].push_back(pObject);
+	m_ObjectList[OBJECT::PLAYER].push_back(pPlayer);
 
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
+
+	dynamic_cast<CPlayer*>(m_ObjectList[OBJECT::PLAYER].front())
+		->Set_Bullet(&m_ObjectList[OBJECT::BULLET]);
+
 #pragma endregion
+
+//#pragma region bullet 테스트 코드
+//	CObject* pBullet = new CNormalBullet;
+//
+//	m_ObjectList[OBJECT::BULLET].push_back(pBullet);
+//
+//	m_ObjectList[OBJECT::BULLET].front()->Initialize();
+//#pragma endregion
 
 #pragma region 테스트 코드
 	CObject* pObj = new CPowerItem();

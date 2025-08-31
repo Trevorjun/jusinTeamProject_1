@@ -32,6 +32,9 @@ public:
 	void SetLastAttackTime(const ULONGLONG _dwLastAttackTime) { m_dwLastAttackTime = _dwLastAttackTime; }
 
 public:
+	void Set_Bullet(list<CObject*>* pBullet) { m_pBullet = pBullet; }
+
+public:
 	bool OnCollision(CObject* _pColObj) override;
 	// AddLife는 플레이어 Life 추가시 사용할 것. 플레이어 생성, 부활 등은 SetLife 함수 사용 바람
 	void AddLife(const int _iLifeChange);
