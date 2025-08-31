@@ -45,7 +45,8 @@ public:
 	void AddPower(const int _iPowerChange);
 
 private:
-	void Key_Input(const tagObjBound _tOutDir);
+	void KeyInput(const tagObjBound _tOutDir);
+	void ShootBullet();
 
 private:
 	list<CObject*>* m_pBullet;
