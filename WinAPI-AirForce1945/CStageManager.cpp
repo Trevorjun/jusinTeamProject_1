@@ -9,6 +9,7 @@
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
+#include "CMonster_Boss.h"
 
 CStageManager* CStageManager::m_instance = nullptr;
 
@@ -25,7 +26,7 @@ CStageManager::CStageManager()
 {
 	ZeroMemory(m_stages, sizeof(m_stages));
 	m_iCurrentStage = 0;
-	m_fLastMonsterSpawned = 0.f;
+	m_fLastMonsterSpawned = 0;
 	m_fStageSpawnTime = 0.f;
 	m_pObjectList = nullptr;
 }
@@ -78,7 +79,7 @@ CObject* CStageManager::Create_Monster()
 		int iX = rand() % (WINCX - 100);
 		int iY = 0;
 
-		int iRand = rand() % 3;
+		int iRand = rand() % 4;
 
 		CObject* pMonster;
 
@@ -91,6 +92,9 @@ CObject* CStageManager::Create_Monster()
 			pMonster = CAbstractFactory<CMonster_Straight>::Create();
 			break;
 		case 2 :
+			pMonster = CAbstractFactory<CMonster_Boss>::Create();
+			break;
+		case 3 :
 		default:
 			pMonster = CAbstractFactory<CMonster_Suicide>::Create();
 			break;
