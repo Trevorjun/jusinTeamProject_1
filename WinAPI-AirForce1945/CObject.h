@@ -64,6 +64,7 @@ protected:
 	tagObjBound	IsOutOfBound(const int _iMargin = 0);
 
 protected:
+	OBJECT			m_eObjectType;
 	RECT			m_tRect;
 	Vector2			m_vPivot;
 	Vector2			m_vSize;

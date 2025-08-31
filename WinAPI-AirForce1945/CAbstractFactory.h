@@ -29,7 +29,7 @@ public:
 	}
 
 	/**
-	 * \brief 총알 발사에 사용하는 발사각 제공 Create
+	 * \brief 총알 발사에 사용하는 발사각 제공하는 Create
 	 * \param _fX		오브젝트의 m_vPivot.x
 	 * \param _fY		오브젝트의 m_vPivot.y
 	 * \param _fAngle	초기 발사각

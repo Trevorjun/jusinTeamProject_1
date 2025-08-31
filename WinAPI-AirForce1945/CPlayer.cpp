@@ -4,9 +4,8 @@
 #include "CNormalBullet.h"
 
 CPlayer::CPlayer()
-	: m_pBullet(nullptr), m_pShield(nullptr),
-	  m_iLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(10), m_qwLastAttackTime(0),
+	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
+	  m_qwAttackCooldown(200), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
 {
 }
@@ -18,6 +17,8 @@ CPlayer::~CPlayer()
 
 void CPlayer::Initialize()
 {
+	m_eObjectType = OBJECT::PLAYER;
+
 	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
 	m_vSize  = { 60.f, 60.f };
 	m_fSpeed = 8.f;
@@ -30,15 +31,19 @@ void CPlayer::Initialize()
 
 int CPlayer::Update()
 {
-	GetTickCount64();
+	if (m_bIsInvincible)
+	{
+		//todo 몬스터 및 총알과 충돌에서 무적
+
+		if (GetTickCount64() >= m_qwInvincibleEndTime)
+			m_bIsInvincible = false;
+	}
 
 	if (m_bDestroy)
 		return OBJ_DESTROY;
 
 	if (m_iLife <= 0)
-	{
 		m_bIsAlive = false;
-	}
 
 	__super::UpdateRect();
 
@@ -71,14 +76,19 @@ void CPlayer::Release()
 void CPlayer::Revive()
 {
 	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
-	m_iLife = IPLATER_LIFE;
+	m_iLife  = IPLATER_LIFE;
 	m_iPower = 0;
 
-	m_bIsAlive = true;
+	m_bIsInvincible = true;
+	m_bIsAlive      = true;
+
+	m_qwInvincibleEndTime = GetTickCount64() + m_dwInvincibleDuration;
 }
 
 bool CPlayer::OnCollision(CObject* _pColObj)
 {
+	//! Collision을 메인 게임의 LateUpdate에서 했을 때 그 안에서 호출되는, 충돌 시 할 작업들
+
 	return false;
 }
 
@@ -106,7 +116,15 @@ void CPlayer::Key_Input(const tagObjBound _tOutDir)
 
 	if (GetAsyncKeyState(VK_SPACE))
 	{
-		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
+		ULONGLONG qwCurrentTime = GetTickCount64();
+
+		if (qwCurrentTime - m_qwLastAttackTime >= m_qwAttackCooldown)
+		{
+			m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+				m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
+
+			m_qwLastAttackTime = qwCurrentTime;
+		}
 
 		//todo 파워에 따른 총알 생성 바리에이션 추가
 	}

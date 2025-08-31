@@ -33,6 +33,8 @@ public:
 
 public:
 	void Set_Bullet(list<CObject*>* pBullet) { m_pBullet = pBullet; }
+
+	// 플레이어 죽을 시 외부에서 호출하면 플레이어 상태 초기화 및 일정시간 무적
 	void Revive();
 
 public:
@@ -55,6 +57,9 @@ private:
 
 	ULONGLONG m_qwAttackCooldown;		// 공격간 딜레이 설정
 	ULONGLONG m_qwLastAttackTime;		// 마지막 공격 시간 저장
+
+	ULONGLONG m_dwInvincibleDuration;	// 무적 지속 시간 설정
+	ULONGLONG m_qwInvincibleEndTime;	// 무적 끝나는 시간 저장
 
 	bool m_bIsAlive;
 	bool m_bIsInvincible;				// 피격, 부활 시 true -> 무적
