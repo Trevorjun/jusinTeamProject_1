@@ -13,6 +13,7 @@
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
+#include "CMonster_Boss.h"
 
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
@@ -51,6 +52,7 @@ void CMainGame::Initialize()
 	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
 	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
 	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Boss>::Create());
 #pragma endregion
 }
 
