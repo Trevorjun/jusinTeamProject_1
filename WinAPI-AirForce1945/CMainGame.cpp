@@ -79,6 +79,8 @@ void CMainGame::LateUpdate()
 			obj->LateUpdate();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
+
+	CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()
@@ -101,4 +103,10 @@ void CMainGame::Release()
 					_p = nullptr;
 				}
 			});
+
+	CStageManager::Get_Instance()->Release(); 
+	if (CStageManager::Get_Instance())
+	{
+		delete CStageManager::Get_Instance();
+	}
 }
