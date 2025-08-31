@@ -86,6 +86,8 @@ void CMainGame::Render()
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)
 			obj->Render(m_hDC);
+
+	CStageManager::Get_Instance()->Render(m_hDC);
 }
 
 void CMainGame::Release()

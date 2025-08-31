@@ -23,6 +23,8 @@ CStageManager* CStageManager::Get_Instance()
 
 CStageManager::CStageManager()
 {
+	rInfoBound ={ WINCX - 170, 0, WINCX, 100 };
+
 	ZeroMemory(m_stages, sizeof(m_stages));
 	m_iCurrentStage = 0;
 	m_fLastMonsterSpawned = 0.f;
@@ -58,9 +60,18 @@ void CStageManager::LateUpdate()
 {
 	Check_Clear();
 }
-void CStageManager::Render()
+void CStageManager::Render(HDC _hDC)
 {
+	// TODO : 
+	Rectangle(_hDC, rInfoBound.left, rInfoBound.top, rInfoBound.right, rInfoBound.bottom);
 
+	// Set current stage text info
+	wsprintf(tInfos, TEXT("\nSTAGE : %d\nREQUIRED KILL : %d\nCURRENT KILL : %d"), 
+		m_stages[m_iCurrentStage]->Get_CurrentStage(),
+		m_stages[m_iCurrentStage]->Get_RequiredKillCount(),
+		m_stages[m_iCurrentStage]->Get_CurrentKillCount());
+
+	DrawText(_hDC, tInfos, -1, &rInfoBound, DT_VCENTER | DT_CENTER);
 }
 void CStageManager::Release()
 {

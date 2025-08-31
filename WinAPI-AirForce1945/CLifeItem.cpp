@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CLifeItem.h"
+#include "CPlayer.h"
 
 CLifeItem::CLifeItem()
 {
@@ -46,6 +47,8 @@ void CLifeItem::Release()
 
 void CLifeItem::Apply_Effect(CObject* pObj)
 {
-	// TODO : 플레이어 클래스 설계 완료 후 구현
+	CPlayer* pPlayer = static_cast<CPlayer*>(pObj);
+	pPlayer->AddLife(iLifeEffect);
+
 	m_bDestroy = true;
 }

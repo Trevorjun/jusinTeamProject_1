@@ -15,7 +15,7 @@ public:
 	void		Initialize();
 	void		Update();
 	void		LateUpdate();
-	void		Render();
+	void		Render(HDC _hDC);
 	void		Release();
 
 public:
@@ -42,4 +42,10 @@ private:
 private :
 	static CStageManager* m_instance;
 	list<CObject*> (*m_pObjectList)[OBJ_END];
+
+private :
+	RECT rInfoBound;
+
+	TCHAR tInfos[128];
+
 };
