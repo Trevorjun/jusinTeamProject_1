@@ -66,7 +66,7 @@ void CMainGame::Initialize()
 #pragma endregion
 
 #pragma region 테스트 코드(monster)
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
 	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
 	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
 #pragma endregion
@@ -106,10 +106,11 @@ void CMainGame::LateUpdate()
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)	
 			obj->LateUpdate();
+			//CStageManager::Get_Instance()->LateUpdate();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
 
-	CStageManager::Get_Instance()->LateUpdate();
+	//CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()

@@ -12,9 +12,8 @@ CMonster_Suicide::~CMonster_Suicide()
 
 void		CMonster_Suicide::Initialize()
 {
-	m_vPivot = { 200, 100 };
-	m_vSize = { 35, 35 };
-	m_fSpeed = { 4.f };
+	m_vSize = { M_VMON_SUICIDE_SIZE_X, M_VMON_SUICIDE_SIZE_Y };
+	m_fSpeed = { M_VMON_SUICIDE_SPEED };
 }
 int			CMonster_Suicide::Update()
 {

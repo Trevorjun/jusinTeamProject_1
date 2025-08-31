@@ -12,9 +12,8 @@ CMonster_Curve::~CMonster_Curve()
 
 void		CMonster_Curve::Initialize()
 {
-	m_vPivot = { 400, 100 };
-	m_vSize = { 50, 50 };
-	m_fSpeed = { 1.f };
+	m_vSize = { M_VMON_CURVE_SIZE_X, M_VMON_CURVE_SIZE_Y };
+	m_fSpeed = { M_VMON_CURVE_SPEED };
 }
 int			CMonster_Curve::Update()
 {

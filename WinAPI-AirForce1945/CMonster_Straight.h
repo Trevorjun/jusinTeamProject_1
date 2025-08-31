@@ -3,6 +3,8 @@
 
 class CMonster_Straight : public CMonster
 {
+private:
+	short test;
 public:
 	CMonster_Straight();
 	~CMonster_Straight() override;
@@ -13,4 +15,6 @@ public:
 	bool OnCollision(CObject* _pObjCol) override;
 	void		Render(HDC _hDC) override;
 	void		Release() override;
+
+	void ShootBullet();
 };
