@@ -13,6 +13,7 @@
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
+#include "CNormalBullet.h"
 #include "CMonster_Boss.h"
 
 CMainGame::CMainGame() : m_hDC(nullptr)
@@ -32,15 +33,43 @@ void CMainGame::Initialize()
 	CStageManager::Get_Instance()->Set_ObjectList(&m_ObjectList);
 
 #pragma region player 테스트 코드
+	CObject* pPlayer = new CPlayer;
 
-	CObject* pObject = new CPlayer;
-
-	m_ObjectList[OBJECT::PLAYER].push_back(pObject);
+	m_ObjectList[OBJECT::PLAYER].push_back(pPlayer);
 
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
+
+	dynamic_cast<CPlayer*>(m_ObjectList[OBJECT::PLAYER].front())
+		->Set_Bullet(&m_ObjectList[OBJECT::BULLET]);
+
 #pragma endregion
 
+//#pragma region bullet 테스트 코드
+//	CObject* pBullet = new CNormalBullet;
+//
+//	m_ObjectList[OBJECT::BULLET].push_back(pBullet);
+//
+//	m_ObjectList[OBJECT::BULLET].front()->Initialize();
+//#pragma endregion
 
+#pragma region 테스트 코드
+	CObject* pObj = new CPowerItem();
+	pObj->Initialize();
+
+	m_ObjectList[ITEM].push_back(pObj);
+
+	pObj = new CLifeItem();
+	pObj->Initialize();
+
+	m_ObjectList[ITEM].push_back(pObj);
+
+#pragma endregion
+
+#pragma region 테스트 코드(monster)
+	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
+	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
+#pragma endregion
 }
 
 void CMainGame::Update()
