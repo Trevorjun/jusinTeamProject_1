@@ -25,9 +25,14 @@ CMainGame::~CMainGame()
 
 void CMainGame::Initialize()
 {
+	srand((unsigned int)time(NULL));
 	m_hDC = GetDC(g_hWnd);
 
+	CStageManager::Get_Instance()->Initialize();
+	CStageManager::Get_Instance()->Set_ObjectList(&m_ObjectList);
+
 #pragma region player 테스트 코드
+
 	CObject* pObject = new CPlayer;
 
 	m_ObjectList[OBJECT::PLAYER].push_back(pObject);
@@ -35,29 +40,13 @@ void CMainGame::Initialize()
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
 #pragma endregion
 
-#pragma region 테스트 코드
-	CObject* pObj = new CPowerItem();
-	pObj->Initialize();
 
-	m_ObjectList[ITEM].push_back(pObj);
-
-	pObj = new CLifeItem();
-	pObj->Initialize();
-
-	m_ObjectList[ITEM].push_back(pObj);
-
-#pragma endregion
-
-#pragma region 테스트 코드(monster)
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Boss>::Create());
-#pragma endregion
 }
 
 void CMainGame::Update()
 {
+	CStageManager::Get_Instance()->Update();
+
 	bool bIsDestroy(false);
 	for (int i = 0; i < OBJ_END; ++i)
 	{
