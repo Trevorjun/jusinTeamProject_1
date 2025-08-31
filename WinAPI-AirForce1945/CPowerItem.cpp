@@ -31,7 +31,11 @@ void CPowerItem::LateUpdate()
 
 bool CPowerItem::OnCollision(CObject* _pObjCol)
 {
-	Apply_Effect(_pObjCol);
+	if (_pObjCol->GetObjectType() == PLAYER)
+	{
+		Apply_Effect(_pObjCol);
+		return true;
+	}
 	return false;
 }
 

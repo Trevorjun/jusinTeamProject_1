@@ -19,6 +19,8 @@ void CLifeItem::Initialize()
 
 	m_fSpeed = 2.5f;
 	m_bDestroy = false;
+
+	iLifeEffect = 1;
 }
 
 int CLifeItem::Update()
@@ -33,6 +35,11 @@ void CLifeItem::LateUpdate()
 
 bool CLifeItem::OnCollision(CObject* _pObjCol)
 {
+	if (_pObjCol->GetObjectType() == PLAYER)
+	{
+		Apply_Effect(_pObjCol);
+		return true;
+	}
 	return false;
 }
 
@@ -47,6 +54,8 @@ void CLifeItem::Release()
 
 void CLifeItem::Apply_Effect(CObject* pObj)
 {
+
+
 	CPlayer* pPlayer = static_cast<CPlayer*>(pObj);
 	pPlayer->AddLife(iLifeEffect);
 
