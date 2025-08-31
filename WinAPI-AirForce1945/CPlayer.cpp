@@ -96,6 +96,7 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	case OBJECT_TYPE::MONSTER_BULLET:
 	{
 		//todo 몬스터 총알만 판정하도록
+		this->AddLife(-1);
 	}
 	break;
 	case OBJECT_TYPE::ITEM_LIFE:
