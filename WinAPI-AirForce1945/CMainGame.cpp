@@ -13,6 +13,7 @@
 #include "CMonster_Curve.h"
 #include "CMonster_Straight.h"
 #include "CMonster_Suicide.h"
+#include "CMonster_Boss.h"
 
 CMainGame::CMainGame() : m_hDC(nullptr)
 {
@@ -38,6 +39,7 @@ void CMainGame::Initialize()
 
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
 #pragma endregion
+
 
 }
 
@@ -77,6 +79,8 @@ void CMainGame::LateUpdate()
 			obj->LateUpdate();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
+
+	CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()
@@ -101,4 +105,10 @@ void CMainGame::Release()
 					_p = nullptr;
 				}
 			});
+
+	CStageManager::Get_Instance()->Release(); 
+	if (CStageManager::Get_Instance())
+	{
+		delete CStageManager::Get_Instance();
+	}
 }

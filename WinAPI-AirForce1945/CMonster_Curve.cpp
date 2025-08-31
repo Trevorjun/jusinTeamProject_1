@@ -7,7 +7,7 @@ CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
 }
 CMonster_Curve::~CMonster_Curve()
 {
-
+	Release();
 }
 
 void		CMonster_Curve::Initialize()

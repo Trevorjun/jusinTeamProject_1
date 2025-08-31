@@ -52,6 +52,9 @@
     <Filter Include="97. Stage">
       <UniqueIdentifier>{25d8aa79-30d9-48b4-a1f0-e9fe9ac35017}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01. Object\01. Monster\Monster_Boss">
+      <UniqueIdentifier>{48757ea4-e175-46b7-8e93-a6b368705bfb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="CStageManager.h">
       <Filter>97. Stage</Filter>
     </ClInclude>
+    <ClInclude Include="CMonster_Boss.h">
+      <Filter>01. Object\01. Monster\Monster_Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="CStage.cpp">
       <Filter>97. Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonster_Boss.cpp">
+      <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

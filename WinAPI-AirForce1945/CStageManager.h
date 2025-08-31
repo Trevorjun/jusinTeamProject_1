@@ -36,7 +36,7 @@ private:
 	CStage* m_stages[cTotalStage];
 	int m_iCurrentStage;
 
-	float m_fLastMonsterSpawned;
+	ULONGLONG m_fLastMonsterSpawned;
 	float m_fStageSpawnTime;
 
 private :
