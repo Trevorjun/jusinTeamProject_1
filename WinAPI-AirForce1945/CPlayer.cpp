@@ -18,12 +18,12 @@ void CPlayer::Initialize()
 {
 	m_eObjectType = OBJECT::PLAYER;
 
-	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
+	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
 	m_vSize  = { 60.f, 60.f };
 	m_fSpeed = 8.f;
 
-	m_iLife     = IPLATER_LIFE;
-	m_iMaxPower = IMAX_POWER;
+	m_iLife     = PL_LIFE;
+	m_iMaxPower = PL_MAXPOWER;
 
 	m_bIsAlive = true;
 }
@@ -72,8 +72,8 @@ void CPlayer::Release()
 
 void CPlayer::Revive()
 {
-	m_vPivot = { M_VPLAYER_PIVOT_X, M_VPLAYER_PIVOT_Y };
-	m_iLife  = IPLATER_LIFE;
+	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
+	m_iLife  = PL_LIFE;
 	m_iPower = 0;
 
 	m_bIsInvincible = true;

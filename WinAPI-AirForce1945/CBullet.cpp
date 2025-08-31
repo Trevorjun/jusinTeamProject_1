@@ -9,18 +9,8 @@ CBullet::~CBullet()
 	CBullet::Release();
 }
 
-void CBullet::LateUpdate()
-{
-	HandleOutOfBound(IsOutOfBound(50));
-}
-
 void CBullet::Release()
 {}
-
-bool CBullet::OnCollision(CObject* _pColObj)
-{
-	return false;
-}
 
 void CBullet::HandleOutOfBound(const tagObjBound _tOutDir)
 {

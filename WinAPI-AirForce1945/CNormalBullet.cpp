@@ -5,13 +5,14 @@ CNormalBullet::CNormalBullet()
 {}
 
 CNormalBullet::~CNormalBullet()
-{}
+{
+	CNormalBullet::Release();
+}
 
 void CNormalBullet::Initialize()
 {
 	m_vSize  = { 15.f, 15.f };
 	m_fSpeed = 6.f;
-
 	m_fAngle = 270.f;
 }
 
@@ -30,7 +31,7 @@ int CNormalBullet::Update()
 
 void CNormalBullet::LateUpdate()
 {
-	__super::LateUpdate();
+	__super::HandleOutOfBound(IsOutOfBound(50));
 }
 
 void CNormalBullet::Render(HDC _hDC)
@@ -40,3 +41,8 @@ void CNormalBullet::Render(HDC _hDC)
 
 void CNormalBullet::Release()
 {}
+
+bool CNormalBullet::OnCollision(CObject* _pColObj)
+{
+	return true;
+}

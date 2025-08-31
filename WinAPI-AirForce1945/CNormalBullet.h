@@ -15,5 +15,6 @@ public:
 	void Render(HDC _hDC) override;
 	void Release() override;
 
-private:
+public:
+	bool OnCollision(CObject* _pColObj) override;
 };
