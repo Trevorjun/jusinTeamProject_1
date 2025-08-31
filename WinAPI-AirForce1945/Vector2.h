@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <cmath>
 
-struct Vector2
+typedef struct Vector2
 {
 public:
 	Vector2() : x(0.f), y(0.f) { };
@@ -20,11 +20,7 @@ public:
 	}
 	Vector2 operator+(const Vector2& _vVec)				// this + 벡터 | 반환값 : 값 벡터
 	{
-		return Vector2(x + _vVec.x, y + _vVec.y);
-	}
-	Vector2 operator-(const Vector2& _vVec)				// this - 벡터 | 반환값 : 값 벡터
-	{
-		return Vector2(x - _vVec.x, y - _vVec.y);
+		return Vector2(x + _vVec.x, x + _vVec.x);
 	}
 	Vector2 operator*(const int& _scalar)				// this * 정수 | 반환값 : 값 벡터
 	{
