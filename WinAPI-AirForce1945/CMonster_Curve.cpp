@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CMonster_Curve.h"
 
 CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
@@ -7,11 +7,13 @@ CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
 }
 CMonster_Curve::~CMonster_Curve()
 {
-	Release();
+	CMonster_Curve::Release();
 }
 
 void		CMonster_Curve::Initialize()
 {
+	m_eObjectType = OBJECT_TYPE::MONSTER;
+
 	m_vPivot = { 400, 100 };
 	m_vSize = { 50, 50 };
 	m_fSpeed = { 1.f };
@@ -36,6 +38,8 @@ void		CMonster_Curve::LateUpdate()
 }
 bool CMonster_Curve::OnCollision(CObject* _pObjCol)
 {
+	__super::OnCollision(_pObjCol);
+
 	return false;
 }
 void		CMonster_Curve::Render(HDC _hDC)

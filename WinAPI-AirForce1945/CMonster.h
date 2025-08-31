@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CObject.h"
 
 class CMonster : public CObject
@@ -7,18 +7,27 @@ protected:
 	short iHp;
 	float fPlayerVX;
 	float fPlayerVY;
+
 public:
 	CMonster();
-	virtual ~CMonster();
+	~CMonster() override;
 
-	virtual void		Initialize()		PURE;
-	virtual int			Update()			PURE;
-	virtual void		LateUpdate()		PURE;
-	bool OnCollision(CObject* _pObjCol)		PURE;
-	virtual void		Render(HDC _hDC)	PURE;
-	virtual void		Release()			PURE;
+public:
+	void Initialize() override PURE;
+	int  Update() override PURE;
+	void LateUpdate() override PURE;
+	bool OnCollision(CObject* _pObjCol) override;
+	void Render(HDC _hDC) override PURE;
+	void Release() override PURE;
 
-	int getHp() const { return iHp; }
+public:
+	int  getHp() const { return iHp; }
 	void setHp(short _iHp) { iHp = _iHp; }
-	void setPlayerVXY(CObject* pObj) { fPlayerVX = pObj->GetPivot().x; fPlayerVY = pObj->GetPivot().y; }
+
+public:
+	void setPlayerVXY(CObject* pObj)
+	{
+		fPlayerVX = pObj->GetPivot().x;
+		fPlayerVY = pObj->GetPivot().y;
+	}
 };
