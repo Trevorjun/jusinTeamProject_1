@@ -1,7 +1,7 @@
 ﻿#pragma once
 #include <cmath>
 
-typedef struct Vector2
+struct Vector2
 {
 public:
 	Vector2() : x(0.f), y(0.f) { };
