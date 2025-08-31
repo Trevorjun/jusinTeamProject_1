@@ -2,8 +2,7 @@
 #include "CBullet.h"
 
 CBullet::CBullet()
-{
-}
+{}
 
 CBullet::~CBullet()
 {
@@ -16,8 +15,7 @@ void CBullet::LateUpdate()
 }
 
 void CBullet::Release()
-{
-}
+{}
 
 bool CBullet::OnCollision(CObject* _pColObj)
 {

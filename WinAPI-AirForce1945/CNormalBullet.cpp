@@ -2,12 +2,10 @@
 #include "CNormalBullet.h"
 
 CNormalBullet::CNormalBullet()
-{
-}
+{}
 
 CNormalBullet::~CNormalBullet()
-{
-}
+{}
 
 void CNormalBullet::Initialize()
 {
@@ -41,5 +39,4 @@ void CNormalBullet::Render(HDC _hDC)
 }
 
 void CNormalBullet::Release()
-{
-}
+{}

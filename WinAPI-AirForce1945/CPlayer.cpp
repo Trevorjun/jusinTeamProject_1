@@ -5,10 +5,9 @@
 
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(200), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
+	  m_qwAttackCooldown(150), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
-{
-}
+{}
 
 CPlayer::~CPlayer()
 {
@@ -47,14 +46,13 @@ int CPlayer::Update()
 
 	__super::UpdateRect();
 
-	Key_Input(IsOutOfBound(-10));
+	KeyInput(IsOutOfBound(-10));
 
 	return OBJ_NOEVENT;
 }
 
 void CPlayer::LateUpdate()
-{
-}
+{}
 
 void CPlayer::Render(HDC _hDC)
 {
@@ -70,8 +68,7 @@ void CPlayer::Render(HDC _hDC)
 }
 
 void CPlayer::Release()
-{
-}
+{}
 
 void CPlayer::Revive()
 {
@@ -110,7 +107,7 @@ void CPlayer::AddPower(const int _iPowerChange)
 		m_iPower = m_iMaxPower;
 }
 
-void CPlayer::Key_Input(const tagObjBound _tOutDir)
+void CPlayer::KeyInput(const tagObjBound _tOutDir)
 {
 	bool bDiagonalInput = false;
 
@@ -120,15 +117,15 @@ void CPlayer::Key_Input(const tagObjBound _tOutDir)
 
 		if (qwCurrentTime - m_qwLastAttackTime >= m_qwAttackCooldown)
 		{
-			m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-				m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
-			m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-				m_vPivot.x - 20, m_vPivot.y - m_vSize.y / 2));
+			ShootBullet();
 
 			m_qwLastAttackTime = qwCurrentTime;
 		}
+	}
 
-		//todo 파워에 따른 총알 생성 바리에이션 추가
+	if (GetAsyncKeyState('F') & 0x0001)
+	{
+		AddPower(1);
 	}
 
 	if (GetAsyncKeyState(VK_LEFT) && !_tOutDir.bIsOutLeft)
@@ -181,4 +178,91 @@ void CPlayer::Key_Input(const tagObjBound _tOutDir)
 	//{
 	//	//m_pShield->push_back(AbstractFactory<Shield>::Create(this));
 	//}
+}
+
+void CPlayer::ShootBullet()
+{
+	//todo 파워 업 될때 기본 총알에 추가로 특수 총알이 나가도록
+
+	switch (m_iPower)
+	{
+	case 0:
+	{
+		m_qwAttackCooldown = 150;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+	}
+	break;
+	case 1:
+	{
+		m_qwAttackCooldown = 150;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+	}
+	break;
+	case 2:
+	{
+		m_qwAttackCooldown = 150;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 12, m_vPivot.y - m_vSize.y / 2, 10.f, 267.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 12, m_vPivot.y - m_vSize.y / 2, 10.f, 273.f));
+	}
+	break;
+	case 3:
+	{
+		m_qwAttackCooldown = 150;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 15, m_vPivot.y - m_vSize.y / 2, 10.f, 267.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + -5, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + +5, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 15, m_vPivot.y - m_vSize.y / 2, 10.f, 273.f));
+	}
+	break;
+	case 4:
+	{
+		m_qwAttackCooldown = 150;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, 10.f, 262.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + -6, m_vPivot.y - m_vSize.y / 2, 10.f, 268.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 6, m_vPivot.y - m_vSize.y / 2, 10.f, 272.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, 10.f, 278.f));
+	}
+	break;
+	case 5:
+	{
+		m_qwAttackCooldown = 50;
+
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, 15.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x - 8, m_vPivot.y - m_vSize.y / 2, 15.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 15.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 8, m_vPivot.y - m_vSize.y / 2, 15.f, 270.f));
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, 15.f, 270.f));
+	}
+	break;
+	default:
+		break;
+	}
 }
