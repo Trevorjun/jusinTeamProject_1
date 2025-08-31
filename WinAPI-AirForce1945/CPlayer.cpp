@@ -122,6 +122,8 @@ void CPlayer::Key_Input(const tagObjBound _tOutDir)
 		{
 			m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 				m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
+			m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
+				m_vPivot.x - 20, m_vPivot.y - m_vSize.y / 2));
 
 			m_qwLastAttackTime = qwCurrentTime;
 		}
