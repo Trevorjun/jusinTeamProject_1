@@ -1,6 +1,23 @@
 ﻿#pragma once
 #include "Define.h"
 
+/**
+ * \brief 각 사방의 범위 밖으로 나갈 경우를 체크하기 위한 구조체
+ *
+ * \details
+ * - bIsOutLeft:	왼쪽으로 벗어난 경우 true
+ * - bIsOutRight:	오른쪽으로 벗어난 경우 true
+ * - bIsOutTop:	위쪽으로 벗어난 경우 true
+ * - bIsOutBottom:	아래쪽으로 벗어난 경우 true
+ */
+struct tagObjBound
+{
+	bool bIsOutLeft = false;
+	bool bIsOutRight = false;
+	bool bIsOutTop = false;
+	bool bIsOutBottom = false;
+};
+
 class CObject
 {
 public:
@@ -37,7 +54,7 @@ protected:
 	* 주로 LateUpdate()에서 호출하며, 범위 밖으로 나갈 시 오브젝트 제거 등 다양하게 사용 가능
 	*
 	* \param	_iMargin
-	* 경계선 판정 시 경계를 늘리거나 줄이는 데 사용. 디폴트로 사용 시 정해진 화면과 동일한 범위
+	* 경계선 판정 시 경계를 늘리거나 줄임. 음수값은 범위를 줄이고 양수값은 범위를 늘림.
 	*
 	* \return	tagObjBound:
 	* 범위 밖으로 나갈 시 각 방향의 bool값이 true가 되는 구조체
@@ -52,6 +69,7 @@ protected:
 
 	float			m_fSpeed;
 	bool			m_bDestroy;
+
 private:
 	bool			m_bCollision;
 };
