@@ -40,6 +40,10 @@ void		CMonster_Curve::LateUpdate()
 		ShootBullet();
 		ull_wLastShotTime = dwCurrentTime;
 	}
+
+	tagObjBound tBound = IsOutOfBound(MON_CURVE_SIZE_Y);
+	if (tBound.bIsOutBottom)	
+		SetDestroy();
 }
 bool CMonster_Curve::OnCollision(CObject* _pObjCol)
 {
