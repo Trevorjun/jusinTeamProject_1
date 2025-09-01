@@ -13,4 +13,8 @@ public:
 	bool OnCollision(CObject* _pObjCol) override;
 	void		Render(HDC _hDC) override;
 	void		Release() override;
+
+	void PatternOne();
+	void PatternTwo();
+	void PatternThree();
 };

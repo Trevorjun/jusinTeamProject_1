@@ -14,6 +14,7 @@ void		CMonster_Straight::Initialize()
 {
 	m_vSize = { MON_STRAIGHT_SIZE_X, MON_STRAIGHT_SIZE_Y };
 	m_fSpeed = { MON_STRAIGHT_SPEED };
+	m_eObjectType = OBJECT_TYPE::MONSTER;
 }
 
 int			CMonster_Straight::Update()
@@ -24,6 +25,13 @@ int			CMonster_Straight::Update()
 	}
 	m_vPivot.y += m_fSpeed;
 	__super::UpdateRect();
+
+	tagObjBound tObjBound = __super::IsOutOfBound(50);
+
+	if (tObjBound.bIsOutBottom || tObjBound.bIsOutTop || tObjBound.bIsOutRight || tObjBound.bIsOutLeft )
+	{
+		m_bDestroy = true;
+	}
 
 
 	return OBJ_NOEVENT;
