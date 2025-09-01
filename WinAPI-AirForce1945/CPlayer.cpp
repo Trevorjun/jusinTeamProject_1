@@ -9,7 +9,7 @@
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr),
 	  m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(0), m_qwLastAttackTime(0),
+	  m_qwAttackCooldown(0), m_qwLastAttackTime(0), m_qwChaserCooldown(0),
 	  m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
 {}
@@ -32,6 +32,7 @@ void CPlayer::Initialize()
 	m_iMaxPower = PL_MAXPOWER;
 
 	m_qwAttackCooldown     = 150;
+	m_qwChaserCooldown     = 400;
 	m_qwInvincibleDuration = 500;
 
 	m_bIsAlive = true;
@@ -128,7 +129,6 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	break;
 	case OBJECT_TYPE::MONSTER_BULLET:
 	{
-		//todo 몬스터 총알만 판정하도록
 		this->AddLife(-1);
 	}
 	break;
@@ -188,6 +188,18 @@ void CPlayer::KeyInput(const tagObjBound _tOutDir)
 			ShootBullet();
 
 			m_qwLastAttackTime = qwCurrentTime;
+		}
+
+		if (m_iPower >= 5 && qwCurrentTime - m_qwLastChaserAttackTime >= m_qwChaserCooldown)
+		{
+			m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
+				m_vPivot.x,
+				m_vPivot.y - m_vSize.y / 2,
+				OBJECT_TYPE::PLAYER_BULLET,
+				15.f,
+				90.f));
+
+			m_qwLastChaserAttackTime = qwCurrentTime;
 		}
 	}
 
@@ -312,12 +324,12 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 84.f));
 
 		m_pBullet->push_back(CAbstractFactory<CRotateBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 50.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 	}
 	break;
 	case 5:
 	{
-		m_qwAttackCooldown = 50;
+		m_qwAttackCooldown = 75;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
@@ -329,8 +341,6 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 5, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
-		m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 	}
 	break;
 	default:
