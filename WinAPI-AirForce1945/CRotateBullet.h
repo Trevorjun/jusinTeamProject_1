@@ -19,5 +19,7 @@ public:
 
 private:
 	Vector2 m_vCenter;			// 가상 중심점
-	float   m_fRotateAngle;		// 회전 각도
+	float   m_fRotAngle;		// 회전 각도
+	float	m_fRotSpeed;		// 회전 속도
+	float	m_fDisToCen;		// 총알과 중심점 사이 거리
 };

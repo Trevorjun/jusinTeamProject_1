@@ -3,11 +3,14 @@
 #include "CAbstractFactory.h"
 #include "CNormalBullet.h"
 #include "CRotateBullet.h"
+#include "CStageManager.h"
 #include "CChaserBullet.h"
 
 CPlayer::CPlayer()
-	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(150), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
+	: m_pBullet(nullptr), m_pShield(nullptr),
+	  m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
+	  m_qwAttackCooldown(0), m_qwLastAttackTime(0), m_qwChaserCooldown(0),
+	  m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
 {}
 
@@ -25,7 +28,12 @@ void CPlayer::Initialize()
 	m_fSpeed = 8.f;
 
 	m_iLife     = PL_LIFE;
+	m_iMaxLife  = PL_LIFE;
 	m_iMaxPower = PL_MAXPOWER;
+
+	m_qwAttackCooldown     = 150;
+	m_qwChaserCooldown     = 500;
+	m_qwInvincibleDuration = 500;
 
 	m_bIsAlive = true;
 }
@@ -35,9 +43,14 @@ int CPlayer::Update()
 	if (m_bDestroy)
 		return OBJ_DESTROY;
 
+#pragma region 부활 테스트 코드
+
 	if (!m_bIsAlive)
-		//return OBJ_PLAYERDEAD;
+	{
 		Revive();
+	}
+
+#pragma endregion
 
 	if (m_bIsInvincible)
 	{
@@ -72,17 +85,16 @@ void CPlayer::Render(HDC _hDC)
 	Rectangle(_hDC, m_tRect.left, m_tRect.bottom, m_tRect.right, m_tRect.bottom + iBodyLen);
 
 	// arm
-	MoveToEx(_hDC, m_tRect.left, m_tRect.bottom, NULL);
+	MoveToEx(_hDC, m_tRect.left, m_tRect.bottom, nullptr);
 	LineTo(_hDC, m_tRect.left - m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
-	MoveToEx(_hDC, m_tRect.right, m_tRect.bottom, NULL);
+	MoveToEx(_hDC, m_tRect.right, m_tRect.bottom, nullptr);
 	LineTo(_hDC, m_tRect.right + m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
 
 	// leg
-	MoveToEx(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	MoveToEx(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, nullptr);
 	LineTo(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
-	MoveToEx(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	MoveToEx(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, nullptr);
 	LineTo(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
-
 
 	DeleteObject(SelectObject(_hDC, hOldPen));
 	RestoreDC(_hDC, saved);
@@ -100,11 +112,14 @@ void CPlayer::Revive()
 	m_bIsInvincible = true;
 	m_bIsAlive      = true;
 
-	m_qwInvincibleEndTime = GetTickCount64() + m_dwInvincibleDuration;
+	m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
 }
 
 bool CPlayer::OnCollision(CObject* _pObjCol)
 {
+	if (!m_bIsAlive)
+		return false;
+
 	switch (_pObjCol->GetObjectType())
 	{
 	case OBJECT_TYPE::MONSTER:
@@ -114,7 +129,7 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	break;
 	case OBJECT_TYPE::MONSTER_BULLET:
 	{
-		//todo 몬스터 총알만 판정하도록
+		this->AddLife(-1);
 	}
 	break;
 	case OBJECT_TYPE::ITEM_LIFE:
@@ -132,7 +147,10 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	}
 
 	if (m_iLife <= 0)
+	{
 		m_bIsAlive = false;
+		CStageManager::Get_Instance()->On_PlayerDead(this);
+	}
 
 	return false;
 }
@@ -143,6 +161,8 @@ void CPlayer::AddLife(const int _iLifeChange)
 
 	if (m_iLife < 0)
 		m_iLife = 0;
+	else if (m_iLife > m_iMaxLife)
+		m_iLife = m_iMaxLife;
 }
 
 void CPlayer::AddPower(const int _iPowerChange)
@@ -168,6 +188,25 @@ void CPlayer::KeyInput(const tagObjBound _tOutDir)
 			ShootBullet();
 
 			m_qwLastAttackTime = qwCurrentTime;
+		}
+
+		if (m_iPower >= 5 && qwCurrentTime - m_qwLastChaserAttackTime >= m_qwChaserCooldown)
+		{
+			m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
+				m_vPivot.x - 40,
+				m_vPivot.y - m_vSize.y / 2 + 50,
+				OBJECT_TYPE::PLAYER_BULLET,
+				15.f,
+				90.f));
+
+			m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
+				m_vPivot.x + 40,
+				m_vPivot.y - m_vSize.y / 2 + 50,
+				OBJECT_TYPE::PLAYER_BULLET,
+				15.f,
+				90.f));
+
+			m_qwLastChaserAttackTime = qwCurrentTime;
 		}
 	}
 
@@ -238,8 +277,6 @@ void CPlayer::ShootBullet()
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
-
-		
 	}
 	break;
 	case 1:
@@ -294,12 +331,12 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 84.f));
 
 		m_pBullet->push_back(CAbstractFactory<CRotateBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 50.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 	}
 	break;
 	case 5:
 	{
-		m_qwAttackCooldown = 50;
+		m_qwAttackCooldown = 75;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
@@ -311,8 +348,6 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 5, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
-		m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 	}
 	break;
 	default:

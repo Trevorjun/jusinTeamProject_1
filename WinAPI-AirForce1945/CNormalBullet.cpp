@@ -11,10 +11,6 @@ CNormalBullet::~CNormalBullet()
 
 void CNormalBullet::Initialize()
 {
-	m_eObjectType = OBJECT_TYPE::PLAYER_BULLET;
-
-	//todo 플레이어쪽인지 몬스터 쪽인지는 Create를 새로 만들어서 전달하면 좋을듯?
-
 	m_vSize     = { 15.f, 15.f };
 	m_fSpeed    = 10.f;
 	m_fShootDeg = 90.f;
