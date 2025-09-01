@@ -35,13 +35,14 @@ public:
 	 * \param _fSpeed		발사 속도
 	 * \param _fShootDeg	발사각 (90도 : 위, 270도 : 아래)
 	 */
-	static CObject* Create(float _fX, float _fY, float _fSpeed, float _fShootDeg)
+	static CObject* Create(float _fX, float _fY, OBJECT_TYPE _eObjectType, float _fSpeed = 10.f, float _fShootDeg = 90.f)
 	{
 		CObject* pObject = new T;
 		pObject->Initialize();
 		pObject->SetPivot({ _fX, _fY });
 		pObject->SetAngle(_fShootDeg);
 		pObject->SetSpeed(_fSpeed);
+		pObject->SetObjectType(_eObjectType);
 
 		return pObject;
 	}

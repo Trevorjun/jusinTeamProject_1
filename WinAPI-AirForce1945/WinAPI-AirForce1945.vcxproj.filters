@@ -49,9 +49,6 @@
     <Filter Include="99. Factories">
       <UniqueIdentifier>{51738779-623d-40ff-adbc-1f8890b1e7e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="99. Factories\00. BulletFactory">
-      <UniqueIdentifier>{a8a2231c-0e19-4995-9cdf-0ae25fcddc59}</UniqueIdentifier>
-    </Filter>
     <Filter Include="97. Stage">
       <UniqueIdentifier>{25d8aa79-30d9-48b4-a1f0-e9fe9ac35017}</UniqueIdentifier>
     </Filter>

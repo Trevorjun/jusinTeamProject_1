@@ -26,6 +26,13 @@ int			CMonster_Straight::Update()
 	m_vPivot.y += m_fSpeed;
 	__super::UpdateRect();
 
+	tagObjBound tObjBound = __super::IsOutOfBound(50);
+
+	if (tObjBound.bIsOutBottom || tObjBound.bIsOutTop || tObjBound.bIsOutRight || tObjBound.bIsOutLeft )
+	{
+		m_bDestroy = true;
+	}
+
 
 	return OBJ_NOEVENT;
 }
