@@ -60,7 +60,7 @@ void CStageManager::Initialize()
 	m_stages[0] = new CStage(1, 5, 2.5f, 0.3f);
 	m_stages[1] = new CStage(2, 5, 2.2f, 0.35f);
 	m_stages[2] = new CStage(3, 5, 1.9f, 0.4f);
-	m_stages[3] = new CStage(4, 1, 1.f, 9999.f); // boss stage
+	m_stages[3] = new CStage(4, 1, 0.f, 0.f); // boss stage
 
 	m_iCurrentStage = 0;
 
@@ -77,11 +77,18 @@ void CStageManager::Update()
 		Handle_GameOver();
 	}
 
+	if (m_iCurrentStage == cTotalStage - 1 && bBossDead)
+	{
+		bGameClear = true;
+	}
+
 	if (m_stages[m_iCurrentStage]->Get_Clear())
 	{
 		Transition_Stage();
 	}
 	Create_Monster();
+
+
 }
 
 void CStageManager::LateUpdate()
@@ -138,7 +145,7 @@ CObject* CStageManager::Create_Monster()
 			iX = WINCX >> 1;
 			m_fLastMonsterSpawned = GetTickCount64();
 		}
-		else
+		else if (m_iCurrentStage < cTotalStage - 1)
 		{
 			switch (iRand)
 			{
@@ -154,11 +161,14 @@ CObject* CStageManager::Create_Monster()
 			}
 		}
 
-		pMonster->SetPivot({iX, iY});
-		m_pMonsterList->push_back(pMonster);
-		
-		dynamic_cast<CMonster*>(m_pMonsterList->back())->SetBullet(m_pBulletList);
-		m_fLastMonsterSpawned = GetTickCount64();
+		if (pMonster)
+		{
+			pMonster->SetPivot({ iX, iY });
+			m_pMonsterList->push_back(pMonster);
+			m_fLastMonsterSpawned = GetTickCount64();
+
+			dynamic_cast<CMonster*>(m_pMonsterList->back())->SetBullet(m_pBulletList);
+		}
 	}
 	return nullptr;
 }
@@ -198,14 +208,12 @@ void CStageManager::Check_Clear()
 
 void CStageManager::Transition_Stage()
 {
-	if (m_iCurrentStage == cTotalStage - 1 && bBossDead)
+
+	if (m_iCurrentStage <= cTotalStage - 1)
 	{
-		bGameClear = true;
-	}
-	else
-	{
-		m_iCurrentStage++;
 		m_fStageSpawnTime = m_stages[m_iCurrentStage]->Get_SpawnTime();
+
+		m_iCurrentStage++; 
 	}
 }
 
@@ -284,6 +292,8 @@ CObject* CStageManager::On_BossStage()
 	}
 
 	bBossCreated = true;
+
+	m_stages[cTotalStage - 1]->Set_CurrentKillCount(0);
 
 	return CAbstractFactory<CMonster_Boss>::Create();
 }
