@@ -60,20 +60,23 @@ CStageManager::~CStageManager()
 
 void CStageManager::Initialize()
 {
-	m_stages[0] = new CStage(1, 4, 1.f, 0.3f);
-	m_stages[1] = new CStage(2, 4, 1.f, 0.5f);
-	m_stages[2] = new CStage(3, 4, 1.f, 0.65f);
+	m_stages[0] = new CStage(1, 5, 2.5f, 0.3f);
+	m_stages[1] = new CStage(2, 5, 2.2f, 0.35f);
+	m_stages[2] = new CStage(3, 5, 1.9f, 0.4f);
+	m_stages[3] = new CStage(4, 1, 1.f, 9999.f); // boss stage
 
 	m_iCurrentStage = 0;
 
 	m_fStageSpawnTime = m_stages[m_iCurrentStage]->Get_SpawnTime();
 	m_fLastMonsterSpawned = GetTickCount64();
+
+	bBossCreated = false;
 }
 
 void CStageManager::Update()
 {
 #pragma region TEST
-	Test_StageManager();
+	// Test_StageManager();
 #pragma endregion
 
 	if (bGameOver)
@@ -118,7 +121,6 @@ void CStageManager::Render(HDC _hDC)
 
 void CStageManager::Release()
 {
-	// TODO : stages created need to call Safe_Delete!! 
 	for (auto& stage : m_stages)
 	{
 		SafeDelete(stage);
@@ -127,6 +129,7 @@ void CStageManager::Release()
 
 CObject* CStageManager::Create_Monster()
 {
+
 	if (m_fLastMonsterSpawned + m_fStageSpawnTime * 1000.f < GetTickCount64())
 	{
 		int iX = rand() % (WINCX - 100);
@@ -136,28 +139,30 @@ CObject* CStageManager::Create_Monster()
 
 		CObject* pMonster = nullptr;
 
-		switch (iRand)
+		if (m_iCurrentStage == cTotalStage - 1 && !bBossCreated)
 		{
-		case 0: 
-			pMonster = CAbstractFactory<CMonster_Curve>::Create();
-			break;
-		case 1 :
-			pMonster = CAbstractFactory<CMonster_Straight>::Create();
-			break;
-		case 2 :
-			pMonster = CAbstractFactory<CMonster_Boss>::Create();
-			break;
-		case 3 :
-		default:
-			pMonster = CAbstractFactory<CMonster_Suicide>::Create();
-			break;
+			pMonster = On_BossStage();
+			iX = WINCX >> 1;
+		}
+		else
+		{
+			switch (iRand)
+			{
+			case 0:
+				pMonster = CAbstractFactory<CMonster_Curve>::Create();
+				break;
+			case 1:
+				pMonster = CAbstractFactory<CMonster_Straight>::Create();
+				break;
+			case 2: default:
+				pMonster = CAbstractFactory<CMonster_Suicide>::Create();
+				break;
+			}
 		}
 
 		pMonster->SetPivot({iX, iY});
 		m_pMonsterList->push_back(pMonster);
 		
-		// TODO : inject player's pointer to monster object
-		// (*m_pObjectList)[PLAYER].front()
 		dynamic_cast<CMonster*>(m_pMonsterList->back())->SetBullet(m_pBulletList);
 		m_fLastMonsterSpawned = GetTickCount64();
 	}
@@ -199,12 +204,14 @@ void CStageManager::Check_Clear()
 
 void CStageManager::Transition_Stage()
 {
-	m_iCurrentStage++;
-	if (m_iCurrentStage >= cTotalStage)
+	if (m_iCurrentStage == cTotalStage - 1)
 	{
-		// Prevent index out of bounds
-		m_iCurrentStage = cTotalStage - 1;
 		bGameClear = true;
+	}
+	else
+	{
+		m_iCurrentStage++;
+		m_fStageSpawnTime = m_stages[m_iCurrentStage]->Get_SpawnTime();
 	}
 }
 
@@ -227,9 +234,7 @@ void CStageManager::Display_GameOver(HDC _hDC)
 
 void CStageManager::Display_GameClear(HDC _hDC)
 {
-	DrawText(_hDC, L"=====GAME CELAR=====", -1, &rGameOver, DT_VCENTER | DT_CENTER);
-
-
+	DrawText(_hDC, L"=====GAME CELAR=====", -1, &rGameClear, DT_VCENTER | DT_CENTER);
 }
 
 void CStageManager::On_MonsterKilled(CObject* pKilledObj)
@@ -239,7 +244,7 @@ void CStageManager::On_MonsterKilled(CObject* pKilledObj)
 	// create item by Item Drop Rate
 	float fRand = (rand() % 100) / 100.f;
 
-	if (fRand <= m_stages[m_iCurrentStage]->Get_ItemDropRate())
+      	if (fRand <= m_stages[m_iCurrentStage]->Get_ItemDropRate())
 	{
 		Create_Item(pKilledObj->GetPivot());
 	}
@@ -250,7 +255,6 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 	tested = true;
  	bGameOver = true;
 
-	
 	//  Release only Bullet, Monster, Item 
 	for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
 	{
@@ -271,6 +275,19 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 	Release();
 	Initialize();
 	lDisplayElapsedTime = GetTickCount64();
+}
+
+CObject* CStageManager::On_BossStage()
+{
+	for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
+	{
+		SafeDelete<CObject*>((*iter));
+		iter = m_pMonsterList->erase(iter);
+	}
+
+	bBossCreated = true;
+
+	return CAbstractFactory<CMonster_Boss>::Create();
 }
 
 void CStageManager::Test_StageManager()
