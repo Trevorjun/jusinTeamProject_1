@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CChaserBullet.h"
 #include "CStageManager.h"
 
@@ -82,7 +82,7 @@ bool CChaserBullet::OnCollision(CObject* _pColObj)
 {
     __super::OnCollision(_pColObj);
     
-    // Æø¹ß°ú °°ÀÌ Å©±â°¡ Ä¿Áø ÈÄ ¼Ò¸ê
+    // í­ë°œ íš¨ê³¼ë¥¼ ë³´ì—¬ì£¼ê¸° ìœ„í•œ í¬ê¸° ë³€ê²½
     m_vSize = { 50.f, 50.f };
 
     return false;

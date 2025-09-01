@@ -23,8 +23,8 @@ extern HWND g_hWnd;
 
 #define PL_LIFE					3
 #define PL_MAXPOWER				5
-#define PL_PIVOT_X				100.f
-#define PL_PIVOT_Y				100.f
+#define PL_PIVOT_X				(WINCX / 2.f)
+#define PL_PIVOT_Y				(WINCY - 150.f)
 #define PL_SIZE_X				60.f
 #define PL_SIZE_Y				60.f
 #define PL_SPEED				8.f
@@ -48,7 +48,7 @@ extern HWND g_hWnd;
 // 열거체				//////////////
 
 // 오브젝트 리스트에서 생성할 때 사용
-enum OBJECT				
+enum OBJECT
 {
 	PLAYER,
 	MONSTER,
@@ -69,7 +69,7 @@ enum COLLISION_FLAG
 };
 
 // 오브젝트의 타입을 저장해서 충돌 판정에서 사용
-enum class OBJECT_TYPE	
+enum class OBJECT_TYPE
 {
 	PLAYER,
 	MONSTER,

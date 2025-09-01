@@ -73,7 +73,7 @@ void CStageManager::Initialize()
 void CStageManager::Update()
 {
 #pragma region TEST
-	Test_StageManager();
+	// Test_StageManager();
 #pragma endregion
 
 	if (bGameOver)
@@ -213,6 +213,24 @@ void CStageManager::Handle_GameOver()
 	while (bGameOver && lDisplayElapsedTime + 2000 < GetTickCount64())
 	{
 		bGameOver = false;
+
+		//  Release only Bullet, Monster, Item 
+		for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
+		{
+			SafeDelete<CObject*>((*iter));
+			iter = m_pMonsterList->erase(iter);
+		}
+		for (auto iter = m_pBulletList->begin(); iter != m_pBulletList->end();)
+		{
+			SafeDelete<CObject*>((*iter));
+			iter = m_pBulletList->erase(iter);
+		}
+		for (auto iter = m_pItemList->begin(); iter != m_pItemList->end();)
+		{
+			SafeDelete<CObject*>((*iter));
+			iter = m_pItemList->erase(iter);
+		}
+
 		static_cast<CPlayer*>(m_pPlayer)->Revive();
 	}
 }
@@ -249,24 +267,6 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 {
 	tested = true;
  	bGameOver = true;
-
-	
-	//  Release only Bullet, Monster, Item 
-	for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
-	{
-		SafeDelete<CObject*>((*iter));
-		iter = m_pMonsterList->erase(iter);
-	}
-	for (auto iter = m_pBulletList->begin(); iter != m_pBulletList->end();)
-	{
-		SafeDelete<CObject*>((*iter));
-		iter = m_pBulletList->erase(iter);
-	}
-	for (auto iter = m_pItemList->begin(); iter != m_pItemList->end();)
-	{
-		SafeDelete<CObject*>((*iter));
-		iter = m_pItemList->erase(iter);
-	}
 
 	Release();
 	Initialize();

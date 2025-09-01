@@ -129,6 +129,12 @@
     <ClInclude Include="CMonster_Boss.h">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClInclude>
+    <ClInclude Include="CRazorBullet.h">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CRotateBullet.h">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
     <ClInclude Include="CBulletTest.h">
       <Filter>01. Object\02. Bullet</Filter>
     </ClInclude>
@@ -199,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="CMonster_Boss.cpp">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CRazorBullet.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CRotateBullet.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
     </ClCompile>
     <ClCompile Include="CBulletTest.cpp">
       <Filter>01. Object\02. Bullet</Filter>
