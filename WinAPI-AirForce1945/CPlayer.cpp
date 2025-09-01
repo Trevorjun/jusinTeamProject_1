@@ -32,7 +32,7 @@ void CPlayer::Initialize()
 	m_iMaxPower = PL_MAXPOWER;
 
 	m_qwAttackCooldown     = 150;
-	m_qwChaserCooldown     = 400;
+	m_qwChaserCooldown     = 500;
 	m_qwInvincibleDuration = 500;
 
 	m_bIsAlive = true;
@@ -193,8 +193,15 @@ void CPlayer::KeyInput(const tagObjBound _tOutDir)
 		if (m_iPower >= 5 && qwCurrentTime - m_qwLastChaserAttackTime >= m_qwChaserCooldown)
 		{
 			m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
-				m_vPivot.x,
-				m_vPivot.y - m_vSize.y / 2,
+				m_vPivot.x - 40,
+				m_vPivot.y - m_vSize.y / 2 + 50,
+				OBJECT_TYPE::PLAYER_BULLET,
+				15.f,
+				90.f));
+
+			m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
+				m_vPivot.x + 40,
+				m_vPivot.y - m_vSize.y / 2 + 50,
 				OBJECT_TYPE::PLAYER_BULLET,
 				15.f,
 				90.f));
