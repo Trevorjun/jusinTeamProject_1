@@ -84,5 +84,5 @@ void CMonster_Straight::Release()
 
 void CMonster_Straight::ShootBullet()
 {
-	m_pBullet->push_back(CAbstractFactory<CBulletTest>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2));
+	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 6.f, 270.f));
 }

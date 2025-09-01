@@ -7,7 +7,7 @@
 class CMonster : public CObject
 {
 protected:
-	short iHp;
+	short m_iHp;
 	float fPlayerVX;
 	float fPlayerVY;
 
