@@ -14,8 +14,6 @@ void CBullet::Release()
 
 bool CBullet::OnCollision(CObject* _pObjCol)
 {
-	//todo 공용 코드 구현
-
 	switch (_pObjCol->GetObjectType())
 	{
 	case OBJECT_TYPE::PLAYER:
@@ -33,6 +31,17 @@ bool CBullet::OnCollision(CObject* _pObjCol)
 	break;
 	default:
 		break;
+	}
+
+	if (m_eObjectType == OBJECT_TYPE::MONSTER_BULLET
+		&& _pObjCol->GetObjectType() == OBJECT_TYPE::PLAYER)
+	{
+		m_bDestroy = true;
+	}
+	else if (m_eObjectType == OBJECT_TYPE::PLAYER_BULLET
+		&& _pObjCol->GetObjectType() == OBJECT_TYPE::MONSTER)
+	{
+		m_bDestroy = true;
 	}
 
 	return false;
