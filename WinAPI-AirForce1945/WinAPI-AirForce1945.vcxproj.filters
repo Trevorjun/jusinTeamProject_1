@@ -59,6 +59,7 @@
       <UniqueIdentifier>{48757ea4-e175-46b7-8e93-a6b368705bfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
+
   <ItemGroup>
     <ClInclude Include="framework.h">
       <Filter>헤더 파일</Filter>
@@ -135,10 +136,14 @@
     <ClInclude Include="CMonster_Boss.h">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClInclude>
+    <ClInclude Include="CBulletTest.h">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
     <ClInclude Include="CBulletFactory.h">
       <Filter>99. Factories\00. BulletFactory</Filter>
     </ClInclude>
   </ItemGroup>
+
   <ItemGroup>
     <ClCompile Include="WinAPI-AirForce1945.cpp">
       <Filter>소스 파일</Filter>
@@ -200,15 +205,20 @@
     <ClCompile Include="CMonster_Boss.cpp">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClCompile>
+    <ClCompile Include="CBulletTest.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClCompile>
     <ClCompile Include="CBulletFactory.cpp">
       <Filter>99. Factories\00. BulletFactory</Filter>
     </ClCompile>
   </ItemGroup>
+
   <ItemGroup>
     <ResourceCompile Include="WinAPI-AirForce1945.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
   </ItemGroup>
+
   <ItemGroup>
     <Image Include="small.ico">
       <Filter>리소스 파일</Filter>

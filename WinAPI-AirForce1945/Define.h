@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <windows.h>
+
 // 전역 변수				//////////////
 
 extern HWND g_hWnd;
@@ -32,6 +34,8 @@ extern HWND g_hWnd;
 #define MON_CURVE_SIZE_X		50.f
 #define MON_CURVE_SIZE_Y		50.f
 #define MON_CURVE_SPEED			1.f
+
+#define ULL_WSHOTINTERVAL 1000ULL
 
 #define MON_STRAIGHT_SIZE_X		40.f
 #define MON_STRAIGHT_SIZE_Y		40.f
