@@ -9,7 +9,6 @@ public:
 	~CChaserBullet() override;
 
 public:
-	
 	void	SetMonsterList(list<CObject*>& _refMonsterList) { m_pMonsterList = &_refMonsterList; }
 
 
@@ -29,6 +28,6 @@ private:
 private:
 	CObject*		m_pTarget;
 	list<CObject*>* m_pMonsterList;
-	HPEN			m_hPen;
+	HBRUSH			m_hBrush;
 };
 
