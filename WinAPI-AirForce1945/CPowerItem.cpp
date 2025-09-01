@@ -35,7 +35,7 @@ bool CPowerItem::OnCollision(CObject* _pObjCol)
 	{
 	case OBJECT_TYPE::PLAYER:
 	{
-		m_bDestroy = true;
+		Apply_Effect(_pObjCol);
 	}
 	break;
 	default:
