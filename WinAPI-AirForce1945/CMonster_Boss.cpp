@@ -18,7 +18,14 @@ void		CMonster_Boss::Initialize()
 
 	m_vSize = { 250, 250 };
 	m_fSpeed = { 1.f };
-	m_iHp = 500;
+	m_iMaxHp = 150;
+	m_iHp = m_iMaxHp;
+
+	m_vBarSize = { 100, 10 };
+	rHPBackgrond = { static_cast<LONG>(m_vPivot.x - m_vBarSize.x), static_cast<LONG>(m_vPivot.y - m_vBarSize.y),
+								static_cast<LONG>(m_vPivot.x + m_vBarSize.x), static_cast<LONG>(m_vPivot.y + m_vBarSize.y) };
+	rHPFill = { static_cast<LONG>(m_vPivot.x - m_vBarSize.x), static_cast<LONG>(m_vPivot.y - m_vBarSize.y),
+								static_cast<LONG>(m_vPivot.x + m_vBarSize.x), static_cast<LONG>(m_vPivot.y + m_vBarSize.y) };
 }
 int			CMonster_Boss::Update()
 {
@@ -88,6 +95,11 @@ bool CMonster_Boss::OnCollision(CObject* _pObjCol)
 void		CMonster_Boss::Render(HDC _hDC)
 {
 	Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+
+	Render_HPBar(_hDC);
+
+
+
 }
 void		CMonster_Boss::Release()
 {
@@ -130,4 +142,27 @@ float CMonster_Boss::checkDegree()
 
 void CMonster_Boss::PatternFour()
 {
+}
+
+void CMonster_Boss::Render_HPBar(HDC _hDC)
+{
+	int saved = SaveDC(_hDC);
+
+	rHPBackgrond = { static_cast<LONG>(m_vPivot.x - m_vBarSize.x), static_cast<LONG>(m_vPivot.y - m_vBarSize.y),
+							static_cast<LONG>(m_vPivot.x + m_vBarSize.x), static_cast<LONG>(m_vPivot.y + m_vBarSize.y) };
+
+	LONG newRight = rHPBackgrond.left + m_vBarSize.x * 2.f * ((float)m_iHp / (float)m_iMaxHp);
+
+	rHPFill = { rHPBackgrond.left, rHPBackgrond.top,
+					newRight, rHPBackgrond.bottom};
+
+	Rectangle(_hDC, rHPBackgrond.left, rHPBackgrond.top, rHPBackgrond.right, rHPBackgrond.bottom);
+
+	HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(0xff, 0x00, 0x00));;
+	HPEN hOldPen = static_cast<HPEN>(SelectObject(_hDC, hNewPen));
+
+	Rectangle(_hDC, rHPFill.left, rHPFill.top, rHPFill.right, rHPFill.bottom);
+
+	DeleteObject(SelectObject(_hDC, hOldPen));
+	RestoreDC(_hDC, saved);
 }

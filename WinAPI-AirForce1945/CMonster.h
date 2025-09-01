@@ -32,4 +32,5 @@ public:
 	void setHp(short _iHp) { m_iHp = _iHp; }
 	void setPlayerVXY(CObject* pObj) { m_fPlayerVX = pObj->GetPivot().x; m_fPlayerVY = pObj->GetPivot().y; }
 	void SetBullet(list<CObject*>* _m_pBullet) { m_pBullet = _m_pBullet; }
+
 };

@@ -57,10 +57,10 @@ CStageManager::~CStageManager()
 
 void CStageManager::Initialize()
 {
-	m_stages[0] = new CStage(1, 5, 2.5f, 0.3f);
-	m_stages[1] = new CStage(2, 5, 2.2f, 0.35f);
-	m_stages[2] = new CStage(3, 5, 1.9f, 0.4f);
-	m_stages[3] = new CStage(4, 1, 0.f, 0.f); // boss stage
+	m_stages[0] = new CStage(1, 7, 2.2f, 0.3f);
+	m_stages[1] = new CStage(2, 10, 2.f, 0.3f);
+	m_stages[2] = new CStage(3, 13, 1.8f, 0.2f);
+	m_stages[3] = new CStage(4, 1, 0.f, 0.01f); // boss stage
 
 	m_iCurrentStage = 0;
 

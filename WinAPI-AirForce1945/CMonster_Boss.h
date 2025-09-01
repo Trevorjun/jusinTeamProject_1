@@ -19,4 +19,15 @@ public:
 	void PatternThree();
 	float checkDegree();
 	void PatternFour();
+
+private :
+	int m_iMaxHp;
+
+
+private :
+	RECT rHPBackgrond;
+	RECT rHPFill;
+
+	Vector2 m_vBarSize;
+	void Render_HPBar(HDC _hDC);
 };
