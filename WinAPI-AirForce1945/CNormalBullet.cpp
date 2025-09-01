@@ -2,19 +2,22 @@
 #include "CNormalBullet.h"
 
 CNormalBullet::CNormalBullet()
-{
-}
+{}
 
 CNormalBullet::~CNormalBullet()
 {
+	CNormalBullet::Release();
 }
 
 void CNormalBullet::Initialize()
 {
-	m_vSize  = { 15.f, 15.f };
-	m_fSpeed = 6.f;
+	m_eObjectType = OBJECT_TYPE::PLAYER_BULLET;
 
-	m_fAngle = 270.f;
+	//todo 플레이어쪽인지 몬스터 쪽인지는 Create를 새로 만들어서 전달하면 좋을듯?
+
+	m_vSize     = { 15.f, 15.f };
+	m_fSpeed    = 10.f;
+	m_fShootDeg = 90.f;
 }
 
 int CNormalBullet::Update()
@@ -22,17 +25,17 @@ int CNormalBullet::Update()
 	if (m_bDestroy)
 		return OBJ_DESTROY;
 
-	CObject::UpdateRect();
+	m_vPivot.x += m_fSpeed * cosf(RAD(m_fShootDeg));
+	m_vPivot.y -= m_fSpeed * sinf(RAD(m_fShootDeg));
 
-	m_vPivot.x += m_fSpeed * cosf(RAD(m_fAngle));
-	m_vPivot.y += m_fSpeed * sinf(RAD(m_fAngle));
+	CObject::UpdateRect();
 
 	return OBJ_NOEVENT;
 }
 
 void CNormalBullet::LateUpdate()
 {
-	__super::LateUpdate();
+	__super::HandleOutOfBound(IsOutOfBound(50));
 }
 
 void CNormalBullet::Render(HDC _hDC)
@@ -41,5 +44,11 @@ void CNormalBullet::Render(HDC _hDC)
 }
 
 void CNormalBullet::Release()
+{}
+
+bool CNormalBullet::OnCollision(CObject* _pObjCol)
 {
+	__super::OnCollision(_pObjCol);
+
+	return false;
 }
