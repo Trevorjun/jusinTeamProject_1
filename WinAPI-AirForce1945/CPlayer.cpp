@@ -28,7 +28,7 @@ void CPlayer::Initialize()
 	m_fSpeed = 8.f;
 
 	m_iLife     = PL_LIFE;
-	m_iMaxLife  = 3;
+	m_iMaxLife  = PL_LIFE;
 	m_iMaxPower = PL_MAXPOWER;
 
 	m_qwAttackCooldown     = 150;
