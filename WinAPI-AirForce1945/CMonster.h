@@ -9,6 +9,7 @@ protected:
 	short iHp;
 	float fPlayerVX;
 	float fPlayerVY;
+
 	ULONGLONG ull_wLastShotTime;
 
 	list<CObject*>* m_pBullet;
