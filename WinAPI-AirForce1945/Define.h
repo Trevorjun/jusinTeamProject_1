@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <windows.h>
+
 // 전역 변수				//////////////
 
 extern HWND g_hWnd;

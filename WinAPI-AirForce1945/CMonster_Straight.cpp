@@ -12,8 +12,8 @@ CMonster_Straight::~CMonster_Straight()
 
 void		CMonster_Straight::Initialize()
 {
-	m_vSize = { M_VMON_STRAIGHT_SIZE_X, M_VMON_STRAIGHT_SIZE_Y };
-	m_fSpeed = { M_VMON_STRAIGHT_SPEED };
+	m_vSize = { MON_STRAIGHT_SIZE_X, MON_STRAIGHT_SIZE_Y };
+	m_fSpeed = { MON_STRAIGHT_SPEED };
 	m_eObjectType = OBJECT_TYPE::MONSTER;
 }
 
@@ -59,7 +59,7 @@ bool CMonster_Straight::OnCollision(CObject* _pObjCol)
 
 	// need to change define value / collision with player
 	if (sqrt((fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y))
-		< 60.f + M_VMON_STRAIGHT_SIZE_X)
+		< 60.f + MON_STRAIGHT_SIZE_X)
 	{
 		return true;
 	}

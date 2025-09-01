@@ -13,8 +13,6 @@ protected:
 	ULONGLONG ull_wLastShotTime;
 
 	list<CObject*>* m_pBullet;
-
-
 public:
 	CMonster();
 	~CMonster() override;

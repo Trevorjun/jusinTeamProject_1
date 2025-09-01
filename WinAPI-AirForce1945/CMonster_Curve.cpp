@@ -13,8 +13,8 @@ CMonster_Curve::~CMonster_Curve()
 
 void		CMonster_Curve::Initialize()
 {
-	m_vSize = { M_VMON_CURVE_SIZE_X, M_VMON_CURVE_SIZE_Y };
-	m_fSpeed = { M_VMON_CURVE_SPEED };
+	m_vSize = { MON_CURVE_SIZE_X, MON_CURVE_SIZE_Y };
+	m_fSpeed = { MON_CURVE_SPEED };
 	m_eObjectType = OBJECT_TYPE::MONSTER;
 }
 int			CMonster_Curve::Update()

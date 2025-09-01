@@ -52,22 +52,16 @@ void CMainGame::Initialize()
 	//#pragma endregion
 
 #pragma region 테스트 코드
-	CObject* pObj = new CPowerItem();
-	pObj->Initialize();
+	//CObject* pObj = new CPowerItem();
+	//pObj->Initialize();
 
-	m_ObjectList[ITEM].push_back(pObj);
+	//m_ObjectList[ITEM].push_back(pObj);
 
-	pObj = new CLifeItem();
-	pObj->Initialize();
+	//pObj = new CLifeItem();
+	//pObj->Initialize();
 
-	m_ObjectList[ITEM].push_back(pObj);
+	//m_ObjectList[ITEM].push_back(pObj);
 
-#pragma endregion
-#pragma region 테스트 코드(monster)
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
-#pragma endregion
 }
 
 void CMainGame::Update()
@@ -102,27 +96,44 @@ void CMainGame::Update()
 void CMainGame::LateUpdate()
 {
 	for (auto& list : m_ObjectList)
-	{
-		for (auto& obj : list)
+		for (auto& obj : list)	
+		{
+			CMonster* pMonster = dynamic_cast<CMonster*>(obj);
+			if (pMonster)
+			{
+				pMonster->SetBullet(&m_ObjectList[BULLET]);
+			}
 			obj->LateUpdate();
-	}
+		}
+
+	CStageManager::Get_Instance()->Check_Clear();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], CIRCLE_TO_RECT);
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
 	CCollisionManager::Collision(m_ObjectList[BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
-
-	//CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()
 {
 	Rectangle(m_hDC, -10, -10, WINCX + 10, WINCY + 10);
 
-	for (auto& list : m_ObjectList)
+	if (CStageManager::Get_Instance()->Get_GameOver())
 	{
+		CStageManager::Get_Instance()->Display_GameOver(m_hDC);
+		return;
+	}
+	if (CStageManager::Get_Instance()->Get_GameClear())
+	{
+		CStageManager::Get_Instance()->Display_GameClear(m_hDC);
+		return;
+	}
+
+	for (auto& list : m_ObjectList)
+
 		for (auto& obj : list)
 			obj->Render(m_hDC);
-	}
+
+	CStageManager::Get_Instance()->Render(m_hDC);
 }
 
 void CMainGame::Release()
