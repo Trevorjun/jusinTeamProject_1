@@ -5,7 +5,6 @@
 
 CMonster::CMonster() : iHp(0), fPlayerVX(0.f), fPlayerVY(0.f), m_pBullet(nullptr), ull_wLastShotTime(0)
 {
-
 }
 CMonster::~CMonster()
 {
