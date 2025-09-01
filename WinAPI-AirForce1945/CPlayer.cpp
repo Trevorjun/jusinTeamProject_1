@@ -247,7 +247,9 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 150;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
+
+		
 	}
 	break;
 	case 1:
@@ -255,9 +257,9 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 150;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 	}
 	break;
 	case 2:
@@ -265,11 +267,11 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 150;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 12, m_vPivot.y - m_vSize.y / 2, 10.f, 95.f));
+			m_vPivot.x - 12, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 95.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 12, m_vPivot.y - m_vSize.y / 2, 10.f, 85.f));
+			m_vPivot.x + 12, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 85.f));
 	}
 	break;
 	case 3:
@@ -277,13 +279,13 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 150;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, 10.f, 95.f));
+			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 95.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 8, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x - 8, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 8, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x + 8, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, 10.f, 85.f));
+			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 85.f));
 	}
 	break;
 	case 4:
@@ -291,18 +293,18 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 150;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, 10.f, 96.f));
+			m_vPivot.x - 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 96.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + -6, m_vPivot.y - m_vSize.y / 2, 10.f, 93.f));
+			m_vPivot.x + -6, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 93.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 10.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 6, m_vPivot.y - m_vSize.y / 2, 10.f, 87.f));
+			m_vPivot.x + 6, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 87.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, 10.f, 84.f));
+			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 84.f));
 
 		m_pBullet->push_back(CAbstractFactory<CRotateBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 8.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 50.f, 90.f));
 	}
 	break;
 	case 5:
@@ -310,17 +312,17 @@ void CPlayer::ShootBullet()
 		m_qwAttackCooldown = 50;
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x - 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x - 5, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x - 5, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 5, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x + 5, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
-			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 15.f, 90.f));
 	}
 	break;
 	default:

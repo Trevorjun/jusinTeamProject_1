@@ -38,7 +38,7 @@ int CChaserBullet::Update()
         Vector2 vDst = vSrc - m_vPivot;
         m_fShootDeg = acosf(vDst.x / sqrtf(vDst.GetSquared())) * 180.f / PI;
         
-        if (vDst.y < 0.f) m_fShootDeg *= -1.f;
+        if (vDst.y > 0.f) m_fShootDeg *= -1.f;
         m_vPivot += m_vDir.Rotate(m_fShootDeg) * m_fSpeed;
     }
     else
