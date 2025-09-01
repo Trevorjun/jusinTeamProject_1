@@ -1,7 +1,7 @@
 ﻿#include "pch.h"
 #include "CMonster.h"
 
-CMonster::CMonster() : m_iHp(0), fPlayerVX(0.f), fPlayerVY(0.f), m_pBullet(nullptr), ull_wLastShotTime(0)
+CMonster::CMonster() : m_iHp(0), m_fPlayerVX(0.f), m_fPlayerVY(0.f), m_pBullet(nullptr), ull_wLastShotTime(0)
 {
 }
 CMonster::~CMonster()

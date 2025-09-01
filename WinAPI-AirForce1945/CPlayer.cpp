@@ -9,7 +9,8 @@
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr),
 	  m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(0), m_qwLastAttackTime(0), m_qwChaserCooldown(0),
+	  m_qwAttackCooldown(0), m_qwLastAttackTime(0),
+	  m_qwChaserCooldown(0), m_qwLastChaserAttackTime(0),
 	  m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
 	  m_bIsAlive(false), m_bIsInvincible(false)
 {}
@@ -33,7 +34,7 @@ void CPlayer::Initialize()
 
 	m_qwAttackCooldown     = 150;
 	m_qwChaserCooldown     = 500;
-	m_qwInvincibleDuration = 500;
+	m_qwInvincibleDuration = 2000;
 
 	m_bIsAlive = true;
 }
@@ -42,15 +43,6 @@ int CPlayer::Update()
 {
 	if (m_bDestroy)
 		return OBJ_DESTROY;
-
-#pragma region 부활 테스트 코드
-
-	if (!m_bIsAlive)
-	{
-		Revive();
-	}
-
-#pragma endregion
 
 	if (m_bIsInvincible)
 	{
@@ -120,16 +112,39 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	if (!m_bIsAlive)
 		return false;
 
+	if (m_bIsInvincible)
+		return false;
+
 	switch (_pObjCol->GetObjectType())
 	{
 	case OBJECT_TYPE::MONSTER:
 	{
-		this->AddLife(-1);
+		if (!m_bIsInvincible)
+		{
+			this->AddLife(-1);
+			m_bIsInvincible = true;
+			m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
+		}
+	}
+	break;
+	case OBJECT_TYPE::BOSS:
+	{
+		if (!m_bIsInvincible)
+		{
+			this->AddLife(-1);
+			m_bIsInvincible = true;
+			m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
+		}
 	}
 	break;
 	case OBJECT_TYPE::MONSTER_BULLET:
 	{
-		this->AddLife(-1);
+		if (!m_bIsInvincible)
+		{
+			this->AddLife(-1);
+			m_bIsInvincible = true;
+			m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
+		}
 	}
 	break;
 	case OBJECT_TYPE::ITEM_LIFE:
@@ -151,6 +166,8 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 		m_bIsAlive = false;
 		CStageManager::Get_Instance()->On_PlayerDead(this);
 	}
+
+	
 
 	return false;
 }
