@@ -17,4 +17,5 @@ public:
 	void PatternOne();
 	void PatternTwo();
 	void PatternThree();
+	void PatternFour();
 };

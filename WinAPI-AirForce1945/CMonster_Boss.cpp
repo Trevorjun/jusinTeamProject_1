@@ -80,11 +80,12 @@ void		CMonster_Boss::Release()
 
 void CMonster_Boss::PatternOne()
 {
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 230.f));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 250.f));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 270.f));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 290.f));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 310.f));
+	Vector2 vPos(m_vPivot.x, m_vPivot.y + m_vSize.y / 2);
+	for (int i = 0; i < 5; ++i)
+	{
+		m_pBullet->push_back(CAbstractFactory<CNormalBullet>
+			::Create(vPos.x, vPos.y, OBJECT_TYPE::MONSTER_BULLET, 5.f, 230.f + i * 20.f));
+	}
 }
 void CMonster_Boss::PatternTwo()
 {
@@ -100,4 +101,8 @@ void CMonster_Boss::PatternThree()
 	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 4.f, 
 		(acos((fPlayerVX - this->GetPivot().x) / sqrtf((fPlayerVX - this->GetPivot().x) * (fPlayerVX - this->GetPivot().x) + (fPlayerVY - this->GetPivot().y) * (fPlayerVY - this->GetPivot().y))) * PI / 180.f)));
 	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 4.f, 290.f));
+}
+
+void CMonster_Boss::PatternFour()
+{
 }
