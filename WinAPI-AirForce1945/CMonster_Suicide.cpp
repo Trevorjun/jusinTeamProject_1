@@ -25,9 +25,9 @@ int			CMonster_Suicide::Update()
 	{
 		return OBJ_DESTROY;
 	}
-	fMonsterRadian = checkDegree(fPlayerVX, fPlayerVY);
+	fMonsterRadian = checkDegree(m_fPlayerVX, m_fPlayerVY);
 
-	if (fPlayerVY > m_vPivot.y)
+	if (m_fPlayerVY > m_vPivot.y)
 	{
 		m_vPivot.x += m_fSpeed * cosf(fMonsterRadian);
 		m_vPivot.y -= m_fSpeed * sinf((360.f * PI / 180.f) - fMonsterRadian);

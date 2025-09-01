@@ -65,7 +65,7 @@ bool CMonster_Straight::OnCollision(CObject* _pObjCol)
 	}
 
 	// need to change define value / collision with player
-	if (sqrt((fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y))
+	if (sqrt((m_fPlayerVX - m_vPivot.x) * (m_fPlayerVX - m_vPivot.x) + (m_fPlayerVY - m_vPivot.y) * (m_fPlayerVY - m_vPivot.y))
 		< 60.f + MON_STRAIGHT_SIZE_X)
 	{
 		return true;
