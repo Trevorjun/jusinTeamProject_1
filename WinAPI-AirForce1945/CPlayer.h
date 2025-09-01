@@ -45,7 +45,6 @@ public:
 private:
 	void KeyInput(const tagObjBound _tOutDir);
 	void ShootBullet();
-	void ShootChaser();
 
 private:
 	list<CObject*>* m_pBullet;

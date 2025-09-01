@@ -8,12 +8,13 @@
 
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr),
-	  m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(0), m_qwLastAttackTime(0),
-	  m_qwChaserCooldown(0), m_qwLastChaserAttackTime(0),
-	  m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
-	  m_bIsAlive(false), m_bIsInvincible(false)
-{}
+	m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
+	m_qwAttackCooldown(0), m_qwLastAttackTime(0),
+	m_qwChaserCooldown(0), m_qwLastChaserAttackTime(0),
+	m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
+	m_bIsAlive(false), m_bIsInvincible(false)
+{
+}
 
 CPlayer::~CPlayer()
 {
@@ -25,16 +26,16 @@ void CPlayer::Initialize()
 	m_eObjectType = OBJECT_TYPE::PLAYER;
 
 	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
-	m_vSize  = { 40.f, 40.f };
+	m_vSize = { 40.f, 40.f };
 	m_fSpeed = 8.f;
 
-	m_iLife     = PL_LIFE;
-	m_iMaxLife  = PL_LIFE;
+	m_iLife = PL_LIFE;
+	m_iMaxLife = PL_LIFE;
 	m_iMaxPower = PL_MAXPOWER;
 
-	m_qwAttackCooldown     = 150;
-	m_qwChaserCooldown     = 500;
-	m_qwInvincibleDuration = 2000;
+	m_qwAttackCooldown = 150;
+	m_qwChaserCooldown = 500;
+	m_qwInvincibleDuration = 1000;
 
 	m_bIsAlive = true;
 }
@@ -60,13 +61,58 @@ int CPlayer::Update()
 }
 
 void CPlayer::LateUpdate()
-{}
+{
+}
 
 void CPlayer::Render(HDC _hDC)
 {
 	int saved = SaveDC(_hDC);
 
-	HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	int iR = 0, iG = 255, iB = 0;
+
+	if (!m_bIsInvincible)
+		iG = 255;
+	else
+	{
+		if (GetTickCount64() < m_qwInvincibleEndTime - 1000)
+		{
+			iR = 255; iG = 200; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 900)
+		{
+			iR = 0; iG = 255; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 800)
+		{
+			iR = 255; iG = 200; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 700)
+		{
+			iR = 0; iG = 255; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 600)
+		{
+			iR = 255; iG = 200; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 500)
+		{
+			iR = 0; iG = 255; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 400)
+		{
+			iR = 255; iG = 200; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 300)
+		{
+			iR = 0; iG = 255; iB = 0;
+		}
+		else if (GetTickCount64() < m_qwInvincibleEndTime - 200)
+		{
+			iR = 255; iG = 200; iB = 0;
+		}
+	}
+
+	HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(iR, iG, iB));;
 	HPEN hOldPen = static_cast<HPEN>(SelectObject(_hDC, hNewPen));
 
 	// head
@@ -93,16 +139,17 @@ void CPlayer::Render(HDC _hDC)
 }
 
 void CPlayer::Release()
-{}
+{
+}
 
 void CPlayer::Revive()
 {
 	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
-	m_iLife  = PL_LIFE;
+	m_iLife = PL_LIFE;
 	m_iPower = 0;
 
 	m_bIsInvincible = true;
-	m_bIsAlive      = true;
+	m_bIsAlive = true;
 
 	m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
 }
@@ -166,8 +213,6 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 		m_bIsAlive = false;
 		CStageManager::Get_Instance()->On_PlayerDead(this);
 	}
-
-	
 
 	return false;
 }
