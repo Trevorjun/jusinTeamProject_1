@@ -43,4 +43,5 @@ void CBullet::HandleOutOfBound(const tagObjBound _tOutDir)
 	if (_tOutDir.bIsOutLeft || _tOutDir.bIsOutRight
 		|| _tOutDir.bIsOutTop || _tOutDir.bIsOutBottom)
 		m_bDestroy = true;
+	//todo 총알 삭제도 매니저에게 부탁하기...?
 }

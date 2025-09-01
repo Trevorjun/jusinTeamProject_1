@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CChaserBullet.h"
 #include "CStageManager.h"
 
@@ -13,6 +13,8 @@ CChaserBullet::~CChaserBullet()
 
 void CChaserBullet::Initialize()
 {
+    m_eObjectType = OBJECT_TYPE::PLAYER_BULLET;
+
     m_vPivot = { WINCX / 2.f, 600.f };
     m_vSize = { 15.f, 15.f };
     m_vDir = { 0.f, -1.f };
