@@ -135,7 +135,7 @@
     <ClInclude Include="CRazorBullet.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CAbstractFactory.h" />
-    <ClInclude Include="CChaserBullet.h" />
+    <ClInclude Include="CBulletTest.h" />
     <ClInclude Include="CCollisionManager.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CLifeItem.h" />
@@ -163,7 +163,7 @@
   <ItemGroup>
     <ClCompile Include="CRazorBullet.cpp" />
     <ClCompile Include="CBullet.cpp" />
-    <ClCompile Include="CChaserBullet.cpp" />
+    <ClCompile Include="CBulletTest.cpp" />
     <ClCompile Include="CCollisionManager.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CLifeItem.cpp" />

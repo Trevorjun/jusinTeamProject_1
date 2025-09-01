@@ -63,13 +63,6 @@ void CMainGame::Initialize()
 	//m_ObjectList[ITEM].push_back(pObj);
 
 #pragma endregion
-
-#pragma region 테스트 코드(monster)
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
-	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
-#pragma endregion
-
 	m_ObjectList[BULLET].push_back(CAbstractFactory<CChaserBullet>::Create());
 
 	CStageManager::Get_Instance()->Set_Player(m_ObjectList[PLAYER]);
@@ -110,16 +103,21 @@ void CMainGame::Update()
 void CMainGame::LateUpdate()
 {
 	for (auto& list : m_ObjectList)
-	{
-		for (auto& obj : list)
+		for (auto& obj : list)	
+		{
+			CMonster* pMonster = dynamic_cast<CMonster*>(obj);
+			if (pMonster)
+			{
+				pMonster->SetBullet(&m_ObjectList[BULLET]);
+			}
 			obj->LateUpdate();
-	}
+		}
+
+	CStageManager::Get_Instance()->Check_Clear();
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], CIRCLE_TO_RECT);
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
 	CCollisionManager::Collision(m_ObjectList[BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
-
-	CStageManager::Get_Instance()->LateUpdate();
 }
 
 void CMainGame::Render()
