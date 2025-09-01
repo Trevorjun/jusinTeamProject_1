@@ -29,7 +29,6 @@ int CBulletTest::Update()
 
 void CBulletTest::LateUpdate()
 {
-	__super::LateUpdate();
 }
 
 void CBulletTest::Render(HDC _hDC)

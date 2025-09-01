@@ -108,6 +108,8 @@ void CMainGame::LateUpdate()
 			obj->LateUpdate();
 		}
 
+	CStageManager::Get_Instance()->Check_Clear();
+
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], CIRCLE_TO_RECT);
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
 	CCollisionManager::Collision(m_ObjectList[BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
