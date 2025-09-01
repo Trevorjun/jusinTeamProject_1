@@ -34,6 +34,8 @@ extern HWND g_hWnd;
 #define M_VMON_SUICIDE_SIZE_Y 30.f
 #define M_VMON_SUICIDE_SPEED 5.f
 
+#define ULL_WSHOTINTERVAL 1000ULL
+
 
 // enum 
 enum OBJECT

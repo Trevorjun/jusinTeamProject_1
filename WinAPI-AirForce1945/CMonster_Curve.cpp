@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CMonster_Curve.h"
+#include "CBulletTest.h"
 
 CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
 {
@@ -31,7 +32,13 @@ int			CMonster_Curve::Update()
 }
 void		CMonster_Curve::LateUpdate()
 {
+	ULONGLONG dwCurrentTime = GetTickCount64();
 
+	if (dwCurrentTime - ull_wLastShotTime >= ULL_WSHOTINTERVAL)
+	{
+		ShootBullet();
+		ull_wLastShotTime = dwCurrentTime;
+	}
 }
 bool CMonster_Curve::OnCollision(CObject* _pObjCol)
 {
@@ -44,4 +51,10 @@ void		CMonster_Curve::Render(HDC _hDC)
 void		CMonster_Curve::Release()
 {
 
+}
+
+void CMonster_Curve::ShootBullet()
+{
+	m_pBullet->push_back(CAbstractFactory<CBulletTest>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2));
+	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
 }

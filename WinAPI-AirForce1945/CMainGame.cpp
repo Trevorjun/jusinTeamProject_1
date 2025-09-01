@@ -105,8 +105,16 @@ void CMainGame::LateUpdate()
 {
 	for (auto& list : m_ObjectList)
 		for (auto& obj : list)	
+			/*obj->LateUpdate();*/
+		{
+			CMonster* pMonster = dynamic_cast<CMonster*>(obj);
+			if (pMonster)
+			{
+				pMonster->SetBullet(&m_ObjectList[BULLET]);
+			}
 			obj->LateUpdate();
-			//CStageManager::Get_Instance()->LateUpdate();
+			/*CStageManager::Get_Instance()->LateUpdate();*/
+		}
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
 

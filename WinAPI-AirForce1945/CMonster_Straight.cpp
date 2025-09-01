@@ -2,7 +2,7 @@
 #include "CMonster_Straight.h"
 #include "CBulletTest.h"
 
-CMonster_Straight::CMonster_Straight() : test(0)
+CMonster_Straight::CMonster_Straight()
 {
 
 }
@@ -30,10 +30,12 @@ int			CMonster_Straight::Update()
 }
 void		CMonster_Straight::LateUpdate()
 {
-	if(test <= 3)
+	ULONGLONG dwCurrentTime = GetTickCount64();
+
+	if (dwCurrentTime - ull_wLastShotTime >= ULL_WSHOTINTERVAL)
 	{
 		ShootBullet();
-		test++;
+		ull_wLastShotTime = dwCurrentTime;
 	}
 }
 bool CMonster_Straight::OnCollision(CObject* _pObjCol)
@@ -55,11 +57,11 @@ bool CMonster_Straight::OnCollision(CObject* _pObjCol)
 
 	return false;
 }
-void		CMonster_Straight::Render(HDC _hDC)
+void CMonster_Straight::Render(HDC _hDC)
 {
 	Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
-void		CMonster_Straight::Release()
+void CMonster_Straight::Release()
 {
 
 }

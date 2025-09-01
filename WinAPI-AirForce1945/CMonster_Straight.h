@@ -4,7 +4,6 @@
 class CMonster_Straight : public CMonster
 {
 private:
-	short test;
 public:
 	CMonster_Straight();
 	~CMonster_Straight() override;
