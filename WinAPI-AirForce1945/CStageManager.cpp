@@ -43,14 +43,11 @@ CStageManager::CStageManager()
 
 	bGameOver = false;
 	bGameClear = false;
+	bBossCreated = false;
+	bBossDead = false;
 
 	ZeroMemory(tStageInfos, sizeof(tStageInfos));
 	ZeroMemory(tPlayerInfos, sizeof(tPlayerInfos));
-
-#pragma region TEST
-	Test_Call_OnPlayerDead = GetTickCount64();
-	Test_Call_OnMonsterDead = GetTickCount64();
-#pragma endregion
 }
 
 CStageManager::~CStageManager()
@@ -75,10 +72,6 @@ void CStageManager::Initialize()
 
 void CStageManager::Update()
 {
-#pragma region TEST
-	// Test_StageManager();
-#pragma endregion
-
 	if (bGameOver)
 	{
 		Handle_GameOver();
@@ -143,6 +136,7 @@ CObject* CStageManager::Create_Monster()
 		{
 			pMonster = On_BossStage();
 			iX = WINCX >> 1;
+			m_fLastMonsterSpawned = GetTickCount64();
 		}
 		else
 		{
@@ -204,7 +198,7 @@ void CStageManager::Check_Clear()
 
 void CStageManager::Transition_Stage()
 {
-	if (m_iCurrentStage == cTotalStage - 1)
+	if (m_iCurrentStage == cTotalStage - 1 && bBossDead)
 	{
 		bGameClear = true;
 	}
@@ -268,9 +262,12 @@ void CStageManager::On_MonsterKilled(CObject* pKilledObj)
 	}
 }
 
+void CStageManager::On_BossKilled(CObject* _pBoss)
+{
+}
+
 void CStageManager::On_PlayerDead(CObject* _pPlayer)
 {
-	tested = true;
  	bGameOver = true;
 
 	Release();
@@ -289,22 +286,4 @@ CObject* CStageManager::On_BossStage()
 	bBossCreated = true;
 
 	return CAbstractFactory<CMonster_Boss>::Create();
-}
-
-void CStageManager::Test_StageManager()
-{
-	if (Test_Call_OnPlayerDead + 20000 < GetTickCount64() && !tested)
-	{
-		CObject* pObj = m_pPlayer;
-		On_PlayerDead(pObj);
-	}
-	if (Test_Call_OnMonsterDead + 2000 < GetTickCount64())
-	{
-		if (m_pMonsterList->size() > 0)
-		{
-			CObject* pObj = m_pMonsterList->front();
-			On_MonsterKilled(pObj);
-		}
-		Test_Call_OnMonsterDead = GetTickCount64();
-	}
 }
