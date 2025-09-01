@@ -63,7 +63,6 @@ void CMainGame::Initialize()
 	//m_ObjectList[ITEM].push_back(pObj);
 
 #pragma endregion
-	m_ObjectList[BULLET].push_back(CAbstractFactory<CChaserBullet>::Create());
 
 	CStageManager::Get_Instance()->Set_Player(m_ObjectList[PLAYER]);
 	CStageManager::Get_Instance()->Set_BulletList(m_ObjectList[BULLET]);

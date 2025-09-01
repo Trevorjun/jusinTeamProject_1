@@ -2,7 +2,7 @@
 #include "CMonster_Curve.h"
 #include "CBulletTest.h"
 
-CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
+CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(5.f)
 {
 
 }
@@ -58,6 +58,6 @@ void		CMonster_Curve::Release()
 
 void CMonster_Curve::ShootBullet()
 {
-	m_pBullet->push_back(CAbstractFactory<CBulletTest>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y - m_vSize.y / 2));
+	m_pBullet->push_back(CAbstractFactory<CBulletTest>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 270.f));
+	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 5.f, 90.f));
 }
