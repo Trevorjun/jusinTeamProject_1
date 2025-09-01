@@ -17,4 +17,6 @@ public:
 	void PatternOne();
 	void PatternTwo();
 	void PatternThree();
+
+	float checkDegree();
 };

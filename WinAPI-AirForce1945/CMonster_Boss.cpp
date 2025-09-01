@@ -17,6 +17,7 @@ void		CMonster_Boss::Initialize()
 
 	m_vSize = { 250, 250 };
 	m_fSpeed = { 1.f };
+	m_iHp = 500;
 }
 int			CMonster_Boss::Update()
 {
@@ -56,9 +57,9 @@ void		CMonster_Boss::LateUpdate()
 		case 1:
 			PatternTwo();
 			break;
-		//case 2:
-		//	PatternThree();
-		//	break;
+		case 2:
+			PatternThree();
+			break;
 		default:
 			break;
 		}
@@ -67,6 +68,16 @@ void		CMonster_Boss::LateUpdate()
 }
 bool CMonster_Boss::OnCollision(CObject* _pObjCol)
 {
+	if (_pObjCol->GetObjectType() == OBJECT_TYPE::PLAYER_BULLET)
+	{
+		if (m_iHp == 0) 
+		{
+			m_bDestroy = true;
+			return false;
+		}
+
+		m_iHp -= 1;
+	}
 	return false;
 }
 void		CMonster_Boss::Render(HDC _hDC)
@@ -97,7 +108,15 @@ void CMonster_Boss::PatternTwo()
 }
 void CMonster_Boss::PatternThree()
 {
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 4.f, 
-		(acos((fPlayerVX - this->GetPivot().x) / sqrtf((fPlayerVX - this->GetPivot().x) * (fPlayerVX - this->GetPivot().x) + (fPlayerVY - this->GetPivot().y) * (fPlayerVY - this->GetPivot().y))) * PI / 180.f)));
-	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 4.f, 290.f));
+	float fDegree = checkDegree();
+	m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(m_vPivot.x, m_vPivot.y + m_vSize.y / 2, OBJECT_TYPE::MONSTER_BULLET, 7.f, fDegree * 180.f / PI));
+}
+
+float CMonster_Boss::checkDegree()
+{
+	if (fPlayerVY > m_vPivot.y)
+		return 2 * PI - acosf((fPlayerVX - m_vPivot.x) / sqrt(
+			(fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y)));
+	return acosf((fPlayerVX - m_vPivot.x) / sqrt(
+		(fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y)));
 }
