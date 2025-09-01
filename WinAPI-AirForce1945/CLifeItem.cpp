@@ -41,7 +41,7 @@ bool CLifeItem::OnCollision(CObject* _pObjCol)
 	{
 	case OBJECT_TYPE::PLAYER:
 	{
-		m_bDestroy = true;
+		Apply_Effect(_pObjCol);
 	}
 	break;
 	default: 
@@ -62,6 +62,8 @@ void CLifeItem::Release()
 
 void CLifeItem::Apply_Effect(CObject* pObj)
 {
-	// TODO : 플레이어 클래스 설계 완료 후 구현
+	CPlayer* pPlayer = static_cast<CPlayer*>(pObj);
+	pPlayer->AddPower(iLifeEffect);
+
 	m_bDestroy = true;
 }

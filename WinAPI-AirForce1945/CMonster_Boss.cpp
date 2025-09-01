@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "CMonster_Boss.h"
+#include "CStageManager.h"
 #include <random>
 
 CMonster_Boss::CMonster_Boss()
@@ -73,6 +74,10 @@ bool CMonster_Boss::OnCollision(CObject* _pObjCol)
 		if (m_iHp == 0) 
 		{
 			m_bDestroy = true;
+
+			// Request to StageManager to execute clear logic!
+			CStageManager::Get_Instance()->Set_BossDead();
+
 			return false;
 		}
 

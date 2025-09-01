@@ -23,7 +23,10 @@ public: // monster
 	CObject* Create_Item(Vector2 _vPos);
 
 	void On_MonsterKilled(CObject* _pKilledObj);
+	void On_BossKilled(CObject* _pBoss);
 	void On_PlayerDead(CObject* _pPlayer);
+
+	CObject* On_BossStage();
 
 public :// stage
 	void Check_Clear();
@@ -49,10 +52,11 @@ public: // reference getset of stage object
 public: // getter-setter
 	bool Get_GameOver() const { return bGameOver; }
 	bool Get_GameClear() const { return bGameClear; }
+	void Set_BossDead() { bBossDead = true; }
 
 // member_variables
 private: // stage 
-	static const int cTotalStage = 3;
+	static const int cTotalStage = 4;
 	CStage* m_stages[cTotalStage];
 	int m_iCurrentStage;
 
@@ -61,6 +65,9 @@ private: // stage
 
 	bool bGameOver;
 	bool bGameClear;
+
+	bool bBossCreated;
+	bool bBossDead;
 
 private :
 	static CStageManager* m_instance;
@@ -77,13 +84,4 @@ private : // ui elements
 	TCHAR tStageInfos[128];
 	TCHAR tPlayerInfos[128];
 	long long lDisplayElapsedTime;
-
-#pragma region TEST
-public :
-	void Test_StageManager();
-	long long Test_Call_OnPlayerDead;
-	long long Test_Call_OnMonsterDead;
-	bool tested = false;
-#pragma endregion
-
 };
