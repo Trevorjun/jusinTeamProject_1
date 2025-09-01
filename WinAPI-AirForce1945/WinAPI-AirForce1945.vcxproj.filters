@@ -120,9 +120,6 @@
     <ClInclude Include="CAbstractFactory.h">
       <Filter>99. Factories</Filter>
     </ClInclude>
-    <ClInclude Include="BulletPolicy.h">
-      <Filter>99. Factories\00. BulletFactory</Filter>
-    </ClInclude>
     <ClInclude Include="CNormalBullet.h">
       <Filter>01. Object\02. Bullet</Filter>
     </ClInclude>
@@ -135,8 +132,11 @@
     <ClInclude Include="CMonster_Boss.h">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClInclude>
-    <ClInclude Include="CBulletFactory.h">
-      <Filter>99. Factories\00. BulletFactory</Filter>
+    <ClInclude Include="CRazorBullet.h">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="CRotateBullet.h">
+      <Filter>01. Object\02. Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +185,6 @@
     <ClCompile Include="CMonster_Curve.cpp">
       <Filter>01. Object\01. Monster\Monster_Curve</Filter>
     </ClCompile>
-    <ClCompile Include="BulletPolicy.cpp">
-      <Filter>99. Factories\00. BulletFactory</Filter>
-    </ClCompile>
     <ClCompile Include="CNormalBullet.cpp">
       <Filter>01. Object\02. Bullet</Filter>
     </ClCompile>
@@ -200,8 +197,11 @@
     <ClCompile Include="CMonster_Boss.cpp">
       <Filter>01. Object\01. Monster\Monster_Boss</Filter>
     </ClCompile>
-    <ClCompile Include="CBulletFactory.cpp">
-      <Filter>99. Factories\00. BulletFactory</Filter>
+    <ClCompile Include="CRazorBullet.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="CRotateBullet.cpp">
+      <Filter>01. Object\02. Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

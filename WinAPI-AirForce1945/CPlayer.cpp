@@ -3,11 +3,12 @@
 #include "CAbstractFactory.h"
 #include "CNormalBullet.h"
 #include "CRotateBullet.h"
+#include "CStageManager.h"
 
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
 	  m_qwAttackCooldown(150), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
-	  m_bIsAlive(false), m_bIsInvincible(false)
+	  m_bIsAlive(true), m_bIsInvincible(false)
 {}
 
 CPlayer::~CPlayer()
@@ -25,8 +26,6 @@ void CPlayer::Initialize()
 
 	m_iLife     = PL_LIFE;
 	m_iMaxPower = PL_MAXPOWER;
-
-	m_bIsAlive = true;
 }
 
 int CPlayer::Update()
@@ -34,9 +33,14 @@ int CPlayer::Update()
 	if (m_bDestroy)
 		return OBJ_DESTROY;
 
+#pragma region 부활 테스트 코드
+
 	if (!m_bIsAlive)
-		//return OBJ_PLAYERDEAD;
+	{
 		Revive();
+	}
+
+#pragma endregion
 
 	if (m_bIsInvincible)
 	{
@@ -71,17 +75,16 @@ void CPlayer::Render(HDC _hDC)
 	Rectangle(_hDC, m_tRect.left, m_tRect.bottom, m_tRect.right, m_tRect.bottom + iBodyLen);
 
 	// arm
-	MoveToEx(_hDC, m_tRect.left, m_tRect.bottom, NULL);
+	MoveToEx(_hDC, m_tRect.left, m_tRect.bottom, nullptr);
 	LineTo(_hDC, m_tRect.left - m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
-	MoveToEx(_hDC, m_tRect.right, m_tRect.bottom, NULL);
+	MoveToEx(_hDC, m_tRect.right, m_tRect.bottom, nullptr);
 	LineTo(_hDC, m_tRect.right + m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
 
 	// leg
-	MoveToEx(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	MoveToEx(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, nullptr);
 	LineTo(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
-	MoveToEx(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	MoveToEx(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, nullptr);
 	LineTo(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
-
 
 	DeleteObject(SelectObject(_hDC, hOldPen));
 	RestoreDC(_hDC, saved);
@@ -104,6 +107,9 @@ void CPlayer::Revive()
 
 bool CPlayer::OnCollision(CObject* _pObjCol)
 {
+	if (!m_bIsAlive)
+		return false;
+
 	switch (_pObjCol->GetObjectType())
 	{
 	case OBJECT_TYPE::MONSTER:
@@ -132,7 +138,11 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	}
 
 	if (m_iLife <= 0)
+	{
 		m_bIsAlive = false;
+		//todo 스테이지 매니저 안의 On_PlayerDead() 호출할 수 있도록
+		//todo 현재 방식에선 스테이지 매니저를 가져와야 함수를 호출할 수 있다
+	}
 
 	return false;
 }
@@ -292,7 +302,7 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 16, m_vPivot.y - m_vSize.y / 2, 10.f, 84.f));
 
 		m_pBullet->push_back(CAbstractFactory<CRotateBullet>::Create(
-			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 50.f, 90.f));
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 8.f, 90.f));
 	}
 	break;
 	case 5:
