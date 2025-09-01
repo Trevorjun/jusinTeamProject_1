@@ -137,6 +137,8 @@
     </ClInclude>
     <ClInclude Include="CBulletTest.h">
       <Filter>01. Object\02. Bullet</Filter>
+    <ClInclude Include="CBulletFactory.h">
+      <Filter>99. Factories\00. BulletFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +204,8 @@
     </ClCompile>
     <ClCompile Include="CBulletTest.cpp">
       <Filter>01. Object\02. Bullet</Filter>
+    <ClCompile Include="CBulletFactory.cpp">
+      <Filter>99. Factories\00. BulletFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

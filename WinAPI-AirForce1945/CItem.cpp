@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CItem.h"
 
 CItem::CItem() { }
@@ -28,6 +28,7 @@ void CItem::LateUpdate()
 
 bool CItem::OnCollision(CObject* _pObjCol)
 {
+	Apply_Effect(_pObjCol);
 	return false;
 }
 

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CMonster_Boss.h"
 
 CMonster_Boss::CMonster_Boss()
@@ -12,6 +12,8 @@ CMonster_Boss::~CMonster_Boss()
 
 void		CMonster_Boss::Initialize()
 {
+	m_eObjectType = OBJECT_TYPE::BOSS;
+
 	m_vPivot = { WINCX >> 1, 100 };
 	m_vSize = { 250, 250 };
 	m_fSpeed = { 1.f };

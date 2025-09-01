@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CMonster_Curve.h"
 #include "CBulletTest.h"
 
@@ -8,13 +8,13 @@ CMonster_Curve::CMonster_Curve() : fBulletDegree(0.f), fMonsterMoveToX(2.f)
 }
 CMonster_Curve::~CMonster_Curve()
 {
-	Release();
+	CMonster_Curve::Release();
 }
 
 void		CMonster_Curve::Initialize()
 {
-	m_vSize = { M_VMON_CURVE_SIZE_X, M_VMON_CURVE_SIZE_Y };
-	m_fSpeed = { M_VMON_CURVE_SPEED };
+	m_vSize = { MON_CURVE_SIZE_X, MON_CURVE_SIZE_Y };
+	m_fSpeed = { MON_CURVE_SPEED };
 }
 int			CMonster_Curve::Update()
 {
@@ -42,6 +42,8 @@ void		CMonster_Curve::LateUpdate()
 }
 bool CMonster_Curve::OnCollision(CObject* _pObjCol)
 {
+	__super::OnCollision(_pObjCol);
+
 	return false;
 }
 void		CMonster_Curve::Render(HDC _hDC)

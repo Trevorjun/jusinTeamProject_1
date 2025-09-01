@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "CObject.h"
 
 #include "CAbstractFactory.h"
@@ -14,14 +14,15 @@ protected:
 	list<CObject*>* m_pBullet;
 public:
 	CMonster();
-	virtual ~CMonster();
+	~CMonster() override;
 
-	virtual void		Initialize()		PURE;
-	virtual int			Update()			PURE;
-	virtual void		LateUpdate()		PURE;
-	bool OnCollision(CObject* _pObjCol)		PURE;
-	virtual void		Render(HDC _hDC)	PURE;
-	virtual void		Release()			PURE;
+public:
+	void Initialize() override PURE;
+	int  Update() override PURE;
+	void LateUpdate() override PURE;
+	bool OnCollision(CObject* _pObjCol) override;
+	void Render(HDC _hDC) override PURE;
+	void Release() override PURE;
 
 	/*virtual void ShootBullet() PURE;*/
 
