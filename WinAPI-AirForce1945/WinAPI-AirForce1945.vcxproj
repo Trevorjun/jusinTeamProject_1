@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CChaserBullet.h" />
     <ClInclude Include="CRazorBullet.h" />
     <ClInclude Include="CBullet.h" />
     <ClInclude Include="CAbstractFactory.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="WinAPI-AirForce1945.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CChaserBullet.cpp" />
     <ClCompile Include="CRazorBullet.cpp" />
     <ClCompile Include="CBullet.cpp" />
     <ClCompile Include="CBulletTest.cpp" />
