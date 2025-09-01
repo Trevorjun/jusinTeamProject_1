@@ -2,7 +2,7 @@
 #include "CRotateBullet.h"
 
 CRotateBullet::CRotateBullet()
-	: m_fRotateAngle(180.f)
+	: m_fRotAngle(180.f), m_fRotSpeed(25.f), m_fDisToCen(20.f)
 {}
 
 CRotateBullet::~CRotateBullet()
@@ -26,16 +26,13 @@ int CRotateBullet::Update()
 	if (m_bDestroy)
 		return OBJ_DESTROY;
 
-	m_vCenter.x += m_fSpeed * cosf(RAD(m_fShootDeg)) * 0.01f;
-	m_vCenter.y -= m_fSpeed * sinf(RAD(m_fShootDeg)) * 0.01f;
-	//! 0.01f : 속도 늦추는 보정값
+	m_vCenter.x = m_fSpeed * cosf(RAD(m_fShootDeg));
+	m_vCenter.y = m_fSpeed * sinf(RAD(m_fShootDeg));
 
-	m_vPivot.x += m_vCenter.x + 30.f * cosf(RAD(m_fRotateAngle));
-	m_vPivot.y += m_vCenter.y + 30.f * sinf(RAD(m_fRotateAngle));
-	//! 30.f : 회전하는 반경을 조정
+	m_fRotAngle += m_fRotSpeed;
 
-	m_fRotateAngle += 50.f;
-	//! 50.f : 회전하는 속도를 조정
+	m_vPivot.x += m_vCenter.x + m_fDisToCen * cosf(RAD(m_fRotAngle));
+	m_vPivot.y -= m_vCenter.y + m_fDisToCen * -sinf(RAD(m_fRotAngle));
 
 	CObject::UpdateRect();
 

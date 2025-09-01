@@ -17,7 +17,6 @@ public:
 public:
 	int       GetLife() const { return m_iLife; }
 	int       GetPower() const { return m_iPower; }
-	bool      GetIsAlive() const { return m_bIsAlive; }
 	bool      GetIsInvincible() const { return m_bIsInvincible; }
 	ULONGLONG GetAttackCooldown() const { return m_qwAttackCooldown; }
 	ULONGLONG GetLastAttackTime() const { return m_qwLastAttackTime; }
@@ -26,7 +25,6 @@ public:
 	void SetLife(const int _iLife) { m_iLife = _iLife; }
 	// SetPower는 플레이어 생성, 부활 등에 사용할 것. Power 추가는 AddPower 함수 사용 바람
 	void SetPower(const int _iPower) { m_iLife = _iPower; }
-	void SetIsAlive(const bool _bIsAlive) { m_bIsAlive = _bIsAlive; }
 	void SetIsInvincible(const bool _bIsInvincible) { m_bIsInvincible = _bIsInvincible; }
 	void SetAttackCooldown(const ULONGLONG _dwAttackCooldown) { m_qwAttackCooldown = _dwAttackCooldown; }
 	void SetLastAttackTime(const ULONGLONG _dwLastAttackTime) { m_qwLastAttackTime = _dwLastAttackTime; }
