@@ -35,8 +35,18 @@ public :// stage
 public: // singleton
 	static CStageManager* Get_Instance();
 
+public: // reference getset of stage object 
+	void Set_Player(list<CObject*>& _pObjectList)		{ m_pPlayer = _pObjectList.front(); }
+	void Set_BulletList(list<CObject*>& _pObjectList)	{ m_pBulletList = &_pObjectList; }
+	void Set_MonsterList(list<CObject*>& _pObjectList)	{ m_pMonsterList = &_pObjectList; }
+	void Set_ItemList(list<CObject*>& _pObjectList)		{ m_pItemList = &_pObjectList; }
+
+	CObject*			Get_Player()		{ return m_pPlayer; }
+	list<CObject*>*		Get_BulletList()	{ return m_pBulletList; }
+	list<CObject*>*		Get_MonsterList()	{ return m_pMonsterList; }
+	list<CObject*>*		Get_ItemList()		{ return m_pItemList; }
+
 public: // getter-setter
-	void Set_ObjectList(list<CObject*>(*_pObjectList)[OBJ_END]) { m_pObjectList = _pObjectList; }
 	bool Get_GameOver() const { return bGameOver; }
 	bool Get_GameClear() const { return bGameClear; }
 
@@ -54,7 +64,10 @@ private: // stage
 
 private :
 	static CStageManager* m_instance;
-	list<CObject*> (*m_pObjectList)[OBJ_END];
+	CObject*		m_pPlayer;
+	list<CObject*>* m_pBulletList;
+	list<CObject*>* m_pMonsterList;
+	list<CObject*>* m_pItemList;
 
 private : // ui elements
 	RECT rStageInfo;

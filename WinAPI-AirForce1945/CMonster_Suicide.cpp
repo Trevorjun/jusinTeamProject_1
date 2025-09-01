@@ -14,11 +14,8 @@ CMonster_Suicide::~CMonster_Suicide()
 
 void		CMonster_Suicide::Initialize()
 {
-	m_eObjectType = OBJECT_TYPE::MONSTER;
-
-	m_vPivot = { 200, 100 };
-	m_vSize  = { 35, 35 };
-	m_fSpeed = { 4.f };
+	m_vSize = { MON_SUICIDE_SIZE_X, MON_SUICIDE_SIZE_Y };
+	m_fSpeed = { MON_SUICIDE_SPEED };
 }
 
 int			CMonster_Suicide::Update()

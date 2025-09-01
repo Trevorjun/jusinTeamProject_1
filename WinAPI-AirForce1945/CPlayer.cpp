@@ -4,6 +4,7 @@
 #include "CNormalBullet.h"
 #include "CRotateBullet.h"
 #include "CStageManager.h"
+#include "CChaserBullet.h"
 
 CPlayer::CPlayer()
 	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
@@ -318,6 +319,8 @@ void CPlayer::ShootBullet()
 			m_vPivot.x + 5, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x + 10, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
+		m_pBullet->push_back(CAbstractFactory<CChaserBullet>::Create(
+			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, 15.f, 90.f));
 	}
 	break;
 	default:

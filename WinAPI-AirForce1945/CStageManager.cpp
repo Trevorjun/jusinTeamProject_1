@@ -35,7 +35,11 @@ CStageManager::CStageManager()
 	m_iCurrentStage = 0;
 	m_fLastMonsterSpawned = 0;
 	m_fStageSpawnTime = 0.f;
-	m_pObjectList = nullptr;
+
+	m_pPlayer			= nullptr;
+	m_pBulletList		= nullptr;
+	m_pMonsterList		= nullptr;
+	m_pItemList			= nullptr;
 
 	bGameOver = false;
 	bGameClear = false;
@@ -105,8 +109,8 @@ void CStageManager::Render(HDC _hDC)
 
 	// Set current player text info
 	wsprintf(tPlayerInfos, TEXT("\nLIFE : %d\nPOWER : %d"),
-		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->GetLife(),
-		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->GetPower());
+		static_cast<CPlayer*>(m_pPlayer)->GetLife(),
+		static_cast<CPlayer*>(m_pPlayer)->GetPower());
 
 	DrawText(_hDC, tPlayerInfos, -1, &rPlayerInfo, DT_VCENTER | DT_CENTER);
 
@@ -130,7 +134,7 @@ CObject* CStageManager::Create_Monster()
 
 		int iRand = rand() % 4;
 
-		CObject* pMonster;
+		CObject* pMonster = nullptr;
 
 		switch (iRand)
 		{
@@ -150,12 +154,11 @@ CObject* CStageManager::Create_Monster()
 		}
 
 		pMonster->SetPivot({iX, iY});
+		m_pMonsterList->push_back(pMonster);
 		
 		// TODO : inject player's pointer to monster object
 		// (*m_pObjectList)[PLAYER].front()
-
-		(*m_pObjectList)[MONSTER].push_back(pMonster);
-
+		dynamic_cast<CMonster*>(m_pMonsterList->back())->SetBullet(m_pBulletList);
 		m_fLastMonsterSpawned = GetTickCount64();
 	}
 	return nullptr;
@@ -181,7 +184,7 @@ CObject* CStageManager::Create_Item(Vector2 _vPos)
 	pItem->Initialize();
 	pItem->SetPivot(_vPos);
 
-	(*m_pObjectList)[ITEM].push_back(pItem);
+	m_pItemList->push_back(pItem);
 
 	return pItem;
 }
@@ -210,7 +213,7 @@ void CStageManager::Handle_GameOver()
 	while (bGameOver && lDisplayElapsedTime + 2000 < GetTickCount64())
 	{
 		bGameOver = false;
-		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->Revive();
+		static_cast<CPlayer*>(m_pPlayer)->Revive();
 	}
 }
 
@@ -249,16 +252,20 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 
 	
 	//  Release only Bullet, Monster, Item 
-	for (int i = 0; i < OBJ_END; ++i)
+	for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
 	{
-		if (i == MONSTER || i == BULLET || i == ITEM)
-		{
-			for (auto iter = (*m_pObjectList)[i].begin(); iter != (*m_pObjectList)[i].end(); )
-			{
-				SafeDelete<CObject*>((*iter));
-				iter = (*m_pObjectList)[i].erase(iter);
-			}
-		}
+		SafeDelete<CObject*>((*iter));
+		iter = m_pMonsterList->erase(iter);
+	}
+	for (auto iter = m_pBulletList->begin(); iter != m_pBulletList->end();)
+	{
+		SafeDelete<CObject*>((*iter));
+		iter = m_pBulletList->erase(iter);
+	}
+	for (auto iter = m_pItemList->begin(); iter != m_pItemList->end();)
+	{
+		SafeDelete<CObject*>((*iter));
+		iter = m_pItemList->erase(iter);
 	}
 
 	Release();
@@ -270,14 +277,14 @@ void CStageManager::Test_StageManager()
 {
 	if (Test_Call_OnPlayerDead + 20000 < GetTickCount64() && !tested)
 	{
-		CObject* pObj = (*m_pObjectList)[PLAYER].front();
+		CObject* pObj = m_pPlayer;
 		On_PlayerDead(pObj);
 	}
 	if (Test_Call_OnMonsterDead + 2000 < GetTickCount64())
 	{
-		if ((*m_pObjectList)[MONSTER].size() > 0)
+		if (m_pMonsterList->size() > 0)
 		{
-			CObject* pObj = (*m_pObjectList)[MONSTER].front();
+			CObject* pObj = m_pMonsterList->front();
 			On_MonsterKilled(pObj);
 		}
 		Test_Call_OnMonsterDead = GetTickCount64();
