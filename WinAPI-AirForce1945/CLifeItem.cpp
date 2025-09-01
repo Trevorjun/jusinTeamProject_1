@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "CLifeItem.h"
 
 CLifeItem::CLifeItem()
@@ -11,6 +11,8 @@ CLifeItem::~CLifeItem()
 
 void CLifeItem::Initialize()
 {
+	m_eObjectType = OBJECT_TYPE::ITEM_LIFE;
+
 	m_tRect = { 0, };
 	m_vPivot = { 100, 300 };
 	m_vSize = { 15, 25 };
@@ -32,6 +34,17 @@ void CLifeItem::LateUpdate()
 
 bool CLifeItem::OnCollision(CObject* _pObjCol)
 {
+	switch (_pObjCol->GetObjectType())
+	{
+	case OBJECT_TYPE::PLAYER:
+	{
+		m_bDestroy = true;
+	}
+	break;
+	default: 
+		break;
+	}
+
 	return false;
 }
 
@@ -46,6 +59,6 @@ void CLifeItem::Release()
 
 void CLifeItem::Apply_Effect(CObject* pObj)
 {
-	// TODO : ÇÃ·¹ÀÌ¾î Å¬·¡½º ¼³°è ¿Ï·á ÈÄ ±¸Çö
+	// TODO : í”Œë ˆì´ì–´ í´ë˜ìŠ¤ ì„¤ê³„ ì™„ë£Œ í›„ êµ¬í˜„
 	m_bDestroy = true;
 }

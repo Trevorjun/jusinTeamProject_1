@@ -1,25 +1,50 @@
-#pragma once
-
+﻿#pragma once
 #include "CObject.h"
 
-template<typename T>
+template <typename T>
 class CAbstractFactory
 {
 public:
-	static CObject* Create(CObject* pTarget = nullptr)
+	// 생성 및 Initialize만 수행하는 기본 Create
+	static CObject* Create()
 	{
-		CObject* pObj = new T;
-		pObj->Initialize();
+		CObject* pObject = new T;
+		pObject->Initialize();
 
-		return pObj;
+		return pObject;
 	}
 
-	static CObject* Create(float fX, float fY)
+	/**
+	 * \brief 초기 Pivot을 지정하는 Create
+	 * \param _fX		오브젝트의 m_vPivot.x
+	 * \param _fY		오브젝트의 m_vPivot.y
+	 */
+	static CObject* Create(float _fX, float _fY)
 	{
-		CObject* pObj = new T;
-		pObj->Initialize();
-		pObj->SetPivot({ fX,fY });
+		CObject* pObject = new T;
+		pObject->Initialize();
+		pObject->SetPivot({ _fX, _fY });
 
-		return pObj;
+		return pObject;
 	}
+
+	/**
+	 * \brief 총알 발사에 사용하는 투사체 속도, 발사각 제공하는 Create
+	 * \param _fX			오브젝트의 m_vPivot.x
+	 * \param _fY			오브젝트의 m_vPivot.y
+	 * \param _fSpeed		발사 속도
+	 * \param _fShootDeg	발사각 (90도 : 위, 270도 : 아래)
+	 */
+	static CObject* Create(float _fX, float _fY, float _fSpeed, float _fShootDeg)
+	{
+		CObject* pObject = new T;
+		pObject->Initialize();
+		pObject->SetPivot({ _fX, _fY });
+		pObject->SetAngle(_fShootDeg);
+		pObject->SetSpeed(_fSpeed);
+
+		return pObject;
+	}
+	//todo 총알을 만드는 주체가 플레이어인지 몬스터인지를 매개변수를 추가해 전달
+	
 };

@@ -16,17 +16,16 @@
 #include "CNormalBullet.h"
 #include "CMonster_Boss.h"
 
-CMainGame::CMainGame() : m_hDC(nullptr)
-{
-}
+CMainGame::CMainGame()
+	: m_hDC(nullptr)
+{}
 
 CMainGame::~CMainGame()
-{
-}
+{}
 
 void CMainGame::Initialize()
 {
-	srand((unsigned int)time(NULL));
+	srand(static_cast<unsigned>(time(NULL)));
 	m_hDC = GetDC(g_hWnd);
 
 	CStageManager::Get_Instance()->Initialize();
@@ -44,13 +43,13 @@ void CMainGame::Initialize()
 
 #pragma endregion
 
-//#pragma region bullet 테스트 코드
-//	CObject* pBullet = new CNormalBullet;
-//
-//	m_ObjectList[OBJECT::BULLET].push_back(pBullet);
-//
-//	m_ObjectList[OBJECT::BULLET].front()->Initialize();
-//#pragma endregion
+	//#pragma region bullet 테스트 코드
+	//	CObject* pBullet = new CNormalBullet;
+	//
+	//	m_ObjectList[OBJECT::BULLET].push_back(pBullet);
+	//
+	//	m_ObjectList[OBJECT::BULLET].front()->Initialize();
+	//#pragma endregion
 
 #pragma region 테스트 코드
 	CObject* pObj = new CPowerItem();
@@ -64,11 +63,10 @@ void CMainGame::Initialize()
 	m_ObjectList[ITEM].push_back(pObj);
 
 #pragma endregion
-
 #pragma region 테스트 코드(monster)
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
-	m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
+	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Suicide>::Create());
+	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Straight>::Create());
+	//m_ObjectList[MONSTER].push_back(CAbstractFactory<CMonster_Curve>::Create());
 #pragma endregion
 }
 
@@ -104,19 +102,14 @@ void CMainGame::Update()
 void CMainGame::LateUpdate()
 {
 	for (auto& list : m_ObjectList)
-		for (auto& obj : list)	
-			/*obj->LateUpdate();*/
-		{
-			CMonster* pMonster = dynamic_cast<CMonster*>(obj);
-			if (pMonster)
-			{
-				pMonster->SetBullet(&m_ObjectList[BULLET]);
-			}
+	{
+		for (auto& obj : list)
 			obj->LateUpdate();
-			/*CStageManager::Get_Instance()->LateUpdate();*/
-		}
+	}
 
-	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], RECT_TO_RECT);
+	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], CIRCLE_TO_RECT);
+	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
+	CCollisionManager::Collision(m_ObjectList[BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
 
 	//CStageManager::Get_Instance()->LateUpdate();
 }
@@ -126,25 +119,29 @@ void CMainGame::Render()
 	Rectangle(m_hDC, -10, -10, WINCX + 10, WINCY + 10);
 
 	for (auto& list : m_ObjectList)
+	{
 		for (auto& obj : list)
 			obj->Render(m_hDC);
+	}
 }
 
 void CMainGame::Release()
 {
 	for (int i = 0; i < OBJ_END; ++i)
-		for_each(m_ObjectList[i].begin(), m_ObjectList[i].end()
-			, [](CObject* _p) -> void {
-				if (_p)
-				{
-					delete _p;
-					_p = nullptr;
-				}
-			});
-
-	CStageManager::Get_Instance()->Release(); 
-	if (CStageManager::Get_Instance())
 	{
-		delete CStageManager::Get_Instance();
+		for_each(m_ObjectList[i].begin(), m_ObjectList[i].end()
+				 , [](CObject* _p) -> void
+				 {
+					 if (_p)
+					 {
+						 delete _p;
+						 _p = nullptr;
+					 }
+				 });
 	}
+
+	CStageManager::Get_Instance()->Release();
+
+	if (CStageManager::Get_Instance())
+		delete CStageManager::Get_Instance();
 }
