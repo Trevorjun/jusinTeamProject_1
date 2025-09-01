@@ -23,6 +23,7 @@ public:
 
 public:
 	int Get_CurrentStage() const { return iCurrentStage; }
+	int Get_RequiredKillCount() const { return iRequiredKillCount; }
 	int Get_LeftMonsterCount() const { return iRequiredKillCount - iCurrentKillCount; }
 	int Get_CurrentKillCount() const { return iCurrentKillCount; }
 	float Get_SpawnTime() const { return fSpawnMonsterTime; }
