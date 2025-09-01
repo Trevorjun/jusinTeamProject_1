@@ -28,6 +28,7 @@ void CItem::LateUpdate()
 
 bool CItem::OnCollision(CObject* _pObjCol)
 {
+	Apply_Effect(_pObjCol);
 	return false;
 }
 

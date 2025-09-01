@@ -1,5 +1,6 @@
 ﻿#include "pch.h"
 #include "CLifeItem.h"
+#include "CPlayer.h"
 
 CLifeItem::CLifeItem()
 {
@@ -20,6 +21,8 @@ void CLifeItem::Initialize()
 
 	m_fSpeed = 2.5f;
 	m_bDestroy = false;
+
+	iLifeEffect = 1;
 }
 
 int CLifeItem::Update()

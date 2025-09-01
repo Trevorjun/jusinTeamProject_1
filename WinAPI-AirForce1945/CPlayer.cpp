@@ -20,7 +20,7 @@ void CPlayer::Initialize()
 	m_eObjectType = OBJECT_TYPE::PLAYER;
 
 	m_vPivot = { PL_PIVOT_X, PL_PIVOT_Y };
-	m_vSize  = { 60.f, 60.f };
+	m_vSize  = { 40.f, 40.f };
 	m_fSpeed = 8.f;
 
 	m_iLife     = PL_LIFE;
@@ -63,7 +63,25 @@ void CPlayer::Render(HDC _hDC)
 	HPEN hNewPen = CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
 	HPEN hOldPen = static_cast<HPEN>(SelectObject(_hDC, hNewPen));
 
+	// head
 	Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+
+	// body
+	long int iBodyLen = m_vSize.y;
+	Rectangle(_hDC, m_tRect.left, m_tRect.bottom, m_tRect.right, m_tRect.bottom + iBodyLen);
+
+	// arm
+	MoveToEx(_hDC, m_tRect.left, m_tRect.bottom, NULL);
+	LineTo(_hDC, m_tRect.left - m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
+	MoveToEx(_hDC, m_tRect.right, m_tRect.bottom, NULL);
+	LineTo(_hDC, m_tRect.right + m_vSize.x / 2.f, m_tRect.bottom + m_vSize.y / 2.f);
+
+	// leg
+	MoveToEx(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	LineTo(_hDC, m_tRect.left + m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
+	MoveToEx(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen, NULL);
+	LineTo(_hDC, m_tRect.right - m_vSize.x / 4.f, m_tRect.bottom + iBodyLen * 2.f);
+
 
 	DeleteObject(SelectObject(_hDC, hOldPen));
 	RestoreDC(_hDC, saved);

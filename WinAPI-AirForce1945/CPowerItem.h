@@ -18,5 +18,8 @@ public:
 
 public:
     void Apply_Effect(CObject* pObj) override;
+
+private :
+    int iPowerEffect;
 };
 
