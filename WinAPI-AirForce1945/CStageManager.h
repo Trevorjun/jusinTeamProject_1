@@ -37,7 +37,9 @@ public: // singleton
 
 public: // reference getset of stage object 
 	void Set_Player(list<CObject*>& _pObjectList)		{ m_pPlayer = _pObjectList.front(); }
-	void Set_BulletList(list<CObject*>& _pObjectList)	{ m_pBulletList = &_pObjectList; }
+	//void Set_BulletList(list<CObject*>& _pObjectList)	{ m_pBulletList = &_pObjectList; }
+	void Set_PlayerBulletList(list<CObject*>& _pObjectList) { m_pBulletList = &_pObjectList; }
+	void Set_MonsterBulletList(list<CObject*>& _pObjectList) { m_pBulletList = &_pObjectList; }
 	void Set_MonsterList(list<CObject*>& _pObjectList)	{ m_pMonsterList = &_pObjectList; }
 	void Set_ItemList(list<CObject*>& _pObjectList)		{ m_pItemList = &_pObjectList; }
 

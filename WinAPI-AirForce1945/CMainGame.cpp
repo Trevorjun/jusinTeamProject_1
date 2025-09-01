@@ -19,17 +19,19 @@
 
 CMainGame::CMainGame()
 	: m_hDC(nullptr)
-{}
+{
+}
 
 CMainGame::~CMainGame()
-{}
+{
+}
 
 void CMainGame::Initialize()
 {
 	srand(static_cast<unsigned>(time(NULL)));
 	m_hDC = GetDC(g_hWnd);
 
-	CStageManager::Get_Instance()->Initialize();	
+	CStageManager::Get_Instance()->Initialize();
 
 #pragma region player 테스트 코드
 	CObject* pPlayer = new CPlayer;
@@ -39,7 +41,7 @@ void CMainGame::Initialize()
 	m_ObjectList[OBJECT::PLAYER].front()->Initialize();
 
 	dynamic_cast<CPlayer*>(m_ObjectList[OBJECT::PLAYER].front())
-		->Set_Bullet(&m_ObjectList[OBJECT::BULLET]);
+		->Set_Bullet(&m_ObjectList[OBJECT::PL_BULLET]);
 
 #pragma endregion
 
@@ -65,7 +67,8 @@ void CMainGame::Initialize()
 #pragma endregion
 
 	CStageManager::Get_Instance()->Set_Player(m_ObjectList[PLAYER]);
-	CStageManager::Get_Instance()->Set_BulletList(m_ObjectList[BULLET]);
+	CStageManager::Get_Instance()->Set_PlayerBulletList(m_ObjectList[PL_BULLET]);
+	CStageManager::Get_Instance()->Set_MonsterBulletList(m_ObjectList[MON_BULLET]);
 	CStageManager::Get_Instance()->Set_MonsterList(m_ObjectList[MONSTER]);
 	CStageManager::Get_Instance()->Set_ItemList(m_ObjectList[ITEM]);
 }
@@ -102,12 +105,12 @@ void CMainGame::Update()
 void CMainGame::LateUpdate()
 {
 	for (auto& list : m_ObjectList)
-		for (auto& obj : list)	
+		for (auto& obj : list)
 		{
 			CMonster* pMonster = dynamic_cast<CMonster*>(obj);
 			if (pMonster)
 			{
-				pMonster->SetBullet(&m_ObjectList[BULLET]);
+				pMonster->SetBullet(&m_ObjectList[MON_BULLET]);
 			}
 			obj->LateUpdate();
 		}
@@ -116,7 +119,8 @@ void CMainGame::LateUpdate()
 
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[ITEM], CIRCLE_TO_RECT);
 	CCollisionManager::Collision(m_ObjectList[PLAYER], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
-	CCollisionManager::Collision(m_ObjectList[BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
+	CCollisionManager::Collision(m_ObjectList[PL_BULLET], m_ObjectList[MONSTER], CIRCLE_TO_CIRCLE);
+	CCollisionManager::Collision(m_ObjectList[MON_BULLET], m_ObjectList[PLAYER], CIRCLE_TO_CIRCLE);
 }
 
 void CMainGame::Render()
@@ -147,14 +151,14 @@ void CMainGame::Release()
 	for (int i = 0; i < OBJ_END; ++i)
 	{
 		for_each(m_ObjectList[i].begin(), m_ObjectList[i].end()
-				 , [](CObject* _p) -> void
-				 {
-					 if (_p)
-					 {
-						 delete _p;
-						 _p = nullptr;
-					 }
-				 });
+			, [](CObject* _p) -> void
+			{
+				if (_p)
+				{
+					delete _p;
+					_p = nullptr;
+				}
+			});
 	}
 
 	CStageManager::Get_Instance()->Release();
