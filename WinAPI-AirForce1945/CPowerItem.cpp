@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CPowerItem.h"
 
 #include "CPlayer.h"
@@ -31,11 +31,17 @@ void CPowerItem::LateUpdate()
 
 bool CPowerItem::OnCollision(CObject* _pObjCol)
 {
-	if (_pObjCol->GetObjectType() == PLAYER)
+	switch (_pObjCol->GetObjectType())
 	{
-		Apply_Effect(_pObjCol);
-		return true;
+	case OBJECT_TYPE::PLAYER:
+	{
+		m_bDestroy = true;
 	}
+	break;
+	default:
+		break;
+	}
+
 	return false;
 }
 

@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "CLifeItem.h"
 #include "CPlayer.h"
 
@@ -12,6 +12,8 @@ CLifeItem::~CLifeItem()
 
 void CLifeItem::Initialize()
 {
+	m_eObjectType = OBJECT_TYPE::ITEM_LIFE;
+
 	m_tRect = { 0, };
 	m_vPivot = { 100, 300 };
 	m_vSize = { 15, 25 };
@@ -35,11 +37,17 @@ void CLifeItem::LateUpdate()
 
 bool CLifeItem::OnCollision(CObject* _pObjCol)
 {
-	if (_pObjCol->GetObjectType() == PLAYER)
+	switch (_pObjCol->GetObjectType())
 	{
-		Apply_Effect(_pObjCol);
-		return true;
+	case OBJECT_TYPE::PLAYER:
+	{
+		m_bDestroy = true;
 	}
+	break;
+	default: 
+		break;
+	}
+
 	return false;
 }
 
@@ -54,10 +62,6 @@ void CLifeItem::Release()
 
 void CLifeItem::Apply_Effect(CObject* pObj)
 {
-
-
-	CPlayer* pPlayer = static_cast<CPlayer*>(pObj);
-	pPlayer->AddLife(iLifeEffect);
-
+	// TODO : 플레이어 클래스 설계 완료 후 구현
 	m_bDestroy = true;
 }
