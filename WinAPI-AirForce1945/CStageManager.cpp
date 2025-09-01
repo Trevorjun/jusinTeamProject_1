@@ -158,10 +158,7 @@ CObject* CStageManager::Create_Monster()
 		
 		// TODO : inject player's pointer to monster object
 		// (*m_pObjectList)[PLAYER].front()
-
-		(*m_pObjectList)[MONSTER].push_back(pMonster);
-		dynamic_cast<CMonster*>((*m_pObjectList)[MONSTER].back())->SetBullet(m_pObjectList[BULLET]);
-		// Create_Item({iX, iY});
+		dynamic_cast<CMonster*>(m_pMonsterList->back())->SetBullet(m_pBulletList);
 		m_fLastMonsterSpawned = GetTickCount64();
 	}
 	return nullptr;
