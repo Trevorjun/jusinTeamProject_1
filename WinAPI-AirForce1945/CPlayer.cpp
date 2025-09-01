@@ -7,9 +7,11 @@
 #include "CChaserBullet.h"
 
 CPlayer::CPlayer()
-	: m_pBullet(nullptr), m_pShield(nullptr), m_iLife(0), m_iPower(0), m_iMaxPower(0),
-	  m_qwAttackCooldown(150), m_qwLastAttackTime(0), m_dwInvincibleDuration(0), m_qwInvincibleEndTime(0),
-	  m_bIsAlive(true), m_bIsInvincible(false)
+	: m_pBullet(nullptr), m_pShield(nullptr),
+	  m_iLife(0), m_iMaxLife(0), m_iPower(0), m_iMaxPower(0),
+	  m_qwAttackCooldown(0), m_qwLastAttackTime(0),
+	  m_qwInvincibleDuration(0), m_qwInvincibleEndTime(0),
+	  m_bIsAlive(false), m_bIsInvincible(false)
 {}
 
 CPlayer::~CPlayer()
@@ -26,7 +28,13 @@ void CPlayer::Initialize()
 	m_fSpeed = 8.f;
 
 	m_iLife     = PL_LIFE;
+	m_iMaxLife  = 3;
 	m_iMaxPower = PL_MAXPOWER;
+
+	m_qwAttackCooldown     = 150;
+	m_qwInvincibleDuration = 500;
+
+	m_bIsAlive = true;
 }
 
 int CPlayer::Update()
@@ -103,7 +111,7 @@ void CPlayer::Revive()
 	m_bIsInvincible = true;
 	m_bIsAlive      = true;
 
-	m_qwInvincibleEndTime = GetTickCount64() + m_dwInvincibleDuration;
+	m_qwInvincibleEndTime = GetTickCount64() + m_qwInvincibleDuration;
 }
 
 bool CPlayer::OnCollision(CObject* _pObjCol)
@@ -153,6 +161,8 @@ void CPlayer::AddLife(const int _iLifeChange)
 
 	if (m_iLife < 0)
 		m_iLife = 0;
+	else if (m_iLife > m_iMaxLife)
+		m_iLife = m_iMaxLife;
 }
 
 void CPlayer::AddPower(const int _iPowerChange)
@@ -248,8 +258,6 @@ void CPlayer::ShootBullet()
 
 		m_pBullet->push_back(CAbstractFactory<CNormalBullet>::Create(
 			m_vPivot.x, m_vPivot.y - m_vSize.y / 2, OBJECT_TYPE::PLAYER_BULLET, 10.f, 90.f));
-
-		
 	}
 	break;
 	case 1:
