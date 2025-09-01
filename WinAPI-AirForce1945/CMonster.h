@@ -8,8 +8,8 @@ class CMonster : public CObject
 {
 protected:
 	short m_iHp;
-	float fPlayerVX;
-	float fPlayerVY;
+	float m_fPlayerVX;
+	float m_fPlayerVY;
 
 	ULONGLONG ull_wLastShotTime;
 
@@ -28,8 +28,8 @@ public:
 
 	/*virtual void ShootBullet() PURE;*/
 
-	int  getHp() const { return iHp; }
-	void setHp(short _iHp) { iHp = _iHp; }
-	void setPlayerVXY(CObject* pObj) { fPlayerVX = pObj->GetPivot().x; fPlayerVY = pObj->GetPivot().y; }
+	int  getHp() const { return m_iHp; }
+	void setHp(short _iHp) { m_iHp = _iHp; }
+	void setPlayerVXY(CObject* pObj) { m_fPlayerVX = pObj->GetPivot().x; m_fPlayerVY = pObj->GetPivot().y; }
 	void SetBullet(list<CObject*>* _m_pBullet) { m_pBullet = _m_pBullet; }
 };

@@ -115,11 +115,11 @@ void CMonster_Boss::PatternThree()
 
 float CMonster_Boss::checkDegree()
 {
-	if (fPlayerVY > m_vPivot.y)
-		return 2 * PI - acosf((fPlayerVX - m_vPivot.x) / sqrt(
-			(fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y)));
-	return acosf((fPlayerVX - m_vPivot.x) / sqrt(
-		(fPlayerVX - m_vPivot.x) * (fPlayerVX - m_vPivot.x) + (fPlayerVY - m_vPivot.y) * (fPlayerVY - m_vPivot.y)));
+	if (m_fPlayerVY > m_vPivot.y)
+		return 2 * PI - acosf((m_fPlayerVX - m_vPivot.x) / sqrt(
+			(m_fPlayerVX - m_vPivot.x) * (m_fPlayerVX - m_vPivot.x) + (m_fPlayerVY - m_vPivot.y) * (m_fPlayerVY - m_vPivot.y)));
+	return acosf((m_fPlayerVX - m_vPivot.x) / sqrt(
+		(m_fPlayerVX - m_vPivot.x) * (m_fPlayerVX - m_vPivot.x) + (m_fPlayerVY - m_vPivot.y) * (m_fPlayerVY - m_vPivot.y)));
 }
 
 
