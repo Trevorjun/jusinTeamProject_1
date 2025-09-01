@@ -14,25 +14,6 @@ void CBullet::Release()
 
 bool CBullet::OnCollision(CObject* _pObjCol)
 {
-	switch (_pObjCol->GetObjectType())
-	{
-	case OBJECT_TYPE::PLAYER:
-	{
-		//todo if : 자기 자신이 MONSTER_BULLET이면 실행
-	}
-	break;
-	case OBJECT_TYPE::MONSTER:
-	{
-		//todo if : 자기 자신이 PLAYER_BULLET이면 실행
-
-		if (m_eObjectType == OBJECT_TYPE::PLAYER_BULLET)
-			m_bDestroy = true;
-	}
-	break;
-	default:
-		break;
-	}
-
 	if (m_eObjectType == OBJECT_TYPE::MONSTER_BULLET
 		&& _pObjCol->GetObjectType() == OBJECT_TYPE::PLAYER)
 	{
@@ -40,6 +21,11 @@ bool CBullet::OnCollision(CObject* _pObjCol)
 	}
 	else if (m_eObjectType == OBJECT_TYPE::PLAYER_BULLET
 		&& _pObjCol->GetObjectType() == OBJECT_TYPE::MONSTER)
+	{
+		m_bDestroy = true;
+	}
+	else if (m_eObjectType == OBJECT_TYPE::PLAYER_BULLET
+		&& _pObjCol->GetObjectType() == OBJECT_TYPE::BOSS)
 	{
 		m_bDestroy = true;
 	}
