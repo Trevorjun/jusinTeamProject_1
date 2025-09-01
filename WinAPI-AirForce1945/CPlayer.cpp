@@ -140,8 +140,7 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	if (m_iLife <= 0)
 	{
 		m_bIsAlive = false;
-		//todo 스테이지 매니저 안의 On_PlayerDead() 호출할 수 있도록
-		//todo 현재 방식에선 스테이지 매니저를 가져와야 함수를 호출할 수 있다
+		CStageManager::Get_Instance()->On_PlayerDead(this);
 	}
 
 	return false;
