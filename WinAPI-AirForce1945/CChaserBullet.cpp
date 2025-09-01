@@ -20,7 +20,7 @@ void CChaserBullet::Initialize()
     
 
     m_hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 0));
-    m_pMonsterList = CStageManager::Get_Instance()->GetMonsterList();
+    //m_pMonsterList = CStageManager::Get_Instance()->GetMonsterList();
     //SetTarget();
 }
 
@@ -49,22 +49,31 @@ int CChaserBullet::Update()
     return OBJ_NOEVENT;
 }
 
+void CChaserBullet::LateUpdate()
+{
+
+}
+
 void CChaserBullet::Render(HDC _hDC)
 {
-    BeginPaint(g_hWnd, 0);
-    HGDIOBJ hPrevPen = SelectObject(_hDC, (HPEN)m_hPen);
+    //BeginPaint(g_hWnd, 0);
+    //HGDIOBJ hPrevPen = SelectObject(_hDC, (HPEN)m_hPen);
 
     Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 
-    SelectObject(_hDC, (HPEN)hPrevPen);
-    EndPaint(g_hWnd, 0);
+    //SelectObject(_hDC, (HPEN)hPrevPen);
+    //EndPaint(g_hWnd, 0);
+}
+
+void CChaserBullet::Release()
+{
+
 }
 
 bool CChaserBullet::OnCollision(CObject* _pColObj)
 {
     
     
-
     return false;
 }
 

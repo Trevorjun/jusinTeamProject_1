@@ -216,7 +216,7 @@ void CStageManager::Handle_GameOver()
 	while (bGameOver && lDisplayElapsedTime + 2000 < GetTickCount64())
 	{
 		bGameOver = false;
-		static_cast<CPlayer*>((*m_pObjectList)[PLAYER].front())->Revive();
+		static_cast<CPlayer*>(m_pPlayer)->Revive();
 	}
 }
 
@@ -255,16 +255,20 @@ void CStageManager::On_PlayerDead(CObject* _pPlayer)
 
 	
 	//  Release only Bullet, Monster, Item 
-	for (int i = 0; i < OBJ_END; ++i)
+	for (auto iter = m_pMonsterList->begin(); iter != m_pMonsterList->end();)
 	{
-		if (i == MONSTER || i == BULLET || i == ITEM)
-		{
-			for (auto iter = (*m_pObjectList)[i].begin(); iter != (*m_pObjectList)[i].end(); )
-			{
-				SafeDelete<CObject*>((*iter));
-				iter = (*m_pObjectList)[i].erase(iter);
-			}
-		}
+		SafeDelete<CObject*>((*iter));
+		iter = m_pMonsterList->erase(iter);
+	}
+	for (auto iter = m_pBulletList->begin(); iter != m_pBulletList->end();)
+	{
+		SafeDelete<CObject*>((*iter));
+		iter = m_pBulletList->erase(iter);
+	}
+	for (auto iter = m_pItemList->begin(); iter != m_pItemList->end();)
+	{
+		SafeDelete<CObject*>((*iter));
+		iter = m_pItemList->erase(iter);
 	}
 
 	Release();
@@ -276,14 +280,14 @@ void CStageManager::Test_StageManager()
 {
 	if (Test_Call_OnPlayerDead + 20000 < GetTickCount64() && !tested)
 	{
-		CObject* pObj = (*m_pObjectList)[PLAYER].front();
+		CObject* pObj = m_pPlayer;
 		On_PlayerDead(pObj);
 	}
 	if (Test_Call_OnMonsterDead + 2000 < GetTickCount64())
 	{
-		if ((*m_pObjectList)[MONSTER].size() > 0)
+		if (m_pMonsterList->size() > 0)
 		{
-			CObject* pObj = (*m_pObjectList)[MONSTER].front();
+			CObject* pObj = m_pMonsterList->front();
 			On_MonsterKilled(pObj);
 		}
 		Test_Call_OnMonsterDead = GetTickCount64();
