@@ -13,6 +13,7 @@ CChaserBullet::~CChaserBullet()
 
 void CChaserBullet::Initialize()
 {
+    m_eObjectType = OBJECT_TYPE::PLAYER_BULLET;
     m_vPivot = { WINCX / 2.f, 600.f };
     m_vSize = { 15.f, 15.f };
     m_vDir = { 0.f, -1.f };
@@ -44,8 +45,7 @@ int CChaserBullet::Update()
     else
     {
         m_vPivot += m_vDir * m_fSpeed;
-
-        SetTarget();
+        //SetTarget();
     }
 
     return OBJ_NOEVENT;
@@ -57,6 +57,8 @@ void CChaserBullet::LateUpdate()
     {
         m_bDestroy = true;
     }
+
+    __super::HandleOutOfBound(IsOutOfBound(50));
 }
 
 void CChaserBullet::Render(HDC _hDC)
@@ -73,7 +75,7 @@ void CChaserBullet::Render(HDC _hDC)
 
 void CChaserBullet::Release()
 {
-
+    DeleteObject((HBRUSH)m_hBrush);
 }
 
 bool CChaserBullet::OnCollision(CObject* _pColObj)
@@ -91,7 +93,7 @@ void CChaserBullet::SetTarget()
     if (m_pTarget || m_pMonsterList == NULL ) return;
 
     CObject*    pClosest = nullptr;
-    float       vDistance = WINCX;
+    float       vDistance = 2000.f;
     for (auto& pObj : *m_pMonsterList)
     {
         if (pClosest == nullptr)
