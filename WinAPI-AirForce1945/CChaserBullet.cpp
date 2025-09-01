@@ -3,7 +3,7 @@
 #include "CStageManager.h"
 
 CChaserBullet::CChaserBullet()
-    : m_pTarget(nullptr), m_pMonsterList(nullptr), m_hPen(nullptr)
+    : m_pTarget(nullptr), m_pMonsterList(nullptr), m_hBrush(nullptr)
 {
 }
 
@@ -18,8 +18,8 @@ void CChaserBullet::Initialize()
     m_vDir = { 0.f, -1.f };
     m_fSpeed = 1.f;
     
-
-    m_hPen = CreatePen(PS_SOLID, 1, RGB(128, 128, 0));
+    
+    m_hBrush = CreateSolidBrush(RGB(255, 255, 0));
     m_pMonsterList = CStageManager::Get_Instance()->Get_MonsterList();
     SetTarget();
 }
@@ -30,20 +30,22 @@ int CChaserBullet::Update()
 
     __super::UpdateRect();
 
+    if (GetCollision()) return OBJ_NOEVENT;
+
     if (m_pTarget)
     {
         Vector2 vSrc(m_pTarget->GetPivot());
         Vector2 vDst = vSrc - m_vPivot;
         m_fShootDeg = acosf(vDst.x / sqrtf(vDst.GetSquared())) * 180.f / PI;
         
-        if (vDst.y < 0.f) m_fShootDeg *= -1.f;
+        if (vDst.y > 0.f) m_fShootDeg *= -1.f;
         m_vPivot += m_vDir.Rotate(m_fShootDeg) * m_fSpeed;
     }
     else
     {
         m_vPivot += m_vDir * m_fSpeed;
 
-        //SetTarget();
+        SetTarget();
     }
 
     return OBJ_NOEVENT;
@@ -51,18 +53,21 @@ int CChaserBullet::Update()
 
 void CChaserBullet::LateUpdate()
 {
-
+    if (GetCollision())
+    {
+        m_bDestroy = true;
+    }
 }
 
 void CChaserBullet::Render(HDC _hDC)
 {
     PAINTSTRUCT ps{};
     BeginPaint(g_hWnd, &ps);
-    HGDIOBJ hPrevPen = SelectObject(_hDC, (HPEN)m_hPen);
+    HGDIOBJ hPrevBrush = SelectObject(_hDC, (HPEN)m_hBrush);
 
     Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 
-    SelectObject(_hDC, (HPEN)hPrevPen);
+    SelectObject(_hDC, (HBRUSH)hPrevBrush);
     EndPaint(g_hWnd, &ps);
 }
 
@@ -73,8 +78,11 @@ void CChaserBullet::Release()
 
 bool CChaserBullet::OnCollision(CObject* _pColObj)
 {
+    __super::OnCollision(_pColObj);
     
-    
+    // 폭발과 같이 크기가 커진 후 소멸
+    m_vSize = { 50.f, 50.f };
+
     return false;
 }
 
