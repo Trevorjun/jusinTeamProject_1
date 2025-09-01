@@ -11,10 +11,6 @@ CRazorBullet::~CRazorBullet()
 
 void CRazorBullet::Initialize()
 {
-	m_eObjectType = OBJECT_TYPE::PLAYER_BULLET;
-
-	//todo 플레이어쪽인지 몬스터 쪽인지는 Create를 새로 만들어서 전달하면 좋을듯?
-
 }
 
 int CRazorBullet::Update()

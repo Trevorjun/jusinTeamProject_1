@@ -45,21 +45,26 @@ public:
 private:
 	void KeyInput(const tagObjBound _tOutDir);
 	void ShootBullet();
+	void ShootChaser();
 
 private:
 	list<CObject*>* m_pBullet;
 	list<CObject*>* m_pShield;
 
 	int m_iLife;
+	int m_iMaxLife;
 	int m_iPower;
 	int m_iMaxPower;
 
-	ULONGLONG m_qwAttackCooldown;		// 공격간 딜레이 설정
-	ULONGLONG m_qwLastAttackTime;		// 마지막 공격 시간 저장
+	ULONGLONG m_qwAttackCooldown;			// 공격간 딜레이 설정
+	ULONGLONG m_qwLastAttackTime;			// 마지막 공격 시간 저장
 
-	ULONGLONG m_dwInvincibleDuration;	// 무적 지속 시간 설정
-	ULONGLONG m_qwInvincibleEndTime;	// 무적 끝나는 시간 저장
+	ULONGLONG m_qwChaserCooldown;			// 체이서 공격간 딜레이 설정
+	ULONGLONG m_qwLastChaserAttackTime;		// 마지막 체이서 공격 시간 저장
+
+	ULONGLONG m_qwInvincibleDuration;		// 무적 지속 시간 설정
+	ULONGLONG m_qwInvincibleEndTime;		// 무적 끝나는 시간 저장
 
 	bool m_bIsAlive;
-	bool m_bIsInvincible;				// 피격, 부활 시 true -> 무적
+	bool m_bIsInvincible;					// 피격, 부활 시 true -> 무적
 };
