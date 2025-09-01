@@ -25,6 +25,8 @@ public: // monster
 	void On_MonsterKilled(CObject* _pKilledObj);
 	void On_PlayerDead(CObject* _pPlayer);
 
+	CObject* On_BossStage();
+
 public :// stage
 	void Check_Clear();
 	void Transition_Stage();
@@ -52,7 +54,7 @@ public: // getter-setter
 
 // member_variables
 private: // stage 
-	static const int cTotalStage = 3;
+	static const int cTotalStage = 4;
 	CStage* m_stages[cTotalStage];
 	int m_iCurrentStage;
 
@@ -61,6 +63,8 @@ private: // stage
 
 	bool bGameOver;
 	bool bGameClear;
+
+	bool bBossCreated;
 
 private :
 	static CStageManager* m_instance;
