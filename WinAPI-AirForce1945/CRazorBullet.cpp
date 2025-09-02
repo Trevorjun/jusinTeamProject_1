@@ -29,8 +29,6 @@ void CRazorBullet::LateUpdate()
 void CRazorBullet::Render(HDC _hDC)
 {
 	//Ellipse(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
-
-	//todo 다른 모양으로 만들어보자
 }
 
 void CRazorBullet::Release()
