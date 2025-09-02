@@ -80,9 +80,14 @@ void CChaserBullet::Release()
 
 bool CChaserBullet::OnCollision(CObject* _pColObj)
 {
+
     __super::OnCollision(_pColObj);
-    
+
     // 폭발 효과를 보여주기 위한 크기 변경
+
+	//! 현재 변화된 m_vSize를 다시 Render로 출력하기 전에
+    //! __super::OnCollision 으로 체이서가 먼저 삭제되어버려 의미 없음
+
     m_vSize = { 50.f, 50.f };
 
     return false;
