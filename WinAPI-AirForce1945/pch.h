@@ -4,6 +4,10 @@
 #include "framework.h"
 #include <list>
 #include <algorithm>
+#include <functional>
+#include <cstdlib>
+#include <ctime>
+
 // custom header
 #include "Vector2.h"
 

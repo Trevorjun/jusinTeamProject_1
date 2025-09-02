@@ -1,0 +1,69 @@
+﻿#include "pch.h"
+#include "CLifeItem.h"
+#include "CPlayer.h"
+
+CLifeItem::CLifeItem()
+{
+}
+
+CLifeItem::~CLifeItem()
+{
+}
+
+void CLifeItem::Initialize()
+{
+	m_eObjectType = OBJECT_TYPE::ITEM_LIFE;
+
+	m_tRect = { 0, };
+	m_vPivot = { 100, 300 };
+	m_vSize = { 15, 25 };
+	m_vDir = { 0, 1 };
+
+	m_fSpeed = 2.5f;
+	m_bDestroy = false;
+
+	iLifeEffect = 1;
+}
+
+int CLifeItem::Update()
+{
+	return __super::Update();
+}
+
+void CLifeItem::LateUpdate()
+{
+	__super::LateUpdate();
+}
+
+bool CLifeItem::OnCollision(CObject* _pObjCol)
+{
+	switch (_pObjCol->GetObjectType())
+	{
+	case OBJECT_TYPE::PLAYER:
+	{
+		Apply_Effect(_pObjCol);
+	}
+	break;
+	default: 
+		break;
+	}
+
+	return false;
+}
+
+void CLifeItem::Render(HDC _hDC)
+{
+	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
+}
+
+void CLifeItem::Release()
+{
+}
+
+void CLifeItem::Apply_Effect(CObject* pObj)
+{
+	CPlayer* pPlayer = static_cast<CPlayer*>(pObj);
+	pPlayer->AddLife(iLifeEffect);
+
+	m_bDestroy = true;
+}
