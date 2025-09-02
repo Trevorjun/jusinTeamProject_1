@@ -1,14 +1,20 @@
 ﻿#include "pch.h"
 #include "CItem.h"
 
-CItem::CItem() { }
+CItem::CItem()
+{
+}
 
 CItem::~CItem()
 {
 	Release();
 }
 
-void CItem::Initialize() {}
+void CItem::Initialize()
+{
+	m_vPivot = { 400, 300 };
+	m_vSize = { 100, 100 };
+}
 
 int CItem::Update()
 {
@@ -38,7 +44,9 @@ void CItem::Render(HDC _hDC)
 	Rectangle(_hDC, m_tRect.left, m_tRect.top, m_tRect.right, m_tRect.bottom);
 }
 
-void CItem::Release() { }
+void CItem::Release()
+{
+}
 
 void CItem::Move()
 {
