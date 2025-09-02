@@ -209,12 +209,14 @@ bool CPlayer::OnCollision(CObject* _pObjCol)
 	break;
 	case OBJECT_TYPE::ITEM_LIFE:
 	{
-		this->AddLife(1);
+		//this->AddLife(1);
+		//! 아이템 각자에서 Addlife 호출 방식으로 변경
 	}
 	break;
 	case OBJECT_TYPE::ITEM_POWER:
 	{
-		this->AddPower(1);
+		//this->AddPower(1);
+		//! 아이템 각자에서 AddPower 호출 방식으로 변경
 	}
 	break;
 	default:
